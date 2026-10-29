@@ -12,6 +12,18 @@ We.Rock.DiskMap is a disk usage analyzer for Synology DSM. It helps NAS administ
 
 The app is available in English and German. We.Rock.DiskMap is for **Synology DSM administrators only**. Scan results are shared among DSM administrators; personal display preferences remain individual.
 
+## Screenshots
+
+### Disk Map: explore storage as a treemap
+
+![Disk Map treemap showing the relative size of files and folders on a Synology NAS](images/disk-map-treemap.png)
+
+### Radial Map: explore folder depth and size
+
+![Radial Map showing a selected shared folder as a colorful sunburst chart](images/radial-map.png)
+
+Shared-folder and file names are redacted in these screenshots.
+
 ## Beta software
 
 We.Rock.DiskMap is in beta. Test the app on **VirtualDSM or a non-production Synology DSM system first** before using it on a production NAS.
