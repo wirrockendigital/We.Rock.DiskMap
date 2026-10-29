@@ -1,0 +1,24 @@
+{
+  "DiskMap.js": {
+    "SYNO.SDS.App.DiskMap.Instance": {
+      "type": "app",
+      "title": "We.Rock.DiskMap",
+      "appWindow": "SYNO.SDS.App.DiskMap.Instance",
+      "allUsers": false,
+      "allowMultiInstance": false,
+      "hidden": false,
+      "icon": "images/DiskMap_{0}.png",
+      "version": "0.1.0-1"
+    },
+    "SYNO.SDS.App.DiskMap.HelpInstance": {
+      "type": "app",
+      "title": "We.Rock.DiskMap",
+      "appWindow": "SYNO.SDS.App.DiskMap.HelpInstance",
+      "allUsers": false,
+      "allowMultiInstance": false,
+      "hidden": true,
+      "icon": "images/DiskMap_{0}.png",
+      "version": "0.1.0-1"
+    }
+  }
+}

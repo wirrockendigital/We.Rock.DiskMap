@@ -1,0 +1,591 @@
+/* The isolated preview owns its palette and layout without legacy stylesheet dependencies. */
+.disk-workspace {
+  --disk-bg: #242f43;
+  --disk-panel: #283449;
+  --disk-raised: #303d52;
+  --disk-hover: #354359;
+  --disk-line: #3b475a;
+  --disk-text: #f0f2f7;
+  --disk-muted: #aeb9cb;
+  --disk-accent: #adc6ff;
+  --disk-action: #d0ddfa;
+  --disk-action-text: #24334e;
+  --disk-chart-pink: #eba7bf;
+  --disk-chart-peach: #edbd99;
+  --disk-chart-yellow: #ead99b;
+  --disk-chart-green: #a4cdb8;
+  --disk-chart-blue: #9fbde5;
+  --disk-chart-purple: #baa9dc;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100dvh;
+  min-height: 480px;
+  display: grid;
+  grid-template-rows: 68px minmax(0, 1fr) 42px;
+  overflow: hidden;
+  background: var(--disk-bg);
+  color: var(--disk-text);
+  color-scheme: dark;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+.disk-workspace[data-theme="light"] {
+  --disk-bg: #f7f8fb;
+  --disk-panel: #eef1f6;
+  --disk-raised: #fff;
+  --disk-hover: #e2e8f2;
+  --disk-line: #d5dce7;
+  --disk-text: #293448;
+  --disk-muted: #5c6980;
+  --disk-accent: #375f9f;
+  --disk-action: #355d9b;
+  --disk-action-text: #fff;
+  color-scheme: light;
+}
+.disk-workspace *, .disk-workspace *::before, .disk-workspace *::after { box-sizing: border-box; }
+.disk-workspace :is(h1,h2,h3,p) { margin: 0; }
+.disk-workspace button, .disk-workspace input, .disk-workspace select { font: inherit; }
+.disk-workspace button { color: inherit; cursor: pointer; }
+.disk-workspace button:disabled { opacity: .45; cursor: default; }
+.disk-workspace :is(button,input,select,a,summary):focus-visible { outline: 2px solid var(--disk-accent); outline-offset: 3px; }
+.disk-workspace button { -webkit-tap-highlight-color: transparent; }
+
+/* The toolbar gives navigation and primary actions one stable horizontal home. */
+.disk-toolbar { display: flex; align-items: center; gap: 14px; height: 68px; min-width: 0; padding: 0 24px; border-bottom: 1px solid var(--disk-line); }
+.disk-brand { flex: 0 0 auto; font-size: 17px; font-weight: 650; letter-spacing: -.5px; }
+.disk-crumbs { display: flex; flex: 1 1 auto; align-items: center; gap: 10px; min-width: 0; color: var(--disk-muted); }
+.disk-crumbs > :is(span,strong) { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.disk-crumbs button { border: 0; background: none; padding: 4px; color: inherit; }
+.disk-icon-button { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; width: 36px; height: 36px; border: 1px solid transparent; border-radius: 8px; background: transparent; color: var(--disk-muted); }
+.disk-icon-button:hover:not(:disabled) { background: var(--disk-hover); color: var(--disk-text); }
+.disk-icon-button svg { width: 19px; height: 19px; }
+.disk-primary-button { display: inline-flex; justify-content: center; align-items: center; gap: 8px; min-height: 36px; padding: 8px 16px; border: 1px solid transparent; border-radius: 8px; background: var(--disk-action); color: var(--disk-action-text) !important; font-weight: 600; white-space: nowrap; }
+.disk-primary-button:hover:not(:disabled) { filter: brightness(1.06); }
+.disk-search { display: flex; align-items: center; min-width: 0; }
+.disk-search input { width: clamp(120px, 18vw, 260px); min-width: 0; height: 36px; padding: 7px 12px; color: var(--disk-text); background: var(--disk-panel); border: 1px solid var(--disk-line); border-radius: 8px; }
+.disk-search input::placeholder { color: var(--disk-muted); }
+.disk-progress { display: flex; align-items: center; gap: 10px; color: var(--disk-muted); font-size: 12px; }
+.disk-progress progress { width: 100px; height: 5px; accent-color: var(--disk-accent); }
+
+/* The chart stays large; the fixed-width inspector owns its own scrolling. */
+.disk-body { display: grid; grid-template-columns: minmax(0, 1fr) 330px; min-height: 0; min-width: 0; }
+.disk-chart-stage { position: relative; display: grid; place-items: center; min-width: 0; min-height: 0; padding: 28px 28px 62px; overflow: hidden; }
+.disk-chart-canvas { display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; }
+.disk-chart-center { position: absolute; inset: 28px 28px 62px; display: flex; flex-direction: column; justify-content: center; align-items: center; pointer-events: none; text-align: center; }
+.disk-chart-center strong { font-size: clamp(32px, 4.4vw, 68px); font-weight: 300; letter-spacing: -2px; line-height: 1.1; }
+.disk-chart-center span { max-width: 24%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--disk-muted); font-size: 13px; margin-top: 5px; }
+.disk-view-toggle { position: absolute; left: 24px; bottom: 18px; display: inline-flex; gap: 2px; padding: 3px; border: 1px solid var(--disk-line); border-radius: 8px; background: var(--disk-panel); }
+.disk-view-toggle button { border: 0; border-radius: 5px; background: transparent; color: var(--disk-muted); padding: 6px 12px; font-size: 12px; }
+.disk-view-toggle :is(button[aria-pressed="true"],button[aria-selected="true"],button.is-selected) { background: var(--disk-hover); color: var(--disk-text); }
+.disk-side { display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow: auto; border-left: 1px solid var(--disk-line); background: var(--disk-panel); }
+.disk-side-header { padding: 28px 22px 20px; }
+.disk-side-header h1 { font-size: 24px; line-height: 1.2; font-weight: 500; letter-spacing: -.6px; overflow-wrap: anywhere; }
+.disk-side-header p { margin-top: 8px; color: var(--disk-muted); font-size: 12px; overflow-wrap: anywhere; }
+.disk-folder-list { padding: 0 10px 16px; }
+.disk-folder-list button, .disk-row { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 47px; padding: 10px 12px; border: 0; border-radius: 7px; background: transparent; text-align: left; }
+.disk-folder-list button:hover:not(:disabled), .disk-row:hover:not(:disabled), .disk-row.is-selected, .disk-row[aria-selected="true"], .disk-folder-list button[aria-pressed="true"] { background: var(--disk-hover); }
+.disk-folder-dot { display: inline-block; flex: 0 0 auto; width: 9px; height: 9px; border-radius: 50%; background: var(--disk-chart-blue); }
+.disk-folder-name { flex: 1 1 auto; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.disk-folder-size { flex: 0 0 auto; font-size: 12px; color: var(--disk-muted); font-variant-numeric: tabular-nums; }
+.disk-folder-chevron { flex: 0 0 auto; color: var(--disk-muted); font-size: 16px; }
+.disk-summary { margin-top: auto; padding: 20px 22px; border-top: 1px solid var(--disk-line); color: var(--disk-muted); font-size: 12px; }
+.disk-summary strong { color: var(--disk-text); font-weight: 500; }
+.disk-capacity-bar { height: 5px; margin: 12px 0; border-radius: 4px; background: var(--disk-line); overflow: hidden; }
+.disk-capacity-bar span { display: block; height: 100%; max-width: 100%; border-radius: inherit; background: var(--disk-chart-blue); }
+.disk-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 42px; padding: 0 24px; border-top: 1px solid var(--disk-line); color: var(--disk-muted); font-size: 11px; }
+.disk-footer > * { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.disk-empty { display: grid; place-items: center; gap: 14px; padding: 32px; color: var(--disk-muted); text-align: center; }
+
+/* Native dialogs retain their modal behavior and inherit the preview theme. */
+.disk-dialog { width: 720px; max-width: calc(100vw - 32px); max-height: calc(100dvh - 32px); margin: auto; padding: 0; overflow: auto; border: 1px solid var(--disk-line); border-radius: 14px; background: var(--disk-panel); color: var(--disk-text); box-shadow: 0 22px 70px #0005; }
+.disk-dialog::backdrop { background: #0c1426a6; }
+.disk-dialog-header { position: relative; padding: 24px 64px 22px 24px; border-bottom: 1px solid var(--disk-line); }
+.disk-dialog-header h2 { font-size: 21px; font-weight: 550; letter-spacing: -.4px; }
+.disk-dialog-header p { margin-top: 6px; color: var(--disk-muted); font-size: 13px; }
+.disk-dialog-header > .disk-icon-button { position: absolute; right: 16px; top: 18px; }
+.disk-picker-body { display: grid; grid-template-columns: 170px minmax(0, 1fr); min-height: 300px; }
+.disk-picker-locations { padding: 16px 10px; border-right: 1px solid var(--disk-line); }
+.disk-picker-locations button { display: block; width: 100%; padding: 10px; text-align: left; border: 0; border-radius: 6px; color: var(--disk-muted); background: transparent; }
+.disk-picker-locations button:hover, .disk-picker-locations .is-selected { color: var(--disk-text); background: var(--disk-hover); }
+.disk-picker-content { min-width: 0; padding: 16px; }
+.disk-picker-path { padding: 9px 10px; margin-bottom: 12px; border: 1px solid var(--disk-line); border-radius: 6px; color: var(--disk-muted); font-size: 12px; overflow-wrap: anywhere; }
+.disk-picker-list { max-height: 340px; overflow: auto; }
+.disk-picker-row { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 42px; padding: 9px 10px; border: 0; border-radius: 6px; text-align: left; color: var(--disk-text); background: transparent; }
+.disk-picker-row:hover, .disk-picker-row.is-selected, .disk-picker-row[aria-selected="true"] { background: var(--disk-hover); }
+.disk-picker-row > span { min-width: 0; overflow-wrap: anywhere; }
+.disk-picker-footer { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 10px; padding: 16px 24px; border-top: 1px solid var(--disk-line); }
+.disk-picker-footer > button:not(.disk-primary-button) { padding: 8px 14px; min-height: 36px; border: 1px solid var(--disk-line); border-radius: 8px; background: transparent; }
+.disk-settings { padding: 8px 24px 24px; }
+.disk-setting-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--disk-line); }
+.disk-setting-row :is(p,small) { color: var(--disk-muted); font-size: 12px; }
+.disk-setting-row select { max-width: 55%; padding: 8px 10px; border: 1px solid var(--disk-line); border-radius: 7px; background: var(--disk-raised); color: var(--disk-text); }
+
+/* Small windows scroll naturally rather than cropping the chart or inspector. */
+@media (max-width: 900px) {
+  .disk-body { grid-template-columns: minmax(0, 1fr) 280px; }
+  .disk-toolbar { gap: 8px; padding-inline: 16px; }
+  .disk-chart-stage { padding-inline: 16px; }
+  .disk-chart-center { left: 16px; right: 16px; }
+  .disk-side-header, .disk-summary { padding-inline: 18px; }
+}
+@media (max-width: 700px) {
+  .disk-workspace { height: auto; min-height: 100dvh; overflow: visible; grid-template-rows: auto minmax(0, 1fr) 42px; }
+  .disk-toolbar { min-height: 68px; height: auto; flex-wrap: wrap; padding-block: 12px; }
+  .disk-brand { font-size: 15px; }
+  .disk-crumbs { min-width: 80px; }
+  .disk-search { flex: 1 1 100%; }
+  .disk-search input { width: 100%; }
+  .disk-body { display: flex; flex-direction: column; }
+  .disk-chart-stage { min-height: 340px; height: 58vh; max-height: 600px; padding-top: 18px; }
+  .disk-chart-center { top: 18px; }
+  .disk-chart-center strong { font-size: 42px; }
+  .disk-side { overflow: visible; border-left: 0; border-top: 1px solid var(--disk-line); }
+  .disk-footer { padding-inline: 16px; }
+  .disk-dialog { width: calc(100vw - 32px); }
+  .disk-picker-body { grid-template-columns: minmax(0,1fr); }
+  .disk-picker-locations { display: flex; flex-wrap: wrap; gap: 4px; border-right: 0; border-bottom: 1px solid var(--disk-line); }
+  .disk-picker-locations button { width: auto; }
+  .disk-setting-row { gap: 12px; }
+}
+/* Reset the document only while the standalone preview is mounted. */
+body:has(.disk-workspace) { margin: 0; }
+/* Workspace composition gives the canvas a stable measured area and keeps tools subordinate. */
+.disk-map-area { display: grid; grid-template-rows: minmax(0,1fr) 58px; min-width: 0; min-height: 0; }
+.disk-chart-stage { padding: 0; }
+.disk-chart-canvas { position: absolute; inset: 0; }
+.disk-chart-center { inset: 0; }
+.disk-chart-center small { max-width: 110px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--disk-muted); font-size: 12px; margin-top: 12px; }
+.disk-chart-center strong { font-size: clamp(30px,3.6vw,52px); }
+.disk-map-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 26px 12px; }
+.disk-map-bottom > span { font-size: 11px; color: var(--disk-muted); }
+.disk-view-toggle { position: static; }
+.disk-toolbar-actions { display: flex; align-items: center; gap: 8px; }
+.disk-toolbar-divider { width: 1px; height: 22px; background: var(--disk-line); }
+.disk-storage-button { padding: 6px 0; background: none; border: 0; font-weight: 600; }
+.disk-crumbs > span { display: inline-flex; align-items: center; gap: 8px; }
+.disk-crumbs button:disabled { opacity: 1; color: var(--disk-text); }
+.disk-side-header > p { margin: 0 0 6px; font-size: 12px; }
+.disk-side-header > strong { display: block; margin-top: 14px; font-size: 32px; font-weight: 300; letter-spacing: -.8px; }
+.disk-folder-list { padding: 4px 12px; flex: 1; }
+.disk-row { display: flex; width: 100%; align-items: center; gap: 10px; padding: 13px 10px; border: 0; border-radius: 7px; background: transparent; text-align: left; }
+.disk-row:hover,.disk-row.is-selected { background: var(--disk-hover); }
+.disk-folder-dot { width: 7px; height: 7px; border-radius: 50%; flex: 0 0 7px; }
+.disk-folder-name { min-width: 0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.disk-folder-size { color: var(--disk-muted); font-size: 12px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.disk-folder-chevron { width: 12px; height: 12px; color: var(--disk-muted); }
+.disk-summary > div:first-child { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; margin-bottom: 10px; }
+.disk-summary small { color: var(--disk-muted); font-size: 11px; }
+.disk-footer .disk-brand { font-size: 11px; font-weight: 500; letter-spacing: 0; }
+.disk-footer > span { display: inline-flex; align-items: center; gap: 6px; }
+.disk-search { margin: 0 18px 10px; gap: 6px; }
+.disk-search input { width: 100%; }
+.disk-search > svg { flex-shrink: 0; }
+.disk-no-results { color: var(--disk-muted); padding: 16px 10px; }
+.disk-file-details { padding: 18px 22px; border-top: 1px solid var(--disk-line); overflow-wrap: anywhere; }
+.disk-file-details header { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.disk-file-details h2 { font-size: 14px; font-weight: 500; }
+.disk-file-details p,.disk-file-details small { color: var(--disk-muted); font-size: 12px; }
+.disk-help { margin-top: 22px; color: var(--disk-muted); font-size: 12px; }
+.disk-help summary { cursor: pointer; }
+.disk-help p { margin-top: 10px; }
+.disk-workspace:has(> .disk-progress) { grid-template-rows: 68px 40px minmax(0,1fr) 42px; }
+.disk-progress { padding: 0 24px; border-bottom: 1px solid var(--disk-line); }
+.disk-progress progress { flex: 1; max-width: 300px; }
+.disk-progress button { background: transparent; border: 0; color: var(--disk-accent); }
+@media(max-width:700px) {
+ .disk-chart-stage { height: 52vh; min-height: 330px; padding: 0; }
+ .disk-chart-center { inset: 0; }
+ .disk-map-bottom > span { display: none; }
+ .disk-toolbar { gap: 5px; }
+ .disk-crumbs { gap: 0; }
+ .disk-crumbs > span:not(:last-child) { display: none; }
+ .disk-toolbar-divider { display: none; }
+ .disk-toolbar-actions { gap: 2px; }
+ .disk-primary-button { padding-inline: 10px; }
+ .disk-footer > span:last-child { display: none; }
+ .disk-summary { padding-top: 24px; }
+}
+/* Picker rows use separate selection and navigation buttons without duplicate borders. */
+.disk-picker-row > button { display: inline-flex; align-items: center; gap: 10px; min-width: 0; min-height: 32px; padding: 3px 0; border: 0; color: inherit; background: transparent; text-align: left; }
+.disk-picker-row > button:first-child { flex: 1 1 auto; }
+.disk-picker-row > button:last-child:not(:first-child) { flex: 0 0 32px; justify-content: center; }
+.disk-picker-path { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
+.disk-picker-path button { border: 0; padding: 3px 5px; border-radius: 4px; background: transparent; color: inherit; }
+.disk-picker-path button:hover:not(:disabled) { color: var(--disk-text); background: var(--disk-hover); }
+
+/* The DSM iframe owns the viewport; only internal content panes may scroll. */
+html,body,#root { width:100%; height:100%; margin:0; overflow:hidden; }
+.disk-workspace { height:100%; min-height:0; min-width:0; }
+.disk-footer { min-width:0; gap:16px; }
+.disk-hover-path { flex:1; min-width:0; display:block!important; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:center; }
+.disk-footer .disk-brand { flex:none; white-space:nowrap; }
+.disk-session-gate { box-sizing:border-box; height:100%; padding:32px; background:#242f43; color:#f0f2f7; font-family:-apple-system,sans-serif; }
+.disk-session-gate a { color:#adc6ff; }
+.disk-settings-tabs { display:flex; gap:8px; padding:12px 24px; border-bottom:1px solid var(--disk-line); }
+.disk-settings-tabs button { border:0; border-radius:6px; padding:8px 14px; background:transparent; }
+.disk-settings-tabs button[aria-pressed=true] { background:var(--disk-hover); }
+.disk-settings-content { padding:8px 24px 20px; }
+.disk-context-menu { position:fixed; z-index:100; min-width:230px; max-width:calc(100vw - 16px); padding:6px; border:1px solid var(--disk-line); border-radius:10px; background:var(--disk-panel); color:var(--disk-text); box-shadow:0 12px 36px #0005; }
+.disk-context-menu button { display:block; width:100%; text-align:left; padding:10px; border:0; background:transparent; }
+.disk-context-menu button:hover { background:var(--disk-hover); }
+@media(max-width:700px) {
+ .disk-workspace { height:100%; min-height:0; overflow:hidden; grid-template-rows:60px minmax(0,1fr) 36px; }
+ .disk-toolbar { min-height:0; flex-wrap:nowrap; padding-block:6px; }
+ .disk-body { display:grid; grid-template-columns:minmax(0,1fr) 220px; }
+ .disk-chart-stage { height:100%; min-height:0; max-height:none; }
+ .disk-side { min-height:0; overflow:auto; }
+ .disk-side-header { padding:16px; }
+ .disk-side-header > strong { font-size:24px; }
+ .disk-chart-center strong { font-size:24px; }
+ .disk-footer { padding-inline:10px; gap:8px; }
+ .disk-footer .disk-brand { font-size:10px; }
+}
+@media(max-width:480px) {
+ .disk-body { grid-template-columns:minmax(0,1fr) 160px; }
+ .disk-row { padding:10px 4px; gap:5px; }
+ .disk-folder-size { font-size:10px; }
+ .disk-chart-center small { display:none; }
+}
+
+/* Keep the temporary UI-only status visible without occupying the path status bar. */
+.disk-build-badge { color:var(--disk-muted); font-size:11px; white-space:nowrap; }
+@media(max-width:800px){.disk-build-badge { max-width:85px; white-space:normal; font-size:10px; }}
+
+/* Live status overlays the map without changing the DSM window grid. */
+.disk-body { position:relative; }
+.disk-live-status { position:absolute; top:10px; left:18px; z-index:2; max-width:calc(100% - 350px); display:flex; align-items:center; gap:8px; padding:8px 12px; border-radius:8px; background:var(--disk-panel); color:var(--disk-muted); font-size:12px; }
+.disk-live-status[role=alert] { color:#f49a9a; }
+.disk-debug-output { white-space:pre-wrap; overflow-wrap:anywhere; font-size:12px; }
+.disk-more { margin:12px; padding:8px 12px; background:var(--disk-hover); border:0; border-radius:6px; }
+
+/* Destructive confirmation remains readable inside small DSM windows and both themes. */
+.disk-delete-dialog { width: 460px; }
+.disk-delete-dialog .disk-dialog-header { padding: 22px 24px 18px; }
+.disk-delete-content { display: grid; gap: 14px; padding: 20px 24px; overflow-wrap: anywhere; }
+.disk-delete-name { font-weight: 600; }
+.disk-delete-path { color: var(--disk-muted); font-size: 12px; }
+.disk-delete-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px; padding: 16px 24px 22px; }
+.disk-delete-actions button { min-height: 38px; padding: 8px 16px; border: 1px solid var(--disk-line); border-radius: 9px; background: var(--disk-raised); }
+.disk-delete-actions button:hover:not(:disabled) { background: var(--disk-hover); }
+.disk-delete-actions .disk-delete-confirm { background: #ba3347; border-color: #ba3347; color: #fff; }
+.disk-delete-actions .disk-delete-confirm:hover:not(:disabled) { background: #a1263a; }
+
+/* Three presentation modes share one live source, map and action model. */
+.disk-workspace { grid-template-rows: 56px minmax(0,1fr) 34px; }
+.disk-toolbar { height:56px; padding:0 16px; gap:10px; }
+.disk-layout-picker { display:flex; align-items:center; gap:8px; }
+.disk-layout-picker > span { color:var(--disk-muted); font-size:12px; }
+.disk-layout-picker select { max-width:180px; height:34px; padding:4px 8px; border:1px solid var(--disk-line); border-radius:7px; background:var(--disk-panel); color:var(--disk-text); font-size:12px; }
+.disk-toolbar-map.disk-view-toggle { position:static; flex:none; }
+.disk-body { position:relative; }
+.disk-workspace[data-layout="focus"] .disk-body,.disk-workspace[data-layout="details"] .disk-body { grid-template-columns:minmax(0,1fr); }
+.disk-workspace[data-layout="list"] .disk-body,.disk-workspace[data-search="true"] .disk-body { grid-template-columns:minmax(0,1fr) 290px; }
+.disk-workspace[data-map="treemap"] .disk-chart-stage { padding:0; }
+.disk-workspace .disk-map-area { padding:0; min-width:0; grid-template-rows:minmax(0,1fr); }
+.disk-workspace .disk-chart-stage { height:100%; }
+.disk-side-header { padding:18px 18px 14px; }
+.disk-side-header h1 { font-size:18px; }
+.disk-side-header > strong { font-size:24px; margin-top:8px; }
+.disk-folder-list { padding:0 6px 10px; }
+.disk-folder-list .disk-row { min-height:36px; padding:8px; gap:8px; font-size:12px; }
+.disk-footer { height:34px; padding:0 16px; }
+.disk-selection-size { flex:0 1 auto; max-width:30%; font-variant-numeric:tabular-nums; }
+.disk-selection-card { position:absolute; right:18px; bottom:18px; width:290px; max-width:calc(100% - 36px); padding:18px; border:1px solid var(--disk-line); border-radius:10px; background:var(--disk-panel); box-shadow:0 10px 28px #0004; display:grid; gap:12px; }
+.disk-selection-card header { display:flex; align-items:center; gap:10px; }
+.disk-selection-card h2 { flex:1; min-width:0; overflow-wrap:anywhere; font-size:14px; font-weight:600; }
+.disk-selection-card strong { font-size:22px; font-weight:500; }
+.disk-selection-card small { overflow-wrap:anywhere; color:var(--disk-muted); }
+.disk-selection-card .disk-icon-button { width:24px; height:24px; }
+@media(max-width:1000px){.disk-layout-picker > span { display:none; }.disk-toolbar{gap:5px;padding:0 10px;}.disk-toolbar-actions{gap:4px;}.disk-toolbar-map button{padding:6px 8px;}}
+@media(max-width:760px){.disk-workspace{grid-template-rows:92px minmax(0,1fr) 34px;}.disk-toolbar{height:92px;flex-wrap:wrap;}.disk-toolbar-actions{width:100%;justify-content:flex-end;}.disk-workspace[data-layout="list"] .disk-body,.disk-workspace[data-search="true"] .disk-body{grid-template-columns:minmax(0,1fr) 220px;}.disk-layout-picker select{max-width:145px;}.disk-selection-size{max-width:25%;}}
+
+/* Cache provenance stays visible without taking space from the responsive map. */
+.disk-cache-notice{position:absolute;z-index:4;top:12px;left:12px;right:12px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 14px;border:1px solid #bd94564d;border-radius:10px;background:var(--disk-panel);color:var(--disk-text);box-shadow:0 3px 16px #0002;font-size:12px;pointer-events:auto}
+.disk-cache-notice small{display:block;margin-top:4px;opacity:.72}
+.disk-cache-notice button,.disk-scan-center button{border:1px solid #8da1be55;border-radius:8px;padding:8px 14px;background:#8da1be15;color:inherit;cursor:pointer}
+/* Unknown totals use an activity ring rather than a misleading percentage. */
+.disk-scan-center{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:24px;color:inherit;overflow:auto}
+.disk-scan-center h2,.disk-scan-center p{margin:0}.disk-scan-center small{opacity:.65}
+.disk-scan-ring{position:relative;width:clamp(150px,24vh,240px);aspect-ratio:1;flex-shrink:0;margin-bottom:12px}
+.disk-scan-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.disk-scan-ring circle{fill:none;stroke-width:9}.disk-ring-track{stroke:#8597b326}.disk-ring-activity{stroke:#70c9d2;stroke-linecap:round;stroke-dasharray:140 413;transform-origin:center;animation:disk-ring-turn 2.5s linear infinite}
+.disk-scan-ring>div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}.disk-scan-ring strong{font-size:30px;font-weight:500}.disk-scan-ring.is-paused .disk-ring-activity{animation-play-state:paused}
+@keyframes disk-ring-turn{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.disk-ring-activity{animation:none}}
+
+/* Keep cache provenance bounded to the map when the optional list is visible. */
+.disk-map-area{position:relative}
+/* Keep terminal warnings and cache provenance separate when both describe the current view. */
+.disk-body:has(.disk-live-status) .disk-cache-notice{top:auto;bottom:12px}
+.disk-live-status{max-width:calc(100% - 32px);flex-wrap:wrap;line-height:1.5}
+.disk-debug-output{max-height:260px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}
+
+/* Diagnostic controls use the same theme as the rest of Settings. */
+.disk-settings-content>button,.disk-debug-actions>button{padding:8px 12px;border:1px solid var(--disk-line);border-radius:8px;background:var(--disk-raised);color:var(--disk-text);cursor:pointer;margin:12px 0}
+.disk-settings-content>h3{margin:14px 0 8px}.disk-settings-content>p{color:var(--disk-muted);font-size:13px}
+
+/* Keep diagnostic controls compact while retaining full session data outside the rendered tail. */
+.disk-debug-actions { display:flex; gap:8px; flex-wrap:wrap; }
+.disk-settings input[type="number"] { width:90px; padding:8px; color:var(--disk-text); background:var(--disk-panel); border:1px solid var(--disk-line); border-radius:6px; }
+
+/* Notifications remain inside the DSM app window and never reduce the map viewport. */
+.disk-workspace{position:relative}
+.disk-notification-bell,.disk-rescan-button{position:relative}
+.disk-notice-badge,.disk-rescan-dot{position:absolute;right:1px;top:0;border-radius:99px;background:#ef5350;color:white;min-width:14px;height:14px;font-size:9px;line-height:14px;text-align:center;pointer-events:none}
+.disk-rescan-dot{min-width:8px;width:8px;height:8px;top:3px;right:3px;box-shadow:0 0 0 2px var(--disk-bg)}
+.disk-notice-stack,.disk-notice-history{position:absolute;z-index:30;right:14px;top:68px;width:min(360px,calc(100% - 28px));color:var(--disk-text);font-size:13px}
+.disk-notice-stack{display:grid;pointer-events:none}
+.disk-notice-card{min-width:0;border:1px solid var(--disk-line);border-radius:15px;background:var(--disk-raised);box-shadow:0 8px 28px #0004;padding:12px 14px;overflow-wrap:anywhere}
+.disk-notice-stack .disk-notice-card{grid-area:1/1;z-index:calc(3 - var(--notice-index));transform:translateY(calc(var(--notice-index)*12px)) scale(calc(1 - var(--notice-index)*.035));transform-origin:bottom;pointer-events:auto}
+.disk-notice-stack .disk-notice-card[aria-hidden=true]{pointer-events:none}
+.disk-notice-card header,.disk-notice-history>header{display:flex;align-items:center;gap:8px}
+.disk-notice-card header strong{flex:1;font-size:12px}.disk-notice-card time{font-size:10px;color:var(--disk-muted)}
+.disk-notice-card p{margin:7px 0 2px;line-height:1.45;white-space:pre-line}
+.disk-notice-card[data-kind=error]{border-color:#e5737380}
+.disk-notice-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.disk-notice-actions button{border:1px solid var(--disk-line);border-radius:7px;background:var(--disk-hover);color:inherit;padding:6px 9px;cursor:pointer}
+.disk-notice-history{border:1px solid var(--disk-line);border-radius:16px;background:var(--disk-panel);box-shadow:0 12px 32px #0005;padding:12px;max-height:calc(100% - 88px);overflow:auto}
+.disk-notice-history>header{justify-content:space-between;margin-bottom:10px}.disk-notice-history .disk-notice-card{margin-bottom:8px;box-shadow:none}
+
+/* The single workspace layout gives the map all space released by either sidebar. */
+.disk-workspace[data-layout="list"] .disk-body { display:grid;grid-template-columns:minmax(0,1fr);overflow:hidden; }
+.disk-workspace[data-left="true"][data-right="true"] .disk-body { grid-template-columns:240px minmax(0,1fr) 290px; }
+.disk-workspace[data-left="true"][data-right="false"] .disk-body { grid-template-columns:240px minmax(0,1fr); }
+.disk-workspace[data-left="false"][data-right="true"] .disk-body { grid-template-columns:minmax(0,1fr) 290px; }
+.disk-tree-pane { min-height:0;min-width:0;overflow:auto;border-right:1px solid var(--disk-line);background:var(--disk-panel); }
+.disk-tree-pane>header { display:flex;align-items:center;justify-content:space-between;padding:12px 14px;font-size:14px; }
+.disk-tree-pane>header strong { font-weight:500; }
+.disk-directory-tree { padding:4px 6px 16px; }
+.disk-tree-row { display:flex;align-items:center;min-height:34px;border-radius:6px;gap:3px; }
+.disk-tree-row:hover { background:color-mix(in srgb,var(--disk-muted) 10%,transparent); }
+.disk-tree-row.is-selected { background:#3b5985;color:#fff; }
+.disk-tree-toggle,.disk-tree-name { appearance:none;border:0;background:none;color:inherit;display:flex;align-items:center;cursor:pointer; }
+.disk-tree-toggle { flex:none;padding:7px 2px; }
+.disk-tree-name { min-width:0;flex:1;gap:8px;text-align:left;padding:7px 4px;font:inherit;font-size:12px; }
+.disk-tree-name svg { flex:none;width:17px;height:17px;color:var(--disk-muted); }
+.disk-tree-name span { overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+.disk-tree-status { display:block;color:var(--disk-muted);font-size:12px;padding:10px 14px; }
+.disk-list-columns { display:flex;justify-content:space-between;padding:10px 18px;border-block:1px solid var(--disk-line);font-size:12px;color:var(--disk-muted); }
+.disk-workspace .disk-map-area { min-height:0;min-width:0; }
+.disk-icon-button[aria-pressed="true"] { color:var(--disk-text);background:color-mix(in srgb,var(--disk-muted) 14%,transparent); }
+/* Narrow DSM windows retain a usable map; panes become bounded overlays instead of stacking below it. */
+@media(max-width:1050px){
+ .disk-workspace[data-left="true"][data-right="true"] .disk-body {grid-template-columns:200px minmax(0,1fr) 230px;}
+ .disk-workspace[data-left="true"][data-right="false"] .disk-body {grid-template-columns:200px minmax(0,1fr);}
+ .disk-workspace[data-left="false"][data-right="true"] .disk-body {grid-template-columns:minmax(0,1fr) 230px;}
+}
+@media(max-width:760px){
+ .disk-workspace[data-layout="list"] .disk-body {grid-template-columns:minmax(0,1fr);}
+ .disk-tree-pane,.disk-workspace .disk-side {position:absolute;top:0;bottom:0;width:min(240px,42%);z-index:4;box-shadow:0 8px 24px #0005;overflow:auto;}
+ .disk-tree-pane{left:0;}.disk-workspace .disk-side{right:0;border-top:0;border-left:1px solid var(--disk-line);}
+ .disk-workspace .disk-map-area{height:100%;}
+}
+/* File selection is inspected inside the right pane, never in an overlapping map card. */
+.disk-file-inspector {padding:14px 18px;border-top:1px solid var(--disk-line);}
+.disk-file-inspector header {display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.disk-file-inspector h2 {font-size:14px;overflow-wrap:anywhere;font-weight:500;}
+.disk-file-inspector strong,.disk-file-inspector small {display:block;margin-block:8px;overflow-wrap:anywhere;}
+
+/* Keep pointer feedback separate from the cached base map and its surface lighting. */
+.disk-chart-overlay { position:absolute;inset:0;width:100%;height:100%;pointer-events:none; }
+
+/* Live source status uses a compact glyph plus text; color alone never represents coverage. */
+.disk-workspace[data-left="true"][data-right="true"] .disk-body {grid-template-columns:330px minmax(0,1fr) 290px;}
+.disk-workspace[data-left="true"][data-right="false"] .disk-body {grid-template-columns:330px minmax(0,1fr);}
+.disk-tree-age {display:flex;align-items:center;gap:7px;padding-right:8px;flex:none;max-width:100px;}
+.disk-tree-age small {font-size:10px;color:var(--disk-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.disk-tree-age i {width:9px;height:9px;border:1px solid #90a0b8;border-radius:50%;flex:none;}
+.disk-tree-name .disk-storage-icon {width:19px;height:19px;color:#b8c9df;}
+.disk-age-inputs {display:flex;align-items:center;gap:10px;}
+.disk-age-inputs input {width:70px;}
+.disk-age-inputs input,.disk-age-inputs select {background:var(--disk-panel);color:var(--disk-text);border:1px solid var(--disk-line);border-radius:7px;padding:8px;}
+.disk-age-gradient {height:10px;border-radius:6px;background:linear-gradient(90deg,#39cb6d,#e7d84b,#ed565f);margin-top:22px;}
+.disk-age-legend {display:flex;justify-content:space-between;font-size:12px;margin-top:8px;color:var(--disk-muted);}
+@media(max-width:1100px){
+ .disk-workspace[data-left="true"][data-right="true"] .disk-body {grid-template-columns:280px minmax(0,1fr) 230px;}
+ .disk-workspace[data-left="true"][data-right="false"] .disk-body {grid-template-columns:280px minmax(0,1fr);}
+ .disk-tree-age small {display:none;}
+}
+@media(max-width:760px){
+ .disk-workspace[data-layout="list"] .disk-body {grid-template-columns:minmax(0,1fr);}
+ .disk-tree-pane {width:min(300px,72%);}
+}
+
+/* Keep empty-scope guidance compact inside the available map area. */
+.disk-empty { display:flex; flex-direction:column; justify-content:center; align-items:center; }
+
+/* Keep age and scope actions readable even when the folder tree is collapsed. */
+.disk-header-scan { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+.disk-scan-age { display:inline-flex; align-items:center; gap:7px; border:1px solid currentColor; border-radius:18px; padding:7px 10px; font-size:12px; white-space:nowrap; background:color-mix(in srgb,currentColor 9%,var(--disk-panel)); }
+.disk-scan-age svg { width:17px; height:17px; flex-shrink:0; }
+.disk-header-coverage { font-size:11px; color:var(--disk-muted); }
+.disk-header-refresh { display:inline-flex; align-items:center; gap:6px; white-space:nowrap; border:1px solid var(--disk-line); background:var(--disk-panel); border-radius:7px; padding:8px 10px; font-size:12px; }
+.disk-header-refresh:disabled { opacity:.45; }
+.disk-crumbs { flex:0 1 auto; max-width:36vw; }
+.disk-toolbar-actions { margin-left:auto; flex-shrink:0; }
+@media(max-width:1250px){
+ .disk-workspace { grid-template-rows:100px minmax(0,1fr) 34px; }
+ .disk-toolbar { height:100px; display:grid; grid-template-columns:34px 34px minmax(0,1fr); grid-template-rows:40px 44px; padding:6px 12px; gap:2px 8px; }
+ .disk-crumbs { grid-column:3; max-width:none; }
+ .disk-header-scan { grid-column:1 / 4; grid-row:2; justify-self:start; min-width:0; }
+ .disk-toolbar-actions { grid-column:3; grid-row:2; width:auto; justify-self:end; }
+ .disk-scan-age { max-width:220px; }
+ .disk-scan-age span { overflow:hidden; text-overflow:ellipsis; }
+ .disk-header-coverage { display:none; }
+}
+@media(max-width:950px){
+ .disk-workspace { grid-template-rows:142px minmax(0,1fr) 34px; }
+ .disk-toolbar { height:142px; grid-template-rows:38px 44px 42px; }
+ .disk-header-scan { padding-right:0; }
+ .disk-toolbar-actions { grid-column:1 / 4; grid-row:3; justify-self:stretch; justify-content:flex-end; }
+ .disk-header-coverage { display:inline; }
+}
+
+/* Preserve the NAS home link on narrow screens while shortening intermediate crumbs. */
+@media(max-width:700px){.disk-crumbs > span:first-child {display:inline-flex;flex-shrink:0;}}
+
+/* Inline list controls keep the chart visible and reserve scrolling for file rows. */
+.disk-list-tools {padding:12px 14px 0; flex:none; max-height:55%; overflow:auto;}
+.disk-list-tools .disk-search {margin:0;padding:9px;border:1px solid var(--disk-line);border-radius:7px;}
+/* Search and disclosure share one row without shrinking the icon hit target. */
+.disk-list-search-row {display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.disk-list-search-row .disk-search {flex:1;min-width:0;}
+.disk-list-search-row button {position:relative;flex:none;}
+.disk-filter-active {position:absolute;right:5px;top:5px;width:6px;height:6px;border-radius:50%;background:#72d5e1;}
+.disk-inline-filters {display:grid;grid-template-rows:0fr;transition:grid-template-rows .18s ease;}
+.disk-inline-filters[data-open="true"] {grid-template-rows:1fr;}
+.disk-inline-filters>div {overflow:hidden;min-height:0;}
+/* A tonal inset makes the expandable controls read as one bounded area. */
+.disk-inline-filters section {padding:12px 14px;margin:4px 0 10px;background:#202c3e;border:1px solid var(--disk-line);border-radius:10px;}
+.disk-inline-filters h3 {font-size:13px;margin:5px 0 12px;}
+.disk-inline-filters label {display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;margin:8px 0;}
+.disk-inline-filters select {max-width:60%;padding:6px;color:var(--disk-text);background:var(--disk-bg);border:1px solid var(--disk-line);border-radius:5px;}
+.disk-list-columns {display:grid;grid-template-columns:1fr 65px 65px;gap:6px;}
+.disk-folder-list .disk-row {display:flex;gap:7px;min-height:38px;}
+.disk-folder-list .disk-storage-icon {width:16px;flex:none;color:var(--disk-muted);}
+.disk-folder-name small {display:block;color:var(--disk-muted);font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:400;}
+.disk-file-category {width:60px;flex:none;text-overflow:ellipsis;overflow:hidden;font-size:10px;color:var(--disk-muted);}
+.disk-selection-note {display:flex;flex-direction:column;gap:6px;padding:12px;background:rgba(98,140,220,.15);font-size:12px;overflow-wrap:anywhere;}
+.disk-selection-note small {color:var(--disk-muted);}
+.disk-tree-bytes {font-size:11px;color:var(--disk-muted);white-space:nowrap;flex:none;margin-right:7px;}
+.disk-map-location {position:absolute;bottom:8px;left:8px;max-width:calc(100% - 16px);padding:7px 10px;border-radius:6px;background:rgba(20,30,46,.94);color:#e4eaf5;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;pointer-events:none;}
+@media(prefers-reduced-motion:reduce){.disk-inline-filters {transition:none;}}
+/* The richer file list gets enough width without covering the map or path tree. */
+.disk-workspace[data-left="true"][data-right="true"] .disk-body {grid-template-columns:290px minmax(0,1fr) 390px;}
+.disk-workspace[data-left="false"][data-right="true"] .disk-body {grid-template-columns:minmax(0,1fr) 390px;}
+.disk-side {overflow:hidden;}
+.disk-folder-list {min-height:70px;overflow:auto;}
+@media(max-width:1100px){
+ .disk-workspace[data-left="true"][data-right="true"] .disk-body {grid-template-columns:230px minmax(0,1fr) 325px;}
+ .disk-workspace[data-left="false"][data-right="true"] .disk-body {grid-template-columns:minmax(0,1fr) 325px;}
+ .disk-side-header {padding:12px 14px 8px;}
+ .disk-file-category {width:44px;}
+}
+/* Avoid excess title height and keep all disclosure controls reachable on small DSM windows. */
+.disk-side-header h1 {margin:0;}
+.disk-list-tools {max-height:60%;}
+.disk-map-location {z-index:3;}
+/* The invisible sentinel triggers incremental loading inside the existing scroll pane. */
+.disk-list-sentinel {height:1px;flex:none;}
+
+/* The selection notice must not change virtual row offsets inside the scroller. */
+.disk-selection-note {flex:none;max-height:110px;overflow:auto;}
+/* Personal widths retain a usable map and clamp to the current DSM window. */
+.disk-workspace .disk-body {grid-template-columns:minmax(0,1fr)}
+.disk-workspace[data-left="true"] .disk-body {grid-template-columns:minmax(180px,min(var(--disk-left-width,290px),32%)) minmax(0,1fr)}
+.disk-workspace[data-right="true"] .disk-body {grid-template-columns:minmax(0,1fr) minmax(240px,min(var(--disk-right-width,390px),38%))}
+.disk-workspace[data-left="true"][data-right="true"] .disk-body {grid-template-columns:minmax(180px,min(var(--disk-left-width,290px),28%)) minmax(0,1fr) minmax(240px,min(var(--disk-right-width,390px),32%))}
+.disk-tree-pane,.disk-side {position:relative}
+.disk-pane-resize {position:absolute;top:0;bottom:0;width:7px;z-index:15;cursor:col-resize;touch-action:none}
+.disk-pane-resize.left {right:-3px}.disk-pane-resize.right {left:-3px}
+.disk-pane-resize:hover,.disk-pane-resize:focus-visible {background:color-mix(in srgb,var(--disk-accent,#94baff) 45%,transparent);outline:none}
+.disk-tree-tools {justify-content:flex-start!important;gap:6px}
+.disk-tree-tools button[aria-pressed="true"] {background:rgba(150,185,255,.2)}
+/* Keep the tree toolbar fixed while the persisted tree viewport scrolls independently. */
+.disk-tree-pane {display:flex;flex-direction:column;overflow:hidden}
+.disk-tree-pane>header {flex:none}
+.disk-directory-tree {flex:1;min-height:0;overflow:auto;overscroll-behavior:contain}
+
+/* Keep size and category switches in one compact row, including narrow sidebars. */
+.disk-category-toolbar { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:18px; flex:none; }
+.disk-category-toolbar > strong { min-width:0; font-size:26px; font-weight:400; letter-spacing:-.6px; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.disk-category-actions { display:flex; align-items:center; gap:4px; flex:none; }
+.disk-category-actions button { display:grid; place-items:center; width:34px; height:34px; padding:0; border:1px solid transparent; border-radius:8px; background:transparent; color:var(--disk-muted); cursor:pointer; }
+.disk-category-actions button svg { width:18px; height:18px; }
+.disk-category-actions button:hover:not(:disabled) { background:rgba(135,164,207,.12); color:var(--disk-text); }
+.disk-category-actions button[aria-pressed="true"] { color:var(--disk-text); background:rgba(135,164,207,.2); border-color:rgba(135,164,207,.22); }
+.disk-category-actions button:disabled { opacity:.3; cursor:default; }
+.disk-category-actions button:focus-visible { outline:2px solid #a9c5f5; outline-offset:2px; }
+
+/* Queue controls reuse the app dialog while keeping the active job separate from removable items. */
+.disk-queue-toggle {position:relative;}
+.disk-queue-toggle>span {position:absolute;right:-3px;top:-3px;background:var(--disk-accent,#a9c5f5);color:#172335;border-radius:9px;min-width:16px;font-size:10px;padding:1px 3px;}
+.disk-queue-dialog {width:min(520px,calc(100vw - 32px));}
+.disk-queue-active {display:flex;flex-direction:column;gap:6px;padding:12px;border-radius:10px;background:rgba(116,169,215,.12);}
+.disk-queue-items {padding-left:24px;max-height:45vh;overflow:auto;}
+.disk-queue-items li {padding:6px 0;}
+.disk-queue-items li>span {display:inline-block;width:calc(100% - 48px);vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+/* Keep a permission warning visible even when the category switch is unavailable. */
+.disk-category-denied { position:relative; display:inline-flex; }
+.disk-category-denied::after { content:""; position:absolute; width:25px; height:2px; border-radius:2px; background:#ff626b; top:16px; left:5px; transform:rotate(-45deg); pointer-events:none; box-shadow:0 0 1px #101827; }
+
+/* Keep first-run guidance within the map viewport, including smaller DSM windows. */
+.disk-setup-scroll{position:absolute;inset:0;overflow:auto;display:flex;padding:32px 24px;box-sizing:border-box;background:radial-gradient(ellipse at 50% 0%,#7c9ee510,transparent 65%)}
+.disk-setup{width:100%;max-width:650px;margin:auto;color:var(--disk-text);text-align:center}
+.disk-setup-symbol{display:grid;place-items:center;width:62px;height:62px;margin:0 auto 20px;border-radius:20px;background:#8cafff18;color:#abc8ff;border:1px solid #a7c4ff25}
+.disk-setup-symbol svg{width:29px;height:29px}.disk-setup-symbol[data-ready=true]{color:#7edbb0;background:#7edbb014}
+.disk-setup-eyebrow{font-size:10px;letter-spacing:1.7px;color:var(--disk-muted);margin:0 0 12px}.disk-setup h1{font-size:clamp(23px,2.4vw,32px);font-weight:600;letter-spacing:-.7px;margin:0 0 14px}
+.disk-setup .disk-setup-intro{max-width:530px;margin:0 auto 24px;color:var(--disk-muted);font-size:14px;line-height:1.6}
+.disk-setup-steps{list-style:none;padding:0;margin:0;text-align:left;border:1px solid #9eb8dc22;border-radius:16px;background:#8aa4cf08;overflow:hidden}
+.disk-setup-steps li{display:flex;gap:16px;padding:18px 22px}.disk-setup-steps li+li{border-top:1px solid #9eb8dc16}.disk-setup-step{flex:none;display:grid;place-items:center;width:29px;height:29px;border-radius:50%;background:#aac7fa17;color:#b9d0fa;font-size:12px;font-weight:600}
+.disk-setup h2{font-size:14px;margin:2px 0 5px;font-weight:600}.disk-setup-steps p,.disk-setup-access p{margin:0;font-size:12px;line-height:1.6;color:var(--disk-muted)}
+.disk-setup .disk-setup-note{display:flex;gap:9px;max-width:560px;margin:18px auto 24px;text-align:left;font-size:11px;line-height:1.6;color:var(--disk-muted)}.disk-setup-note svg{flex:none;margin-top:3px}
+.disk-setup-actions{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}.disk-setup-actions button{display:flex;align-items:center;gap:9px;padding:11px 17px}.disk-setup-actions span{font-size:10px;color:var(--disk-muted)}
+.disk-setup-shares{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;max-height:220px;overflow:auto;text-align:left}.disk-setup-shares button{display:flex;align-items:center;gap:12px;border:1px solid #9eb8dc22;border-radius:10px;padding:14px;background:#8aa4cf0c;color:inherit;cursor:pointer}.disk-setup-shares button:hover{background:#8aa4cf20}.disk-setup-shares button span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.disk-setup-shares svg{flex:none;color:var(--disk-muted)}
+.disk-setup-access{margin:20px 0;text-align:left;font-size:12px;color:var(--disk-muted)}.disk-setup-access summary{cursor:pointer}.disk-setup-access p{margin-top:10px}.disk-setup-error{color:#f3bba6;font-size:12px;line-height:1.5}
+@media(max-height:650px){.disk-setup-scroll{padding:20px}.disk-setup-symbol{width:42px;height:42px;margin-bottom:12px}.disk-setup-steps li{padding:12px 16px}.disk-setup .disk-setup-intro{margin-bottom:16px}}
+
+/* Recycle-bin existence and access have distinct signals; disabled index toggles retain that evidence. */
+.disk-recycle-readable button,.disk-recycle-readable button:disabled,.disk-recycle-readable button:hover:not(:disabled){color:var(--disk-muted);opacity:1}
+.disk-recycle-denied button,.disk-recycle-denied button:disabled,.disk-recycle-denied button:hover:not(:disabled){color:#ff626b;opacity:1}
+.disk-recycle-missing{position:relative;display:inline-flex}
+.disk-recycle-missing::after{content:"";position:absolute;width:25px;height:2px;border-radius:2px;background:#ff626b;top:16px;left:5px;transform:rotate(-45deg);pointer-events:none}
+
+/* Status badges keep a fixed footprint beside a truncated share name. */
+.disk-tree-status-toggle { margin-left:auto; }
+.disk-tree-share-status { display:inline-flex;align-items:center;gap:5px;flex:none; }
+.disk-share-status-icon { position:relative;display:inline-flex;align-items:center;justify-content:center;width:18px;height:20px;flex:none;color:var(--disk-muted);border-radius:3px; }
+.disk-share-status-icon svg { width:15px;height:15px; }
+.disk-share-status-icon.is-denied { color:#ff626b; }
+.disk-share-status-icon.is-missing::after { content:"";position:absolute;width:19px;height:2px;background:#ff626b;transform:rotate(-45deg);pointer-events:none; }
+.disk-share-status-icon small { position:absolute;right:-2px;bottom:-2px;background:var(--disk-panel);font-size:9px;line-height:11px;font-weight:700;border-radius:3px;padding:0 1px; }
+.disk-share-status-icon:focus-visible { outline:2px solid var(--disk-text);outline-offset:2px; }
+
+/* Fixed metadata tracks keep every level aligned despite names, units or missing badges. */
+.disk-directory-tree { --tree-status-width:0px;font-size:11px; }
+.disk-directory-tree[data-status="true"] { --tree-status-width:52px; }
+.disk-tree-row { display:grid;grid-template-columns:minmax(0,1fr) var(--tree-status-width) var(--tree-size-width,10ch) 14px;padding-right:5px;box-sizing:border-box; }
+.disk-tree-name { overflow:hidden; }
+.disk-tree-status-cell { display:flex;align-items:center;justify-content:center;min-width:0; }
+.disk-directory-tree[data-status="false"] .disk-tree-status-cell { visibility:hidden; }
+.disk-tree-share-status { display:grid;grid-template-columns:repeat(3,16px);gap:2px; }
+.disk-tree-bytes { margin:0;text-align:right;font-variant-numeric:tabular-nums;font-feature-settings:"tnum"; }
+.disk-tree-age { width:18px;padding:0;justify-content:center; }
+.disk-directory-tree[data-size-unit="hidden"] .disk-tree-bytes { visibility:hidden;overflow:hidden; }
+.disk-size-unit-toggle { flex:none;min-width:32px;font-size:11px;font-weight:600; }
+
+/* Indentation belongs to the label track, never to the shared metadata columns. */
+.disk-tree-label { display:flex;align-items:center;min-width:0;overflow:hidden;box-sizing:border-box; }
+
+/* Compact tree badges retain their full three-column footprint in narrow panes. */
+.disk-tree-share-status .disk-share-status-icon {width:16px;}
+.disk-tree-row {gap:2px;}
+.disk-tree-age {width:14px;}
+
+/* Coverage gaps qualify the recorded lower bound independently of scan freshness. */
+.disk-tree-bytes[data-partial] { color:#e5b96f; }
+/* Keep lower-bound text readable on the light palette as well. */
+.disk-workspace[data-theme="light"] .disk-tree-bytes[data-partial] { color:#805000; }

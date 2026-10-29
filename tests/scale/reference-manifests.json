@@ -1,0 +1,128 @@
+[
+  {
+    "version": 1,
+    "config": {
+      "count": 100000,
+      "seed": 42,
+      "shape": "wide"
+    },
+    "sha256": "177f7691713882a1a7ad39a7768f5024359137bbfbd793c92b348a07cc12c766",
+    "count": 100000,
+    "knownSum": "225179981368538425000",
+    "unknown": 25000,
+    "zero": 25000,
+    "maximumDepth": 1
+  },
+  {
+    "version": 1,
+    "config": {
+      "count": 1000000,
+      "seed": 42,
+      "shape": "wide"
+    },
+    "sha256": "d7606dc700b065cc57eef997dec5332cefa3bc5f83a0aa89e2681443dae982fe",
+    "count": 1000000,
+    "knownSum": "2251799813685384250000",
+    "unknown": 250000,
+    "zero": 250000,
+    "maximumDepth": 1
+  },
+  {
+    "version": 1,
+    "config": {
+      "count": 10000000,
+      "seed": 42,
+      "shape": "wide"
+    },
+    "sha256": "b16c4a540cb600ab0ac4c21a112fda85ba1e39a6517a53ffac897901fbee2f81",
+    "count": 10000000,
+    "knownSum": "22517998136853842500000",
+    "unknown": 2500000,
+    "zero": 2500000,
+    "maximumDepth": 1
+  },
+  {
+    "version": 1,
+    "config": {
+      "count": 100000,
+      "seed": 42,
+      "shape": "deep"
+    },
+    "sha256": "70ba4519faabb94ca0d77d60738591078123ddcd71928d2c1ebb20f2a5423e72",
+    "count": 100000,
+    "knownSum": "224603520616234990440",
+    "unknown": 24936,
+    "zero": 25192,
+    "maximumDepth": 257
+  },
+  {
+    "version": 1,
+    "config": {
+      "count": 1000000,
+      "seed": 42,
+      "shape": "deep"
+    },
+    "sha256": "933ab9737a72612b5cd0c5d1a1bc123bbbfe8d19855b188c349e89a5f30b3bd8",
+    "count": 1000000,
+    "knownSum": "2251223352933080815440",
+    "unknown": 249936,
+    "zero": 250192,
+    "maximumDepth": 257
+  },
+  {
+    "version": 1,
+    "config": {
+      "count": 10000000,
+      "seed": 42,
+      "shape": "deep"
+    },
+    "sha256": "7f212189ca3306584fbabc3abad9999f8970c7f1bf868e553f747c35da1099d0",
+    "count": 10000000,
+    "knownSum": "22517421676101539065440",
+    "unknown": 2499936,
+    "zero": 2500192,
+    "maximumDepth": 257
+  },
+  {
+    "version": 1,
+    "config": {
+      "count": 100000,
+      "seed": 42,
+      "shape": "skewed"
+    },
+    "sha256": "aed3860b9c2a90d116b951f26cff64877419f3f28102dcd71ab13985e4316d54",
+    "count": 100000,
+    "knownSum": "225035866180462567896",
+    "unknown": 24984,
+    "zero": 25048,
+    "maximumDepth": 2
+  },
+  {
+    "version": 1,
+    "config": {
+      "count": 1000000,
+      "seed": 42,
+      "shape": "skewed"
+    },
+    "sha256": "1d4ff7bfd64c18baf7308b932c7c5dc5a03d75b5077ac9de2d02e7d7ee63418d",
+    "count": 1000000,
+    "knownSum": "2251655698497308392896",
+    "unknown": 249984,
+    "zero": 250048,
+    "maximumDepth": 2
+  },
+  {
+    "version": 1,
+    "config": {
+      "count": 10000000,
+      "seed": 42,
+      "shape": "skewed"
+    },
+    "sha256": "f46bf897f4f81290bda0904202d1a9cf8277afc71ad502399111e473584ba78a",
+    "count": 10000000,
+    "knownSum": "22517854021665766642896",
+    "unknown": 2499984,
+    "zero": 2500048,
+    "maximumDepth": 2
+  }
+]

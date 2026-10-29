@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+# DSM stops the old package; the new binary performs the first guarded backup in postupgrade.
+# This stage deliberately invokes no new flag on an older installed binary.
+[ -n "${SYNOPKG_PKGVAR:-}" ] || exit 1
+exit 0

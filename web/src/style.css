@@ -1,0 +1,201 @@
+/* Keep the foundation readable in a resizable DSM window. */
+:root { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 14px; --page: #f4f6f9; --surface: #fff; --ink: #233347; --muted: #5d6d7e; --line: #d3dce5; --soft: #f0f4f7; --accent: #137d88; --accent-soft: #e7f4f4; color: var(--ink); background: var(--page); color-scheme: light; }
+body { margin: 0; }
+main { max-width: 1440px; margin: auto; padding: 16px 20px; }
+.eyebrow { color: #187f86; letter-spacing: .14em; font-size: .8rem; font-weight: 700; }
+h1 { font-size: clamp(1.8rem, 5vw, 3rem); }
+section { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; line-height: 1.5; }
+/* Automatic pre-authentication paint is replaced by the confirmed personal choice after bootstrap. */
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --page: #111923; --surface: #1a2532; --ink: #e7eef5; --muted: #a6b7c8; --line: #3c4d5f; --soft: #222f3e; --accent: #73d3d8; --accent-soft: #203e48; color-scheme: dark; } }
+:root[data-theme="dark"] { --page: #111923; --surface: #1a2532; --ink: #e7eef5; --muted: #a6b7c8; --line: #3c4d5f; --soft: #222f3e; --accent: #73d3d8; --accent-soft: #203e48; color-scheme: dark; }
+.eyebrow { color: var(--accent); }
+
+/* Bounded index rows stay usable inside the native DSM window at narrow widths. */
+.probe-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
+button, select { font: inherit; color: inherit; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 7px 11px; min-height: 32px; }
+button { cursor: pointer; } button:hover:not(:disabled) { background: var(--soft); border-color: var(--accent); } button:disabled { cursor: not-allowed; opacity: .55; }
+button:focus-visible, select:focus-visible, a:focus-visible { outline: 3px solid #168b9b; outline-offset: 3px; }
+.profile-select { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.table-scroll { overflow: auto; max-height: 460px; }
+/* Keyboard scrolling has an explicit focus indicator, including when no row is focused. */
+.table-scroll:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+th, td { padding: 10px; text-align: left; border-bottom: 1px solid #879dab55; vertical-align: top; }
+th { font-weight: 650; } td small { display: block; overflow-wrap: anywhere; opacity: .75; }
+.snapshot-id, code { overflow-wrap: anywhere; } .notice { padding: 10px; border-left: 3px solid #d5912b; }
+@media (max-width: 700px) { main { padding: 16px; } section { padding: 16px; } }
+/* The authenticated shell reserves the window for work rather than a document-width header. */
+main:has(.analysis-shell) { max-width: none; padding: 0 16px 16px; }
+.app-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 58px; }
+.app-header h1 { font-size: .9rem; font-weight: 400; color: var(--muted); margin: 0; }
+.app-brand { display: flex; align-items: center; gap: 10px; }
+.app-brand .eyebrow { margin: 0; font-size: 1.06rem; letter-spacing: -.02em; color: var(--ink); }
+/* The geometric mark echoes a storage map without external assets. */
+.app-mark { display: grid; grid-template-columns: 11px 9px; grid-template-rows: 9px 11px; gap: 3px; padding: 5px; border-radius: 8px; background: var(--accent-soft); }
+.app-mark i { background: var(--accent); border-radius: 2px; }
+.app-mark i:first-child { grid-row: span 2; }
+.app-mark i:last-child { opacity: .5; }
+/* The document also contains help after the shell; neither it nor replaced rows may anchor async navigation. */
+html:has(.analysis-shell) { overflow-anchor: none; }
+.analysis-shell { display: grid; grid-template-columns: 184px minmax(0,1fr); padding: 0; overflow: clip; box-shadow: 0 2px 8px rgb(12 33 50 / 4%); }
+.workspace-sidebar { background: var(--soft); border-right: 1px solid var(--line); min-width: 0; }
+.workspace-content { min-width: 0; }
+.analysis-shell [hidden] { display: none !important; }
+.analysis-nav { display: flex; flex-direction: column; gap: 5px; padding: 12px 8px; border-bottom: 1px solid var(--line); }
+.analysis-nav button { display: inline-flex; align-items: center; gap: 8px; border-color: transparent; background: transparent; font-weight: 600; color: var(--muted); padding: 10px; text-align: left; }
+.analysis-nav svg { flex-shrink: 0; }
+.analysis-nav button[aria-current="page"] { color: var(--accent); background: var(--accent-soft); border-color: transparent; }
+.analysis-source { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 10px 16px; background: var(--soft); }
+.analysis-source > .profile-select { display: grid; gap: 6px; flex: 1; min-width: 0; font-size: .8rem; color: var(--muted); }
+.analysis-source select { min-width: 0; max-width: 100%; width: 100%; color: var(--ink); }
+/* Sidebar help must not squeeze the profile selector into a narrow flex column. */
+.workspace-sidebar .analysis-source { display: grid; grid-template-columns: minmax(0,1fr); }
+.shell-help { max-width: 42rem; font-size: .82rem; color: var(--muted); }
+.shell-help summary { cursor: pointer; }
+.analysis-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 20px; padding: 9px 16px; border-bottom: 1px solid var(--line); }
+.analysis-context { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; overflow-wrap: anywhere; }
+.analysis-toolbar .probe-actions { margin: 0; gap: 6px; }
+.analysis-toolbar > p { margin: 3px 0; font-size: .8rem; }
+/* Operational metadata stays secondary to the map while warnings remain prominent. */
+.analysis-context { font-size: .8rem; color: var(--muted); gap: 4px 12px; }
+.analysis-context strong { color: var(--ink); }
+.scan-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.scan-help { font-size: .8rem; color: var(--muted); max-width: 38rem; }
+.scan-tools { border-bottom: 1px solid var(--line); padding: 7px 16px; font-size: .82rem; color: var(--muted); }
+.scan-tools .analysis-toolbar { border: 0; padding: 8px 0; color: var(--ink); }
+.setup-tools { padding: 6px 16px; font-size: .8rem; color: var(--muted); border-bottom: 1px solid var(--line); }
+/* Keep the empty live region mounted for announcements without reserving a blank card. */
+.workspace-content > section[aria-live="polite"]:empty { padding: 0; border: 0; }
+.notice { margin: 6px 12px; padding: 7px 10px; font-size: .84rem; }
+.notice p { margin: 3px 0; }
+summary { cursor: pointer; font-weight: 550; }
+details[open] > summary { margin-bottom: 8px; }
+.snapshot-status { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 14px; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding: 7px 16px; font-size: .8rem; color: var(--muted); }
+.snapshot-status h3 { font-size: .85rem; margin: 0 0 4px; color: var(--ink); }
+.snapshot-status p { margin: 3px 0; }
+.snapshot-status dl { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 5px 0; }
+.snapshot-status dd { margin: 0; }
+.snapshot-details[open] { flex-basis: 100%; }
+/* Navigation, breadcrumbs and the view switch form one compact, wrapping toolbar. */
+.view-navigation { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 9px 16px; border-bottom: 1px solid var(--line); }
+.view-history, .map-switch { display: inline-flex; gap: 4px; }
+.view-history { flex-wrap: wrap; }
+.view-navigation button { font-size: .8rem; padding: 5px 9px; }
+.view-navigation ol { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; list-style: none; margin: 0; padding: 0; flex: 1; min-width: 100px; }
+.view-navigation li { display: inline-flex; align-items: center; min-width: 0; }
+.view-navigation li + li::before { content: '/'; color: var(--muted); margin-right: 4px; }
+.view-navigation li button { border-color: transparent; background: transparent; max-width: 220px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.view-navigation li button[aria-current="location"] { color: var(--ink); opacity: 1; font-weight: 600; }
+.map-switch { background: var(--soft); border-radius: 7px; padding: 3px; }
+.map-switch button { border-color: transparent; background: transparent; }
+.map-switch button[aria-pressed="true"] { background: var(--surface); color: var(--accent); border-color: var(--line); box-shadow: 0 1px 3px rgb(0 0 0 / 6%); }
+/* Search is one compact row; advanced predicates are disclosed on demand. */
+.search-controls { border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding: 10px 16px; }
+.search-controls fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.search-controls legend { font-size: .8rem; font-weight: 600; color: var(--muted); padding: 0; margin-bottom: 6px; }
+/* Labels retain accessible names while the compact row avoids a duplicate heading. */
+.search-controls > form > fieldset > legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.search-controls > form > fieldset { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px 16px; align-items: end; }
+.search-controls .search-advanced { margin: 0 0 8px; }
+.search-controls .search-advanced[open] { grid-column: 1 / -1; }
+.search-controls .filter-chips { margin-top: 5px; }
+.search-controls .filter-chips button { min-height: 22px; padding: 2px 6px; }
+.search-primary { display: flex; flex-wrap: wrap; align-items: end; gap: 8px; }
+.search-primary label { display: grid; gap: 4px; font-size: .8rem; color: var(--muted); }
+.search-primary label:first-child { flex: 1; min-width: min(230px,100%); }
+.search-primary input { width: 100%; min-height: 34px; }
+.search-controls button[type="submit"] { color: #fff; background: #137d88; border-color: #137d88; font-weight: 600; }
+.search-advanced { margin-top: 8px; font-size: .82rem; }
+.search-advanced > summary { width: fit-content; color: var(--muted); }
+.search-advanced[open] { padding: 12px; background: var(--soft); border-radius: 8px; }
+.search-fields { display: grid; grid-template-columns: repeat(auto-fit,minmax(170px,1fr)); gap: 10px 16px; }
+.search-fields > label { display: grid; gap: 5px; }
+.search-fields > p, .search-fields > fieldset { grid-column: 1 / -1; }
+.search-advanced fieldset { margin: 12px 0; }
+.search-advanced fieldset label { display: inline-flex; align-items: center; gap: 5px; margin: 4px 12px 4px 0; }
+.search-advanced p { color: var(--muted); font-size: .8rem; margin: 6px 0; }
+.filter-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.filter-chips:empty { display: none; }
+.filter-chips button { min-height: 26px; font-size: .78rem; padding: 4px 8px; background: var(--accent-soft); border-color: transparent; }
+.analysis-area { padding: 12px; border: 0; border-radius: 0; }
+.analysis-panel-controls { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.analysis-panel-controls button { padding: 4px 10px; font-size: .85rem; }
+.analysis-columns { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; align-items: start; }
+.analysis-columns.with-tree { grid-template-columns: minmax(120px,160px) minmax(0,1fr); }
+.analysis-columns.with-details { grid-template-columns: minmax(0,1fr) minmax(160px,220px); }
+.analysis-columns.with-tree.with-details { grid-template-columns: minmax(120px,160px) minmax(0,1fr) minmax(160px,220px); }
+.analysis-columns > aside { font-size: .82rem; padding: 12px; background: var(--soft); border: 1px solid var(--line); border-radius: 8px; min-width: 0; overflow-wrap: anywhere; }
+.analysis-columns h3 { margin: 0 0 8px; font-size: 1rem; }
+.analysis-columns h4 { margin: 12px 0 4px; }
+.analysis-columns dl, .analysis-columns dd { margin-left: 0; overflow-wrap: anywhere; }
+.analysis-columns aside section { padding: 0; border: 0; font-size: .82rem; }
+.analysis-columns textarea { width: 100%; box-sizing: border-box; min-height: 5em; font: inherit; }
+.analysis-main { min-width: 0; }
+.analysis-main > p { font-size: .83rem; margin: 6px 0; }
+/* Consistent controls place size, colour and detail immediately above the map. */
+.map-tools { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: end; margin: 0 0 8px; }
+.analysis-area .map-tools label { display: grid; gap: 4px; font-size: .78rem; color: var(--muted); margin: 0; flex: 1 1 145px; }
+.map-tools select { width: 100%; min-width: 0; color: var(--ink); }
+.map-display-help { font-size: .78rem; color: var(--muted); margin: 6px 0 10px; }
+.map-display-help > summary { width: fit-content; }
+.map-display-help p { margin: 4px 0; }
+.metric-availability { font-size: .8rem; }
+.map-viewport { border: 1px solid var(--line); border-radius: 8px; background: var(--soft); }
+.analysis-main > section { padding: 12px; margin-top: 10px; }
+/* Table headers remain legible when exploring a bounded result list. */
+thead { background: var(--soft); color: var(--muted); }
+tbody tr:hover { background: var(--soft); }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--accent); }
+.analysis-main dl { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 2px 12px; font-size: .8rem; }
+.analysis-main dd { margin: 0; }
+.analysis-main table { min-width: 540px; }
+.analysis-main .table-scroll { max-height: 42vh; }
+.analysis-empty { display: grid; align-content: center; min-height: 210px; padding: 24px; text-align: center; }
+.analysis-empty h2, .analysis-empty h4 { margin: 0; }
+.analysis-empty p { max-width: 50rem; margin: 12px auto; }
+.scope-roots, .profile-cards { list-style: none; margin: 0; padding: 0; }
+.scope-roots button { width: 100%; overflow-wrap: anywhere; padding: 6px; text-align: left; }
+.scope-roots button[aria-pressed="true"] { outline: 2px solid #187f86; outline-offset: -2px; }
+.profile-cards { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(240px,100%),1fr)); gap: 12px; }
+.profile-cards li { border: 1px solid #879dab55; border-radius: 8px; padding: 14px; overflow-wrap: anywhere; }
+.profile-cards h3 { margin: 0; }
+.analysis-shell button { overflow-wrap: anywhere; }
+/* Side panels stack below the main region only below the qualified desktop window widths. */
+@media (max-width: 760px) {
+  .analysis-shell { grid-template-columns: minmax(0,1fr); }
+  .workspace-sidebar { border-right: 0; border-bottom: 1px solid var(--line); }
+  .analysis-nav { flex-direction: row; flex-wrap: wrap; }
+  .analysis-columns.with-tree, .analysis-columns.with-details, .analysis-columns.with-tree.with-details { grid-template-columns: minmax(0,1fr); }
+  .analysis-main { grid-row: 1; }
+  .analysis-source { align-items: stretch; }
+  .analysis-source > * { width: 100%; }
+  .app-header h1 { display: none; }
+  main:has(.analysis-shell) { padding: 0 8px 8px; }
+  .analysis-nav { gap: 2px; padding: 6px; }
+  .analysis-nav button { padding: 8px; font-size: .85rem; }
+}
+
+/* Keep persistent legend text compact so controls do not displace the map. */
+.map-legend { padding: 8px 0; border: 0; font-size: .8rem; }
+.map-legend ul { display: flex; flex-wrap: wrap; gap: 4px 14px; list-style: none; padding: 0; margin: 0 0 6px; }
+.map-legend li { display: inline-flex; align-items: center; }
+.map-legend p { margin: 3px 0; }
+.map-viewport { position: relative; min-width: 0; overflow: hidden; }
+
+/* Inputs and nested panes share the same explicit theme as both Canvas renderers. */
+input, textarea, select, option { font: inherit; color: var(--ink); background: var(--surface); max-width: 100%; box-sizing: border-box; }
+input, textarea { border: 1px solid var(--line); border-radius: 4px; padding: 6px; }
+a { color: var(--accent); }
+input:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.analysis-area, .analysis-area section { min-width: 0; overflow-wrap: anywhere; }
+.analysis-area label { display: inline-block; max-width: 100%; margin: 4px 12px 4px 0; }
+.theme-settings button { margin: 4px 8px 4px 0; }
+/* Motion is never required for navigation; users requesting less motion retain immediate state changes. */
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+
+/* Native confirmation dialogs contain focus; the backdrop keeps background actions inactive. */
+dialog { color: var(--ink); background: var(--surface); border: 2px solid var(--line); border-radius: 8px; max-width: min(42rem, calc(100vw - 2rem)); max-height: calc(100vh - 2rem); padding: 1.25rem; overflow: auto; overflow-wrap: anywhere; }
+dialog::backdrop { background: rgb(0 0 0 / 55%); }
+
+/* An explicit personal reduction also applies when the system has no reduce signal. */
+:root[data-motion="reduce"] *, :root[data-motion="reduce"] *::before, :root[data-motion="reduce"] *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }

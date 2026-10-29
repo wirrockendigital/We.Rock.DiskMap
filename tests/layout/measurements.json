@@ -1,0 +1,398 @@
+[
+  {
+    "shape": "wide",
+    "viewport": {
+      "width": 1024,
+      "height": 700
+    },
+    "dpr": 1,
+    "treemap": {
+      "knownBytes": "22517998136853842500000",
+      "unknownCount": 2500000,
+      "memberCount": 9999999,
+      "nodes": 9402,
+      "layoutAndDrawMs": 11.400000005960464,
+      "canvasBytes": 2867200
+    },
+    "radial": {
+      "knownBytes": "22517998136853842500000",
+      "unknownCount": 2500000,
+      "memberCount": 9999999,
+      "nodes": 1402,
+      "layoutAndDrawMs": 1.7000000029802322,
+      "canvasBytes": 2867200
+    },
+    "initialMs": 26.399999998509884,
+    "switchReactionMs": 33.30000000447035,
+    "heap": 14477622,
+    "heapBytes": 10645780,
+    "browserProcessRSSBytes": 834633728,
+    "rendererRSSBytes": 287686656,
+    "browserProcessCount": 6,
+    "coldElapsedMs": 353.7576670000001,
+    "browser": "149.0.7827.55"
+  },
+  {
+    "shape": "deep",
+    "viewport": {
+      "width": 1024,
+      "height": 700
+    },
+    "dpr": 1,
+    "treemap": {
+      "knownBytes": "22517421676101539065440",
+      "unknownCount": 2499936,
+      "memberCount": 9999743,
+      "nodes": 9914,
+      "layoutAndDrawMs": 11.400000005960464,
+      "canvasBytes": 2867200
+    },
+    "radial": {
+      "knownBytes": "22517421676101539065440",
+      "unknownCount": 2499936,
+      "memberCount": 9999743,
+      "nodes": 1914,
+      "layoutAndDrawMs": 1.8999999985098839,
+      "canvasBytes": 2867200
+    },
+    "initialMs": 18.399999998509884,
+    "switchReactionMs": 34,
+    "heap": 15814724,
+    "heapBytes": 11967884,
+    "browserProcessRSSBytes": 854114304,
+    "rendererRSSBytes": 305119232,
+    "browserProcessCount": 6,
+    "coldElapsedMs": 534.1912090000001,
+    "browser": "149.0.7827.55"
+  },
+  {
+    "shape": "skewed",
+    "viewport": {
+      "width": 1024,
+      "height": 700
+    },
+    "dpr": 1,
+    "treemap": {
+      "knownBytes": "22517854021665766642896",
+      "unknownCount": 2499984,
+      "memberCount": 9999935,
+      "nodes": 9497,
+      "layoutAndDrawMs": 8,
+      "canvasBytes": 2867200
+    },
+    "radial": {
+      "knownBytes": "22517854021665766642896",
+      "unknownCount": 2499984,
+      "memberCount": 9999935,
+      "nodes": 1497,
+      "layoutAndDrawMs": 1.0999999940395355,
+      "canvasBytes": 2867200
+    },
+    "initialMs": 8.800000004470348,
+    "switchReactionMs": 32.399999998509884,
+    "heap": 22763832,
+    "heapBytes": 18916560,
+    "browserProcessRSSBytes": 863092736,
+    "rendererRSSBytes": 313524224,
+    "browserProcessCount": 6,
+    "coldElapsedMs": 702.305417,
+    "browser": "149.0.7827.55"
+  },
+  {
+    "shape": "wide",
+    "viewport": {
+      "width": 1024,
+      "height": 700
+    },
+    "dpr": 2,
+    "treemap": {
+      "knownBytes": "22517998136853842500000",
+      "unknownCount": 2500000,
+      "memberCount": 9999999,
+      "nodes": 9402,
+      "layoutAndDrawMs": 12.300000004470348,
+      "canvasBytes": 11468800
+    },
+    "radial": {
+      "knownBytes": "22517998136853842500000",
+      "unknownCount": 2500000,
+      "memberCount": 9999999,
+      "nodes": 1402,
+      "layoutAndDrawMs": 1.7999999970197678,
+      "canvasBytes": 11468800
+    },
+    "initialMs": 33.70000000298023,
+    "switchReactionMs": 33.29999999701977,
+    "heap": 14490338,
+    "heapBytes": 10658496,
+    "browserProcessRSSBytes": 838467584,
+    "rendererRSSBytes": 281018368,
+    "browserProcessCount": 6,
+    "coldElapsedMs": 386.3512920000003,
+    "browser": "149.0.7827.55"
+  },
+  {
+    "shape": "deep",
+    "viewport": {
+      "width": 1024,
+      "height": 700
+    },
+    "dpr": 2,
+    "treemap": {
+      "knownBytes": "22517421676101539065440",
+      "unknownCount": 2499936,
+      "memberCount": 9999743,
+      "nodes": 9914,
+      "layoutAndDrawMs": 10.899999998509884,
+      "canvasBytes": 11468800
+    },
+    "radial": {
+      "knownBytes": "22517421676101539065440",
+      "unknownCount": 2499936,
+      "memberCount": 9999743,
+      "nodes": 1914,
+      "layoutAndDrawMs": 2,
+      "canvasBytes": 11468800
+    },
+    "initialMs": 18.69999999552965,
+    "switchReactionMs": 33.399999998509884,
+    "heap": 24112597,
+    "heapBytes": 20254644,
+    "browserProcessRSSBytes": 853999616,
+    "rendererRSSBytes": 295714816,
+    "browserProcessCount": 6,
+    "coldElapsedMs": 568.1198750000003,
+    "browser": "149.0.7827.55"
+  },
+  {
+    "shape": "skewed",
+    "viewport": {
+      "width": 1024,
+      "height": 700
+    },
+    "dpr": 2,
+    "treemap": {
+      "knownBytes": "22517854021665766642896",
+      "unknownCount": 2499984,
+      "memberCount": 9999935,
+      "nodes": 9497,
+      "layoutAndDrawMs": 9.300000004470348,
+      "canvasBytes": 11468800
+    },
+    "radial": {
+      "knownBytes": "22517854021665766642896",
+      "unknownCount": 2499984,
+      "memberCount": 9999935,
+      "nodes": 1497,
+      "layoutAndDrawMs": 1.2999999970197678,
+      "canvasBytes": 11468800
+    },
+    "initialMs": 10.200000002980232,
+    "switchReactionMs": 33.399999998509884,
+    "heap": 24618657,
+    "heapBytes": 20760652,
+    "browserProcessRSSBytes": 867024896,
+    "rendererRSSBytes": 308740096,
+    "browserProcessCount": 6,
+    "coldElapsedMs": 733.3521250000003,
+    "browser": "149.0.7827.55"
+  },
+  {
+    "shape": "wide",
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "dpr": 1,
+    "treemap": {
+      "knownBytes": "22517998136853842500000",
+      "unknownCount": 2500000,
+      "memberCount": 9999999,
+      "nodes": 9402,
+      "layoutAndDrawMs": 11.899999998509884,
+      "canvasBytes": 33177600
+    },
+    "radial": {
+      "knownBytes": "22517998136853842500000",
+      "unknownCount": 2500000,
+      "memberCount": 9999999,
+      "nodes": 1402,
+      "layoutAndDrawMs": 1.7999999970197678,
+      "canvasBytes": 33177600
+    },
+    "initialMs": 34.399999998509884,
+    "switchReactionMs": 33.899999998509884,
+    "heap": 14494865,
+    "heapBytes": 10663024,
+    "browserProcessRSSBytes": 844595200,
+    "rendererRSSBytes": 285999104,
+    "browserProcessCount": 6,
+    "coldElapsedMs": 392.90716699999984,
+    "browser": "149.0.7827.55"
+  },
+  {
+    "shape": "deep",
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "dpr": 1,
+    "treemap": {
+      "knownBytes": "22517421676101539065440",
+      "unknownCount": 2499936,
+      "memberCount": 9999743,
+      "nodes": 9914,
+      "layoutAndDrawMs": 10.5,
+      "canvasBytes": 33177600
+    },
+    "radial": {
+      "knownBytes": "22517421676101539065440",
+      "unknownCount": 2499936,
+      "memberCount": 9999743,
+      "nodes": 1914,
+      "layoutAndDrawMs": 1.9000000059604645,
+      "canvasBytes": 33177600
+    },
+    "initialMs": 11.600000001490116,
+    "switchReactionMs": 28.600000001490116,
+    "heap": 24098508,
+    "heapBytes": 20240556,
+    "browserProcessRSSBytes": 859635712,
+    "rendererRSSBytes": 300498944,
+    "browserProcessCount": 6,
+    "coldElapsedMs": 559.975042,
+    "browser": "149.0.7827.55"
+  },
+  {
+    "shape": "skewed",
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "dpr": 1,
+    "treemap": {
+      "knownBytes": "22517854021665766642896",
+      "unknownCount": 2499984,
+      "memberCount": 9999935,
+      "nodes": 9497,
+      "layoutAndDrawMs": 8.899999998509884,
+      "canvasBytes": 33177600
+    },
+    "radial": {
+      "knownBytes": "22517854021665766642896",
+      "unknownCount": 2499984,
+      "memberCount": 9999935,
+      "nodes": 1497,
+      "layoutAndDrawMs": 1.2000000029802322,
+      "canvasBytes": 33177600
+    },
+    "initialMs": 12,
+    "switchReactionMs": 33.399999998509884,
+    "heap": 24711092,
+    "heapBytes": 20853088,
+    "browserProcessRSSBytes": 872185856,
+    "rendererRSSBytes": 313016320,
+    "browserProcessCount": 6,
+    "coldElapsedMs": 726.0299169999998,
+    "browser": "149.0.7827.55"
+  },
+  {
+    "shape": "wide",
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "dpr": 2,
+    "treemap": {
+      "knownBytes": "22517998136853842500000",
+      "unknownCount": 2500000,
+      "memberCount": 9999999,
+      "nodes": 9402,
+      "layoutAndDrawMs": 12.600000001490116,
+      "canvasBytes": 132710400
+    },
+    "radial": {
+      "knownBytes": "22517998136853842500000",
+      "unknownCount": 2500000,
+      "memberCount": 9999999,
+      "nodes": 1402,
+      "layoutAndDrawMs": 1.7999999970197678,
+      "canvasBytes": 132710400
+    },
+    "initialMs": 24.299999997019768,
+    "switchReactionMs": 33.30000000447035,
+    "heap": 14438970,
+    "heapBytes": 10607128,
+    "browserProcessRSSBytes": 840990720,
+    "rendererRSSBytes": 281968640,
+    "browserProcessCount": 6,
+    "coldElapsedMs": 408.869917,
+    "browser": "149.0.7827.55"
+  },
+  {
+    "shape": "deep",
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "dpr": 2,
+    "treemap": {
+      "knownBytes": "22517421676101539065440",
+      "unknownCount": 2499936,
+      "memberCount": 9999743,
+      "nodes": 9914,
+      "layoutAndDrawMs": 11.600000001490116,
+      "canvasBytes": 132710400
+    },
+    "radial": {
+      "knownBytes": "22517421676101539065440",
+      "unknownCount": 2499936,
+      "memberCount": 9999743,
+      "nodes": 1914,
+      "layoutAndDrawMs": 2.100000001490116,
+      "canvasBytes": 132710400
+    },
+    "initialMs": 12.799999997019768,
+    "switchReactionMs": 32.899999998509884,
+    "heap": 24084725,
+    "heapBytes": 20226772,
+    "browserProcessRSSBytes": 856047616,
+    "rendererRSSBytes": 296435712,
+    "browserProcessCount": 6,
+    "coldElapsedMs": 625.0866250000008,
+    "browser": "149.0.7827.55"
+  },
+  {
+    "shape": "skewed",
+    "viewport": {
+      "width": 3840,
+      "height": 2160
+    },
+    "dpr": 2,
+    "treemap": {
+      "knownBytes": "22517854021665766642896",
+      "unknownCount": 2499984,
+      "memberCount": 9999935,
+      "nodes": 9497,
+      "layoutAndDrawMs": 9.800000004470348,
+      "canvasBytes": 132710400
+    },
+    "radial": {
+      "knownBytes": "22517854021665766642896",
+      "unknownCount": 2499984,
+      "memberCount": 9999935,
+      "nodes": 1497,
+      "layoutAndDrawMs": 1.1999999955296516,
+      "canvasBytes": 132710400
+    },
+    "initialMs": 18.200000002980232,
+    "switchReactionMs": 34,
+    "heap": 24586145,
+    "heapBytes": 20728140,
+    "browserProcessRSSBytes": 870023168,
+    "rendererRSSBytes": 310411264,
+    "browserProcessCount": 6,
+    "coldElapsedMs": 808.3739170000008,
+    "browser": "149.0.7827.55"
+  }
+]

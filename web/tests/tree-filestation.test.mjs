@@ -1,0 +1,11 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {stripTypeScriptTypes} from 'node:module';
+import vm from 'node:vm';
+// Exercise fresh inventory and exact folder validation without a selected snapshot.
+const source=stripTypeScriptTypes(readFileSync(new URL('../src/scope-api.ts',import.meta.url),'utf8'),{mode:'transform'}).replace(/^import .*;$/gm,'').replace(/export /g,'');
+function fixture(readable=true){const calls=[];const resolve=vm.runInNewContext(source+'\nresolveScopeFileStation',{currentToken:()=> 'session',SessionDenied:Error,checkedScopeInventory:x=>x,TextEncoder,TextDecoder,AbortController,setTimeout,clearTimeout,crypto,fetch:async(url,init)=>{const body=init.body?JSON.parse(init.body):null;calls.push({url,body});return new Response(JSON.stringify({contractVersion:1,data:body?{shareId:body.shareId,relativePath:body.relativePath,entries:[],nextCursor:null,checkedAt:new Date().toISOString()}:{shares:[{id:'share-1',name:'Daten % ü',state:readable?'reachable':'unreadable',readable}]}}));}});return{resolve,calls};}
+test('tree reveal uses fresh share mapping and the clicked relative folder',async()=>{const f=fixture();const target=await f.resolve({kind:'folder',targetIds:['share-1'],relativePath:'Unterordner/100%'},new AbortController().signal);assert.equal(target.fileStationPath,'/Daten % ü/Unterordner/100%');assert.equal(target.kind,'directory');assert.equal(f.calls[1].body.relativePath,'Unterordner/100%');});
+test('share root opens without a scan and unsupported or unsafe scopes fail closed',async()=>{const f=fixture();assert.equal((await f.resolve({kind:'shares',targetIds:['share-1']},new AbortController().signal)).fileStationPath,'/Daten % ü');for(const scope of [{kind:'nas',targetIds:[]},{kind:'volumes',targetIds:['v']},{kind:'folder',targetIds:['share-1'],relativePath:'../elsewhere'}])await assert.rejects(f.resolve(scope,new AbortController().signal));assert.equal(f.calls.length,2);});
+test('revoked share stops before folder enumeration',async()=>{const f=fixture(false);await assert.rejects(f.resolve({kind:'shares',targetIds:['share-1']},new AbortController().signal));assert.equal(f.calls.length,1);});

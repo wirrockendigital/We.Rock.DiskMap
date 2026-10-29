@@ -1,0 +1,14 @@
+#!/bin/sh
+set -eu
+# Upgrade lifecycle must never interpret uninstall selections.
+[ "${SYNOPKG_PKG_STATUS:-}" = UNINSTALL ] || exit 0
+case "${diskmap_remove_data:-false}" in
+  false|'') exit 0 ;;
+  true)
+    # The offline helper validates and locks the canonical package data root.
+    state=${SYNOPKG_PKGVAR:?Missing package state}
+    binary=${SYNOPKG_PKGDEST:?Missing package target}/bin/diskmapd
+    "$binary" --socket="$state/run/control.sock" --uninstall-data
+    ;;
+  *) exit 1 ;;
+esac

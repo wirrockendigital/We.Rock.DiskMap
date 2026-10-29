@@ -1,0 +1,7 @@
+17 1 8:1 / / rw,relatime - ext4 /dev/sda1 rw
+40 17 0:31 /@syno /volume1 rw,nodev,relatime - btrfs /dev/sdb1 rw,subvolid=256,subvol=/@syno
+44 17 0:37 /@syno /volume2 rw,nodev,relatime - btrfs /dev/sdc1 rw,subvolid=256,subvol=/@syno
+45 40 0:40 / /volume1/diskmap-g03-locked rw - ecryptfs /volume1/@diskmap-g03-locked@ rw
+46 17 8:65 / /volumeUSB1/usbshare rw - ext4 /dev/sde1 rw
+47 17 0:51 / /mnt/remote rw - nfs server:/export rw
+48 17 0:52 / /run rw - tmpfs tmpfs rw

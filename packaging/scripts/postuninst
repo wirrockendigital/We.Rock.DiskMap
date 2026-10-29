@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+# Data policy is enforced in preuninst; no source paths or DSM tasks are changed here.
+exit 0

@@ -1,0 +1,1342 @@
+{
+  "de": [
+    {
+      "id": "window",
+      "title": "Dein Speicher im Überblick",
+      "paragraphs": [
+        "Mit We.Rock.DiskMap findest du große Dateien, erkundest Verzeichnisse und nutzt gespeicherte Ergebnisse, ohne bei jedem Öffnen erneut zu scannen."
+      ],
+      "sections": [
+        {
+          "title": "Drei Bereiche, ein Datenstand",
+          "paragraphs": [
+            "Links wählst du NAS, Volume, Freigabe oder Unterordner. Die Karte zeigt den Speicher im gewählten Bereich einschließlich tieferer Ebenen. Rechts stehen standardmäßig dessen direkte Kinder."
+          ],
+          "diagram": [
+            "Links · Ordnerbaum",
+            "Mitte · Dateikarte",
+            "Rechts · Dateiliste"
+          ]
+        },
+        {
+          "title": "In drei Schritten zur ersten Karte",
+          "steps": [
+            "Melde dich mit einem DSM-Administratorkonto an und öffne We.Rock.DiskMap.",
+            "Sind keine Freigaben zugänglich, folge der angezeigten Leserechte-Anleitung. „Freigaben erneut prüfen“ prüft nur das Inventar und startet keinen Scan.",
+            "Wähle eine Freigabe und klicke auf „Scannen“. Für alle verfügbaren Bereiche nutze „Scanne NAS“."
+          ]
+        },
+        {
+          "title": "Hilfe öffnen",
+          "paragraphs": [
+            "Das Fragezeichen im DSM-Fenster öffnet diese lokale Hilfe. Klappe links Themen auf und wähle einen Abschnitt. Alle Erklärungen und Grafiken sind im Paket enthalten; eine Internetverbindung ist zum Lesen nicht nötig."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scan",
+      "title": "Scannen und Warteschlange",
+      "paragraphs": [
+        "Ein Scan erfasst Dateinamen, Verzeichnisse und Größen. Deine Quelldateien bleiben beim Scannen unverändert."
+      ],
+      "sections": [
+        {
+          "title": "Den richtigen Bereich wählen",
+          "items": [
+            "Scannen: erfasst einen noch nicht gescannten Bereich.",
+            "Aktualisieren: liest den gewählten Bereich erneut vollständig und veröffentlicht einen neuen Scanstand.",
+            "Scanne NAS: erfasst alle für das Paketkonto zugänglichen NAS-Bereiche.",
+            "Rechtsklick im Ordnerbaum → Rescanne Ordner: aktualisiert genau diesen Bereich."
+          ]
+        },
+        {
+          "title": "Im Hintergrund weiterarbeiten",
+          "paragraphs": [
+            "Ein Wechsel des angezeigten Ordners beendet keinen Scan. Du kannst bereits gespeicherte Ergebnisse weiter ansehen. Ein weiterer Scanauftrag wird in die Warteschlange aufgenommen. Die Aufträge laufen nacheinander; ein neuer Auftrag verdrängt den laufenden Scan nicht.",
+            "Das Warteschlangen-Symbol im Header zeigt den laufenden Auftrag und die wartenden Bereiche. Mit dem X hinter einem wartenden Eintrag entfernst du nur diesen Auftrag. „Abbrechen“ beendet dagegen den laufenden Scan."
+          ],
+          "diagram": [
+            "Wird gescannt",
+            "Wartet in der Queue",
+            "Wird danach gestartet"
+          ]
+        },
+        {
+          "title": "Fortschritt richtig lesen",
+          "paragraphs": [
+            "Dateierfassung und Indexaufbereitung sind getrennte Phasen. Während der Aufbereitung kann die Zahl der Einträge unverändert bleiben. Der Kreis zeigt nur dann einen belastbaren Prozentwert, wenn eine passende Gesamtmenge bekannt ist; andernfalls zeigt er die bereits erfasste Größe.",
+            "Verfügbare Vorschauen sind noch vorläufig und können sich ändern. Ein fertig erfasster Ordner ist während des laufenden Gesamtauftrags nicht automatisch ein eigenständiger fertiger Scan. Das abgeschlossene Ergebnis wird angezeigt; über die Glocke findest du relevante Meldungen."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "navigation",
+      "title": "Karten und Ordnerbaum",
+      "paragraphs": [
+        "Disk Map und Radial verwenden denselben Scanstand. Die Darstellung ändert sich, die zugrunde liegenden Dateien bleiben dieselben."
+      ],
+      "sections": [
+        {
+          "title": "Rechtecke und Ringe",
+          "paragraphs": [
+            "In der Disk Map steht die Fläche eines Rechtecks für seine Größe. Die Radialkarte stellt Ordnerstufen als Ringe dar; der Winkel entspricht dem Größenanteil. Große Dateien fallen dadurch schnell auf.",
+            "Die Karte umfasst auch Unterordner. Eine große Dateikachel muss daher nicht direkt im gewählten Ordner liegen. Zeige auf sie oder wähle sie aus: Der vollständige Pfad erscheint unten und bei der Auswahl rechts."
+          ]
+        },
+        {
+          "title": "Sehr viele kleine Dateien",
+          "paragraphs": [
+            "Millionen Dateien passen nicht als einzeln erkennbare Kacheln auf einen Bildschirm. Bei hoher Dichte können Detailgruppen auftreten. Diese sind keine einzelne große Datei. Öffne den zugehörigen Bereich oder nutze die Dateiliste und Suche, um einzelne Einträge zu finden."
+          ]
+        },
+        {
+          "title": "Navigieren und Platz schaffen",
+          "steps": [
+            "Klicke auf den Namen eines Ordners, um ihn anzuzeigen. Der Pfeil davor klappt nur seine Kinder auf oder zu.",
+            "Die Pfadleiste oben führt zu übergeordneten Ebenen. Ein Ordnerklick in der Karte wechselt ebenfalls den Bereich.",
+            "Die Symbole links oben im Baum sortieren nach Name oder Größe und ändern die Richtung. Standard ist die alphanumerische Namenssortierung.",
+            "Blende Seitenleisten über die Header-Symbole ein oder aus. Ziehe ihre Trennkanten mit der Maus, um die Breite anzupassen."
+          ]
+        },
+        {
+          "title": "Deine Ansicht behalten",
+          "paragraphs": [
+            "Ansicht, Seitenleistenbreiten, aufgeklappte Pfade und weitere Anzeigeoptionen werden für deinen Benutzer gespeichert. Ein Tab- oder Fokuswechsel soll keinen neuen Scan auslösen. Scanbestände bleiben gemeinsam; persönliche Anzeigeoptionen sind keine getrennten Dateizugriffsrechte."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "filters",
+      "title": "Dateiliste, Suche und Filter",
+      "paragraphs": [
+        "Die rechte Liste zeigt standardmäßig die direkten Kinder des ausgewählten Ordners. Die Karte zeigt dagegen auch die tieferen Ebenen."
+      ],
+      "sections": [
+        {
+          "title": "Dateien finden",
+          "steps": [
+            "Gib einen Namen, einen Teil des Pfads oder eine Endung wie .zip in das Suchfeld ein. Suchmuster wie *.pdf werden ebenfalls unterstützt.",
+            "Öffne das Symbol direkt rechts neben dem Suchfeld. „Filtern & Sortieren“ klappt darunter auf, ohne die Liste zu überdecken.",
+            "Aktiviere „Unterordner einbeziehen“, wenn du auch tiefere Ebenen durchsuchen möchtest. Leere die Suche und prüfe aktive Filter, wenn erwartete Einträge fehlen."
+          ]
+        },
+        {
+          "title": "Filtern und sortieren",
+          "items": [
+            "Anzeigen: alle Einträge, nur Dateien oder nur Ordner.",
+            "Art: etwa Archive, Dokumente, Bilder, Audio oder Video.",
+            "Sortieren: Größe, Name oder Art; jeweils auf- oder absteigend.",
+            "Ordner zuerst: standardmäßig aktiv; Ordner stehen vor Dateien.",
+            "Die Liste lädt beim Scrollen weiter. Es gibt keine Seitenumschaltung."
+          ]
+        },
+        {
+          "title": "Warum die Liste nicht genauso aussieht wie die Karte",
+          "paragraphs": [
+            "Eine Datei aus einem Unterordner ist in der rekursiven Karte schon sichtbar, in der direkten Liste aber erst nach Öffnen dieses Ordners oder mit „Unterordner einbeziehen“. Such- und Listenfilter verändern keine Quelldateien und nicht die ursprüngliche Scan-Gesamtsumme. Papierkorb- und Systeminhalts-Schalter gelten dagegen für Karte, Baum und Liste gemeinsam."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "filestation",
+      "title": "Dateien öffnen und verwalten",
+      "paragraphs": [
+        "Das Kontextmenü verbindet die Analyse mit DSM. Die angebotenen Aktionen hängen vom Eintrag und den verfügbaren DSM-Anwendungen ab."
+      ],
+      "sections": [
+        {
+          "title": "In File Station anzeigen",
+          "steps": [
+            "Klicke mit der rechten Maustaste auf eine Datei in der Karte oder auf einen Ordner im linken Baum.",
+            "Wähle „In File Station anzeigen“. DSM öffnet den zugehörigen Ort. Eine Teilerfassung anderer Bereiche blockiert einen gültigen Pfad nicht pauschal."
+          ]
+        },
+        {
+          "title": "Öffnen und Löschen",
+          "paragraphs": [
+            "„Öffnen“ nutzt einen passenden DSM-Viewer, sofern die Datei und die installierten Anwendungen dies unterstützen. Dateiaktionen verwenden die aktuelle DSM-Sitzung und deren Rechte. Ein gespeicherter Scan beweist nicht, dass die Datei noch unverändert vorhanden ist.",
+            "„Datei löschen“ löscht eine echte Quelldatei und benötigt eine ausdrückliche Bestätigung. Prüfe den vollständigen Pfad vor der Bestätigung. „Index für diesen Ordner löschen“ entfernt dagegen nur DiskMap-Ergebnisse und keine NAS-Dateien."
+          ],
+          "tone": "warning"
+        }
+      ]
+    },
+    {
+      "id": "measurement",
+      "title": "Größen richtig verstehen",
+      "paragraphs": [
+        "Die angezeigten Größen beschreiben den gewählten Datenstand und die gewählte Sichtbarkeit. Sie sind keine laufende Messung des freien Volume-Speichers."
+      ],
+      "sections": [
+        {
+          "title": "Ordnersummen und ausgeblendete Inhalte",
+          "paragraphs": [
+            "Ordnergrößen ergeben sich aus ihren erfassten Dateien und Unterordnern. Im Baum bleibt die letzte bekannte Größe erhalten, auch wenn du einen anderen Ordner ansiehst. Ein Strich bedeutet unbekannt oder noch nicht erfasst; 0 B ist eine erfasste Nullgröße.",
+            "Die Zahl rechts oben bezieht sich auf die angezeigten Inhalte. Blende Papierkörbe oder Systeminhalte ein, um diese in der Darstellung zu berücksichtigen. Deshalb kann die sichtbare Summe kleiner als der gesamte gespeicherte Bestand sein."
+          ]
+        },
+        {
+          "title": "Dateigröße ist nicht gleich physischer Verbrauch",
+          "paragraphs": [
+            "Logische Dateigrößen können von der tatsächlich belegten Fläche auf Btrfs abweichen, etwa durch Komprimierung, Sparse-Dateien oder gemeinsam genutzte Blöcke. Die Karten sind keine exakte Aufteilung aller physisch belegten Volume-Blöcke. Snapshot-Schätzungen werden separat gezeigt und nicht zur Dateikarte addiert."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "profiles",
+      "title": "Einrichtung und Leserechte",
+      "paragraphs": [
+        "Ein DSM-Administrator installiert und nutzt die App. Der Scanner liest mit dem internen Systembenutzer we-rock-diskmap – nicht automatisch mit den vollen Rechten des angemeldeten Administrators."
+      ],
+      "sections": [
+        {
+          "title": "Freigaben zugänglich machen",
+          "steps": [
+            "Öffne DSM → Systemsteuerung → Freigegebener Ordner und wähle die gewünschte Freigabe.",
+            "Öffne Bearbeiten → Berechtigungen und wähle „Interner Systembenutzer“.",
+            "Erlaube we-rock-diskmap „Nur Lesen“ und speichere. Wiederhole dies für die Freigaben, die analysiert werden sollen.",
+            "Öffne DiskMap neu oder nutze im Einrichtungsbildschirm „Freigaben erneut prüfen“. Eine neu erkannte Freigabe erscheint ohne vollständigen NAS-Scan; scanne sie anschließend gezielt."
+          ]
+        },
+        {
+          "title": "Unterordner prüfen",
+          "paragraphs": [
+            "Leserechte auf der Freigabewurzel garantieren nicht den Zugriff auf alle Unterordner. Abweichende ACLs, verschlüsselte oder nicht eingehängte Bereiche und geschützte Papierkörbe können den Zugriff verhindern. Prüfe die betreffenden Rechte in File Station. Die App erweitert keine Rechte selbstständig."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "recycle",
+      "title": "Papierkorb und Admin-Beschränkung",
+      "paragraphs": [
+        "Ein nicht lesbarer #recycle-Ordner ist nicht leer. Das Paketkonto benötigt auch hier passende Leserechte. Die DSM-Admin-Beschränkung und manuell gesetzte Papierkorbrechte sind miteinander gekoppelt."
+      ],
+      "sections": [
+        {
+          "title": "Wichtig: Der Haken ändert sich mit den Rechten",
+          "paragraphs": [
+            "Wenn du dem #recycle-Ordner den Benutzer we-rock-diskmap mit Leserechten hinzufügst, entfernt DSM automatisch den Haken bei „Zugriff auf ausschließlich Administratoren beschränken“.",
+            "Setzt du diesen Haken später wieder, entzieht DSM dem App-Benutzer die Zugriffsrechte wieder. Die beiden Einstellungen lassen sich deshalb nicht unabhängig voneinander als dauerhafte Lösung kombinieren."
+          ],
+          "diagram": [
+            "App-Leserecht hinzufügen",
+            "Admin-Haken wird entfernt",
+            "Haken wieder setzen → App-Zugriff entfällt"
+          ],
+          "tone": "warning"
+        },
+        {
+          "title": "Variante 1: Rechte am Papierkorb gezielt setzen",
+          "steps": [
+            "Öffne File Station und markiere #recycle in der gewünschten Freigabe.",
+            "Öffne Eigenschaften → Berechtigung und füge den internen Systembenutzer we-rock-diskmap hinzu.",
+            "Erlaube Lesen, Auflisten und Durchqueren für die zu erfassenden Ordner und Dateien. Vergib keine Schreib- oder Löschrechte.",
+            "Prüfe nach dem Speichern auch die wirksamen Rechte anderer Konten. Der Admin-only-Haken ist nun aus; setze ihn nicht wieder, wenn die App weiter lesen soll.",
+            "Wiederhole die Einrichtung bei weiteren Papierkörben und aktualisiere anschließend den betroffenen Scanbereich."
+          ]
+        },
+        {
+          "title": "Variante 2: Admin-Beschränkung in DSM abschalten",
+          "paragraphs": [
+            "Unter Systemsteuerung → Freigegebener Ordner → Bearbeiten → Allgemein kannst du den Haken beim aktivierten Papierkorb entfernen. Prüfe danach die tatsächlich wirksamen Rechte: Auch andere berechtigte Benutzer können Zugriff auf gelöschte Dateien erhalten. Das Abschalten ersetzt keine Prüfung, ob das Paketkonto wirklich lesen darf."
+          ]
+        },
+        {
+          "title": "Nach einer Rechteänderung",
+          "paragraphs": [
+            "Der Papierkorbstatus wird beim Laden des Freigabe-Inventars kurz am #recycle-Ordner geprüft, ohne rekursiven Scan. Nach Rechteänderungen öffne die App erneut oder lade das Inventar neu. Gespeicherte Inhalte benötigen weiterhin „Aktualisieren“, um ihren Datenstand zu erneuern. Lesbarkeit am Papierkorb selbst garantiert nicht, dass jeder Unterordner lesbar ist. Ein-/Ausblenden ändert keine Rechte."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "categories",
+      "title": "Papierkörbe und Systeminhalte anzeigen",
+      "paragraphs": [
+        "Erfassen und Anzeigen sind getrennte Entscheidungen. So kannst du besondere Inhalte im Index behalten, ohne sie ständig in der Karte zu sehen."
+      ],
+      "sections": [
+        {
+          "title": "1 · Beim nächsten Scan erfassen",
+          "paragraphs": [
+            "Unter Einstellungen → Scans → „Scannen und in den Index aufnehmen“ wählst du Papierkörbe und Systemdateien/-ordner, etwa @eaDir, .DS_Store oder .SMB-Dateien. Eine Änderung wirkt erst beim nächsten Scan. Bereits gespeicherte Ergebnisse werden dadurch nicht rückwirkend ergänzt."
+          ]
+        },
+        {
+          "title": "2 · In der Oberfläche einblenden",
+          "paragraphs": [
+            "Neben der Größenanzeige rechts schalten das Papierkorb- und das Systemdateien-Symbol die jeweilige Kategorie für Karte, Ordnerbaum und Dateiliste gemeinsam um. Dieselben Optionen findest du unter Einstellungen → Scans → „In Karten und Listen anzeigen“. Eingeblendete besondere Inhalte erscheinen in Graustufen."
+          ]
+        },
+        {
+          "title": "Die drei Icon-Zustände",
+          "items": [
+            "Papierkorb normal grau: auf der Freigabe vorhanden und für die App lesbar.",
+            "Papierkorb mit roter Kontur, ohne Strich: vorhanden, aber der App fehlen Leserechte.",
+            "Papierkorb ausgegraut und rot durchgestrichen: auf der Freigabe nicht vorhanden.",
+            "Ein unbekannter Status wird nicht als fehlender Papierkorb dargestellt. Der Tooltip erklärt den Zustand. Unterordner verwenden den Status ihrer Freigabe; auf NAS-/Volume-Ebene wird zusammengefasst.",
+            "Nicht im Index enthalten: Ein-/Ausblenden bleibt deaktiviert, auch wenn der Papierkorb vorhanden und lesbar ist. Vorhandensein und Index-Inklusion sind getrennt.",
+            "Systemdateien: ausgegraut bedeutet nicht im Index verfügbar; ein roter Strich meldet weiterhin fehlende Leserechte im letzten Scan."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "snapshot-report",
+      "title": "Snapshot-Speicherbericht",
+      "paragraphs": [
+        "Synology-Snapshots teilen Datenblöcke mit aktuellen Dateien und anderen Snapshots. Ihre zusätzliche Speicherbelegung lässt sich deshalb nicht korrekt als normale Dateikacheln darstellen."
+      ],
+      "sections": [
+        {
+          "title": "Bericht anzeigen",
+          "steps": [
+            "Wähle eine Freigabe oder einen Ordner innerhalb einer Freigabe.",
+            "Klicke rechts neben den Kategorie-Symbolen auf das Ebenen-Symbol „Snapshot-Speicherbericht“.",
+            "Lies die geschätzte Größe zusammen mit Zeitraum und Berechnungsdatum. Auch bei einem Unterordner gilt der Bericht für die gesamte Freigabe."
+          ]
+        },
+        {
+          "title": "Noch kein Bericht vorhanden?",
+          "paragraphs": [
+            "Erstelle in Snapshot Replication für die Freigabe unter „Snapshot → Größe berechnen“ einen Bericht. DiskMap liest einen abgeschlossenen DSM-Bericht; es berechnet beim Öffnen nicht selbst alle Snapshot-Blöcke neu.",
+            "Der #snapshot-Ordner muss dafür in File Station nicht sichtbar sein. Der Bericht ist unabhängig von seiner Sichtbarkeit. Ohne passenden abgeschlossenen Bericht wird keine Größe erfunden und keine Null als Messwert ausgegeben."
+          ]
+        },
+        {
+          "title": "Keine Addition zur Karte",
+          "paragraphs": [
+            "Die Schätzung gehört zum angegebenen Zeitraum und kann älter sein als dein letzter Dateiscan. Sie wird nicht zur Dateikarten-Summe addiert und ist keine exakte Größe eines einzelnen Snapshot-Ordners."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "snapshots",
+      "title": "Scanalter und Teilabdeckung",
+      "paragraphs": [
+        "Alter und Vollständigkeit beantworten zwei verschiedene Fragen: Wann wurde gelesen – und konnte alles im relevanten Bereich erfasst werden?"
+      ],
+      "sections": [
+        {
+          "title": "Grün, Gelb, Rot oder Grau",
+          "paragraphs": [
+            "Die Altersanzeige steht im Header auch bei eingeklapptem Baum. Die Punkte im Baum zeigen ebenfalls das Alter: von Grün über Gelb bis Rot. Grau kennzeichnet fehlende oder unbekannte Scanzeitpunkte. Die Altersgrenze stellst du unter Einstellungen → Scans ein; Minuten, Stunden, Tage, Wochen und Monate sind möglich. Ein Monat entspricht hier 30 Tagen."
+          ],
+          "diagram": [
+            "Grün · aktuell",
+            "Gelb · wird älter",
+            "Rot · veraltet"
+          ]
+        },
+        {
+          "title": "Teilabdeckung verstehen",
+          "paragraphs": [
+            "Ein frischer Scan kann trotzdem Lücken haben, etwa durch fehlende Leserechte, veränderte oder verschwundene Quellen und Scan-Grenzen. Öffne „Teilabdeckung“, um die konkreten Gründe zu sehen. Verfügbare Teilergebnisse sind nutzbar, aber kein Beweis einer vollständigen Erfassung.",
+            "Absichtlich ausgeschlossene oder ausgeblendete besondere Inhalte sind von echten Lücken zu unterscheiden. Ausblenden repariert keine Rechte; für die sichtbare Ansicht werden die passenden Abdeckungsinformationen berücksichtigt."
+          ]
+        },
+        {
+          "title": "Gespeicherte Ergebnisse wiederverwenden",
+          "paragraphs": [
+            "Die App speichert Scanergebnisse dauerhaft. Öffnen oder Navigieren startet keinen automatischen vollständigen Scan. „Aktualisieren“ ist deine bewusste Entscheidung, den Bereich neu zu erfassen. Ein fehlgeschlagener oder abgebrochener Lauf darf nicht als erfolgreicher neuer Stand verstanden werden."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "storage",
+      "title": "Index löschen und neu aufbauen",
+      "paragraphs": [
+        "Der Index ist der gespeicherte Dateikatalog von DiskMap. Index löschen und Datei löschen sind unterschiedliche Aktionen."
+      ],
+      "sections": [
+        {
+          "title": "Einen Bereich zurücksetzen",
+          "steps": [
+            "Klicke im linken Ordnerbaum mit der rechten Maustaste auf den betreffenden Ordner.",
+            "Wähle „Index für diesen Ordner löschen“ und prüfe den Umfang im Sicherheitsdialog.",
+            "Bestätige nur den gewünschten Bereich. Seine bisherigen Ergebnisse sind danach nicht verfügbar; scanne ihn gezielt neu."
+          ]
+        },
+        {
+          "title": "Den gesamten Index zurücksetzen",
+          "paragraphs": [
+            "Unter Einstellungen → Scans findest du „Kompletten Index löschen“. Auch diese Aktion verlangt eine Bestätigung. Aktive Scanaufträge können das Löschen blockieren. Deine Quelldateien bleiben erhalten; die gespeicherten Analyseergebnisse müssen danach neu aufgebaut werden."
+          ],
+          "tone": "warning"
+        },
+        {
+          "title": "Paketdaten sind keine gescannten Dateien",
+          "paragraphs": [
+            "DSM verwaltet den Paket-Datenbereich über SYNOPKG_PKGVAR. control.db enthält Steuerinformationen, generations/ die Scan-Indizes, upgrades/ Wiederherstellungsbundles; run/control.sock und diskmapd.pid sind Laufzeitdateien. Bearbeite oder verschiebe diese Dateien nicht bei laufendem Dienst."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "settings",
+      "title": "Einstellungen und persönliche Ansicht",
+      "paragraphs": [
+        "Das Zahnrad öffnet die Einstellungen. Die Tabs trennen Darstellung, Scanoptionen, Versionsinformationen und Diagnose."
+      ],
+      "sections": [
+        {
+          "title": "Darstellung, Scans und Info",
+          "items": [
+            "Darstellung: helle oder dunkle Oberfläche sowie Deutsch oder Englisch wählen.",
+            "Scans: Papierkorb-/Systemkategorien für den nächsten Scan festlegen, Sichtbarkeit umschalten, Altersgrenze ändern oder den Index zurücksetzen.",
+            "Info: installierte App-Version nachsehen. Die Version steht auch unten links im Hauptfenster.",
+            "Debug: optionales Sitzungsprotokoll und technische Statusinformationen."
+          ]
+        },
+        {
+          "title": "Speichern und Geltungsbereich",
+          "paragraphs": [
+            "Die kompakten Anzeige- und Scanoptionen werden über ihre Bedienelemente übernommen. Die Altersgrenze gilt für deinen Benutzer in diesem Browser. Gespeicherte Ansichten und persönliche Darstellung ändern nicht die gemeinsam genutzten Scanbestände oder die DSM-Zugriffsrechte."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "support",
+      "title": "Meldungen und Fehlerdiagnose",
+      "paragraphs": [
+        "Die Glocke sammelt relevante Meldungen. Diagnoseinformationen helfen bei Fehlern, ohne für die normale Bedienung ständig eingeblendet zu sein."
+      ],
+      "sections": [
+        {
+          "title": "Meldungen lesen",
+          "paragraphs": [
+            "Wichtige Meldungen erscheinen oben rechts. Mit X schließt du eine Meldung; im Glockenverlauf kannst du sie erneut ansehen. Alter und Fortschritt stehen bereits in der Oberfläche und werden nicht ständig als zusätzliche Cache-Hinweise wiederholt."
+          ]
+        },
+        {
+          "title": "Debug gezielt einschalten",
+          "steps": [
+            "Öffne Einstellungen → Debug und aktiviere das Debugprotokoll, bevor du das Problem reproduzierst. Standardmäßig ist es aus.",
+            "Wähle Alles, Hinweis, Warnung, Fehler oder Kritisch. Die Anzeige zeigt die letzten 500 passenden Einträge.",
+            "Passe das Speicherlimit bei Bedarf an: Standard 10 MB, zulässig 1–100 MB. Am Limit werden die ältesten Einträge entfernt.",
+            "Exportiere das gefilterte Protokoll vor dem Schließen der App. Der Export enthält alle noch gespeicherten Treffer; Ausschalten oder Schließen löscht das Sitzungsprotokoll."
+          ]
+        },
+        {
+          "title": "Schnelle Fehlerhilfe",
+          "items": [
+            "Freigabe fehlt: Paketleserechte prüfen und Inventar erneut laden; kein Vollscan nötig.",
+            "Papierkorb wirkt leer: Rechte und Admin-only-Haken prüfen, dann den Bereich aktualisieren.",
+            "Datei fehlt rechts: Suchtext, Dateiart, Dateien/Ordner und „Unterordner einbeziehen“ prüfen.",
+            "Karte fehlt: gescannten Bereich wählen; laufende Queue und Meldungen prüfen.",
+            "Scan wirkt stehen geblieben: Erfassungsphase von Indexaufbereitung unterscheiden; bei anhaltendem Fehler Debug mit Zeitangabe sichern."
+          ]
+        },
+        {
+          "title": "Supportdaten teilen",
+          "paragraphs": [
+            "Notiere App-/Paketversion, DSM-Version, Uhrzeit und die Schritte zum Fehler. Protokolle werden nicht automatisch versendet. Private Pfade erfordern eine gesonderte Zustimmung; prüfe Exporte und Screenshots vor dem Weitergeben. Zugangsdaten und Sitzungswerte gehören nicht in eine Supportanfrage."
+          ]
+        },
+        {
+          "title": "Noch kein Scan",
+          "paragraphs": [
+            "Wähle NAS, Volume, Freigabe oder Ordner und starte ausdrücklich einen Scan. Ohne Datenstand wird kein leeres NAS behauptet."
+          ],
+          "recoveryCase": "no-scan"
+        },
+        {
+          "title": "Keine Suchtreffer",
+          "paragraphs": [
+            "Prüfe die sichtbaren Such- und Filterregeln und setze sie bei Bedarf zurück. Ein begrenzter Ausschnitt ohne Treffer ist kein vollständiges Suchergebnis."
+          ],
+          "recoveryCase": "no-hits"
+        },
+        {
+          "title": "Leerer aufgezeichneter Ordner",
+          "paragraphs": [
+            "Dieser Ordner enthält im Datenstand keine Dateien. Das ist eine historische Aussage; fehlende Erfassungsrechte sind kein Nachweis eines leeren Ordners."
+          ],
+          "recoveryCase": "empty"
+        },
+        {
+          "title": "Leserecht fehlt",
+          "paragraphs": [
+            "Prüfe unter Berechtigungen den betroffenen Bereich. In DSM müssen die benötigten Leserechte für den Paketdienst an dieser Freigabe und ihren Unterordnern bestehen. Keine pauschale Rechteerweiterung vornehmen."
+          ],
+          "recoveryCase": "unreadable"
+        },
+        {
+          "title": "Volume fehlt",
+          "paragraphs": [
+            "Prüfe in DSM, ob das gewählte Volume verfügbar und eingehängt ist. Lade das Inventar anschließend erneut. Fehlende Daten bleiben unbekannt und werden nicht zu null Byte."
+          ],
+          "recoveryCase": "missing"
+        },
+        {
+          "title": "Freigabe gesperrt",
+          "paragraphs": [
+            "Entsperre die Freigabe in DSM und prüfe danach den Bereich erneut. DiskMap fragt keinen Verschlüsselungsschlüssel ab."
+          ],
+          "recoveryCase": "locked"
+        },
+        {
+          "title": "Neuer Scan fehlgeschlagen",
+          "paragraphs": [
+            "Prüfe Scanstatus und lokale Diagnose. Ein bisheriger nutzbarer vollständiger Stand bleibt getrennt vom fehlgeschlagenen Auftrag verfügbar. Starte einen weiteren Scan nur ausdrücklich."
+          ],
+          "recoveryCase": "failed"
+        },
+        {
+          "title": "Teilscan abgeschlossen",
+          "paragraphs": [
+            "Verfügbare Teilergebnisse werden automatisch angezeigt. Prüfe die Gründe unter Teilabdeckung. Unbekannte Bereiche zählen nicht als null Byte; nach Behebung kannst du den Bereich aktualisieren."
+          ],
+          "recoveryCase": "partial"
+        },
+        {
+          "title": "Indexspeicher voll oder Reserve unterschritten",
+          "paragraphs": [
+            "Der Lauf wird kontrolliert beendet; ein geschützter bisheriger Datenstand bleibt erhalten. Prüfe den freien Platz des Paket-Datenbereichs in DSM. Lösche keine Datenbankdateien manuell. Starte nach Behebung ausdrücklich einen neuen Scan."
+          ],
+          "recoveryCase": "index-space"
+        },
+        {
+          "title": "Datei seit dem Scan entfernt",
+          "paragraphs": [
+            "Der Dateiname beschreibt den gespeicherten Stand. Wenn die aktuelle Zielprüfung einen vorhandenen Elternordner bestätigt, kann File Station diesen nach deiner Bestätigung öffnen. Eine Dateimarkierung wird nicht zugesichert."
+          ],
+          "recoveryCase": "removed"
+        },
+        {
+          "title": "DSM-Sitzung abgelaufen",
+          "paragraphs": [
+            "Weitere Datenzugriffe werden gesperrt. Melde dich über „Bei DSM anmelden“ erneut an. Gib Zugangsdaten ausschließlich in DSM ein; die lokale Hilfe bleibt lesbar."
+          ],
+          "recoveryCase": "session"
+        },
+        {
+          "title": "Grafik nicht verfügbar",
+          "paragraphs": [
+            "Nutze die Objektliste und Navigation für denselben Datenstand. Ein Darstellungsfehler ist kein leerer Ordner und erfordert keinen automatischen Scan."
+          ],
+          "recoveryCase": "graphics"
+        },
+        {
+          "title": "DSM-Funktion nicht verfügbar",
+          "paragraphs": [
+            "Prüfe den angezeigten Integrationsstatus der betroffenen Funktion, etwa File Station. Ein Öffnungsauftrag bestätigt noch nicht das angezeigte Ziel. Ungeprüfte Fähigkeiten gelten nicht als unterstützt."
+          ],
+          "recoveryCase": "integration"
+        },
+        {
+          "title": "Paket gestoppt",
+          "paragraphs": [
+            "Der lokale CLI-Aufruf meldet Dienst nicht verfügbar und startet das Paket nicht heimlich. Prüfe den Paketstatus im DSM-Paket-Zentrum und starte den Dienst dort ausdrücklich, wenn gewünscht."
+          ],
+          "recoveryCase": "stopped"
+        },
+        {
+          "title": "Beschädigter oder inkompatibler Index",
+          "paragraphs": [
+            "Ein beschädigter Stand wird nicht als nutzbar geöffnet. Sichere die Diagnose und setze den betroffenen Index nach Bestätigung zurück. Ein neuer Scan baut ihn wieder auf; Quelldateien werden dadurch nicht geändert."
+          ],
+          "recoveryCase": "corrupt"
+        }
+      ]
+    },
+    {
+      "id": "photos",
+      "title": "Photo Station und Synology Photos",
+      "paragraphs": [
+        "Die Freigabe photo kann eigene Unterordner-Berechtigungen aus Photo Station oder einer früheren Einrichtung besitzen. Zugriff in der Foto-App und ein Leserecht auf der Freigabewurzel belegen nicht, dass das DiskMap-Paketkonto alle Unterordner lesen kann."
+      ],
+      "sections": [
+        {
+          "title": "Warum fehlen große Teile der Fotosammlung?",
+          "paragraphs": [
+            "DiskMap erfasst Dateien mit dem internen Systembenutzer we-rock-diskmap. Fehlt diesem Konto das Lese- oder Durchsuchungsrecht auf einem Unterordner, bleibt dessen Datenmenge unbekannt. Ein frischer Scan kann deshalb trotzdem unvollständig sein. Im Pfadbaum erklärt der Tooltip eine unvollständige Größenangabe; ein unvollständig erfasster Nullwert erscheint als — statt als leerer Ordner."
+          ]
+        },
+        {
+          "title": "Leserechte gezielt prüfen",
+          "paragraphs": [
+            "DiskMap ändert diese Berechtigungen nicht selbstständig. Ein pauschales Zurücksetzen aller Unterordnerrechte oder eine Umbenennung der Foto-Freigabe ist für diese Diagnose nicht erforderlich.",
+            "Offizielle Anleitung: Synology: ACL-Berechtigungen für Unterordner von photo."
+          ],
+          "steps": [
+            "Prüfe zunächst in DSM → Systemsteuerung → Freigegebener Ordner → photo → Berechtigungen den internen Systembenutzer we-rock-diskmap: Nur Lesen.",
+            "Prüfe zusätzlich die konkret nicht lesbaren Unterordner und deren eigene ACLs. Ergänze ausschließlich Lesen und Durchsuchen für das Paketkonto und erhalte vorhandene Benutzer- und Foto-App-Rechte.",
+            "Synology Photos verwaltet den Zugriff auf den freigegebenen Bereich zusätzlich in der Foto-App. Änderungen in File Station werden nicht automatisch zu Foto-App-Berechtigungen. Bei älteren Photo-Station-Ordnern können die Berechtigungseinstellungen in File Station eingeschränkt sein; beachte die zur installierten Foto-App passende Synology-Anleitung.",
+            "Scanne anschließend die betroffene Freigabe erneut. Ein bloßes Neuladen der Oberfläche ergänzt fehlende Indexdaten nicht."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "session",
+      "title": "Administratoren und Sitzungen",
+      "paragraphs": [
+        "Die App ist ausschließlich für DSM-Administratoren freigegeben. Persönliche Oberflächeneinstellungen und gemeinsame Scanbestände haben unterschiedliche Aufgaben."
+      ],
+      "sections": [
+        {
+          "title": "Welche Rechte gelten?",
+          "paragraphs": [
+            "Alle berechtigten Administratoren verwenden die gemeinsamen Scanbestände. Der eingeschränkte Paketbenutzer we-rock-diskmap bestimmt, was der Scanner lesen kann. Aktionen in File Station prüfen zusätzlich die Rechte deiner aktuellen DSM-Sitzung.",
+            "Ist die Sitzung abgelaufen, melde dich erneut in DSM an und öffne die App. Es wird dadurch kein neuer Scan gestartet. Gewähre einem Standardkonto nicht vermeintlich Zugriff auf private Teilbestände: Die App bietet keine persönliche Scantrennung für Standardnutzer."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "configuration",
+      "title": "Konfiguration und erweiterte Verwaltung",
+      "paragraphs": [
+        "Die kompakte Hauptoberfläche konzentriert sich auf Ordnerauswahl, Scans und Analyse. Erweiterte Verwaltungsfunktionen sind von diesen alltäglichen Bedienelementen zu unterscheiden."
+      ],
+      "sections": [
+        {
+          "title": "Konfigurationssicherung",
+          "paragraphs": [
+            "Der erweiterte Verwaltungsbereich unterstützt Konfigurationsexport und -import; diese Bedienelemente sind in der aktuellen kompakten Oberfläche nicht eingeblendet. Ein Konfigurationsexport enthält Profile und geeignete Einstellungen, aber keine vollständigen Scan-Indizes, Passwörter oder Dateiinhalte.",
+            "Für den Import gilt ein Limit von 4 MiB. Quellen müssen dem Ziel-NAS zugeordnet werden; gleiche Namen beweisen keine Identität. Importierte Profile erhalten neue IDs und starten nicht automatisch. Nutze eine konsistente Sicherung des Paket-Datenbereichs, wenn auch Indizes gesichert werden sollen."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scheduler",
+      "title": "Geplante Scans in DSM",
+      "paragraphs": [
+        "Manuelle Scans und die Warteschlange sind direkt in der App verfügbar. Regelmäßige Zeitpläne werden separat im DSM-Aufgabenplaner eingerichtet."
+      ],
+      "sections": [
+        {
+          "title": "Bestehende Aufgaben prüfen",
+          "paragraphs": [
+            "Die erweiterte Profilverwaltung liefert profilspezifische Aufrufvorlagen; sie ist nicht Teil der aktuellen kompakten Oberfläche. Verwende nur eine zum installierten Paket und zum konkreten Profil gehörende Vorlage. Die App legt keinen DSM-Zeitplan automatisch an.",
+            "Aufgaben beziehen sich auf Profil-IDs, nicht nur auf Namen. Nach Import, Profilentfernung, NAS-Wechsel oder Deinstallation müssen vorhandene DSM-Aufgaben geprüft werden. CLI-Protokollversionen sind keine Appversionsnummern."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "recovery",
+      "title": "Updates und Wiederherstellung",
+      "paragraphs": [
+        "Installiere Paketupdates über den vorgesehenen DSM-Paketweg. Bewahre bei Problemen die Fehlermeldung und die Identität des installierten Pakets auf."
+      ],
+      "sections": [
+        {
+          "title": "Update und Rückkehr zu einem nutzbaren Stand",
+          "paragraphs": [
+            "Die Paketmigration sichert Kontrollinformationen vor Änderungen. Ein Schema-Downgrade ist nicht automatisch reversibel. Tausche nach einem fehlgeschlagenen Upgrade keine Datenbanken von Hand aus; nutze den dokumentierten administrativen Wiederherstellungsweg mit dem passenden Bundle.",
+            "Vor einem Update laufende Scans berücksichtigen. Ein erfolgreicher Paketstart und ein sichtbarer vorhandener Scan sind getrennt von einer erneuten vollständigen Erfassung deiner Freigaben zu prüfen."
+          ]
+        },
+        {
+          "title": "Deinstallation und Neuinstallation",
+          "paragraphs": [
+            "Lies im Paketdialog die Auswahl zum Behalten oder Entfernen eigener App-Daten. Analysierte Freigaben und Quelldateien sind davon getrennt. Nach Neuinstallation oder NAS-Wechsel prüfst du Paketleserechte und Quellen erneut. Benutzerseitige DSM-Aufgaben müssen separat entfernt oder angepasst werden."
+          ]
+        },
+        {
+          "title": "Fehlgeschlagenes Update",
+          "paragraphs": [
+            "Bewahre Paket-/Buildidentität und das geprüfte Bundle unter upgrades/ auf. Die administrative Wiederherstellung erfolgt bei gestopptem Paket unter dem Paketkonto mit dem installierten Daemon, dem eigenen kanonischen Socket und --upgrade=restore. Der verdrängte Kontrollstand bleibt im Bundle. Der Start bleibt gesperrt, bis ein passendes Paket oder erfolgreiches prepare/apply die Version qualifiziert. Keine manuell ausgetauschten Datenbanken und keine automatische Downgradefreigabe."
+          ],
+          "recoveryCase": "upgrade"
+        },
+        {
+          "title": "Sicherung und Neuinstallation",
+          "paragraphs": [
+            "Exportiere die Konfiguration geschützt; sie enthält private Namen und Pfade, aber keine vollständigen Indizes. Optionale Indexsicherungen müssen konsistent bei angehaltenen Schreibvorgängen erfolgen. Nach Import oder NAS-Wechsel ordne Quellen ausdrücklich neu zu und prüfe die Rechte. Importierte Profile bleiben zunächst inaktiv; Speichern startet keinen Scan."
+          ],
+          "recoveryCase": "reinstall"
+        },
+        {
+          "title": "Deinstallation und verbleibende Aufgaben",
+          "paragraphs": [
+            "Exportiere vor Deinstallation die Konfiguration und prüfe Erhalten oder Entfernen der eigenen App-Daten im Paketdialog. Prüfe eigene DSM-Aufgaben separat anhand ihrer Profil-ID; importierte oder neu angelegte gleichnamige Profile ersetzen diese ID nicht. Entferne veraltete Aufgaben bewusst. Analysierte Freigaben werden nicht gelöscht."
+          ],
+          "recoveryCase": "tasks"
+        }
+      ]
+    }
+  ],
+  "en": [
+    {
+      "id": "window",
+      "title": "Your storage at a glance",
+      "paragraphs": [
+        "Use We.Rock.DiskMap to find large files, explore directories and reopen recorded results without scanning each time."
+      ],
+      "sections": [
+        {
+          "title": "Three panes, one snapshot",
+          "paragraphs": [
+            "Choose NAS, volume, share or subfolder on the left. The map includes deeper descendants of that scope. The right list shows its direct children by default."
+          ],
+          "diagram": [
+            "Left · Folder tree",
+            "Centre · File map",
+            "Right · File list"
+          ]
+        },
+        {
+          "title": "Your first map in three steps",
+          "steps": [
+            "Sign in as a DSM administrator and open We.Rock.DiskMap.",
+            "If no shares are accessible, follow the read-permission guide. “Check shared folders again” refreshes inventory only; it starts no scan.",
+            "Choose a share and click Scan. Use Scan NAS for all available scopes."
+          ]
+        },
+        {
+          "title": "Open help",
+          "paragraphs": [
+            "The question mark in the DSM window opens this local guide. Expand a topic on the left and select a section. All text and illustrations are bundled; reading requires no internet connection."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scan",
+      "title": "Scanning and the queue",
+      "paragraphs": [
+        "A scan records file names, directories and sizes. Scanning leaves your source files unchanged."
+      ],
+      "sections": [
+        {
+          "title": "Choose a scope",
+          "items": [
+            "Scan: records a scope that has not been scanned.",
+            "Refresh: fully reads the selected scope again and publishes a new snapshot.",
+            "Scan NAS: scans all NAS scopes accessible to the package account.",
+            "Right-click the folder tree → Rescan folder: refreshes that scope."
+          ]
+        },
+        {
+          "title": "Keep browsing while a scan runs",
+          "paragraphs": [
+            "Changing the displayed folder does not stop a scan. You can keep viewing existing results. Another scan request enters the queue. Jobs run sequentially; a new request does not replace the active scan.",
+            "The queue icon in the header shows the active job and waiting scopes. The X beside a waiting item removes only that job. Cancel stops the active scan."
+          ],
+          "diagram": [
+            "Scanning now",
+            "Waiting in queue",
+            "Starts afterwards"
+          ]
+        },
+        {
+          "title": "Understand progress",
+          "paragraphs": [
+            "File traversal and index preparation are separate phases. Entry counts may stay unchanged during preparation. The ring can show a meaningful percentage only when a suitable total is known; otherwise it shows the size recorded so far.",
+            "Available previews are provisional and may change. A traversed folder is not automatically a separately completed scan while the overall job is running. Completed results are displayed; relevant notifications remain under the bell."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "navigation",
+      "title": "Maps and the folder tree",
+      "paragraphs": [
+        "Disk Map and Radial use the same recorded snapshot. The presentation changes, not the underlying files."
+      ],
+      "sections": [
+        {
+          "title": "Rectangles and rings",
+          "paragraphs": [
+            "In Disk Map, rectangle area represents size. Radial uses rings for directory levels; angles represent size shares. Large files stand out quickly.",
+            "The map includes subfolders. A large file tile may therefore live deeper than the selected folder. Hover or select it to inspect its full path in the status bar and selection details."
+          ]
+        },
+        {
+          "title": "Very large file counts",
+          "paragraphs": [
+            "Millions of files cannot all be individually distinguishable on one screen. Dense views may contain detail groups. These are not single large files. Open the corresponding scope or use the file list and search to inspect individual entries."
+          ]
+        },
+        {
+          "title": "Navigate and arrange the workspace",
+          "steps": [
+            "Click a folder name to view it. The arrow beside it only expands or collapses its children.",
+            "Use the breadcrumb at the top to go to ancestors. Clicking a folder in the map also changes scope.",
+            "The tree toolbar sorts by name or size and changes direction. Natural alphanumeric name order is the default.",
+            "Toggle sidebars with the header icons. Drag their separators to adjust width."
+          ]
+        },
+        {
+          "title": "Keep your view",
+          "paragraphs": [
+            "The selected view, sidebar widths, expanded paths and other display preferences are saved for your account. Switching tabs or focus should not start a scan. Recorded scans remain shared; personal display preferences do not create separate file-access permissions."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "filters",
+      "title": "File list, search and filters",
+      "paragraphs": [
+        "By default, the right list shows the selected folder’s direct children. The map also shows deeper levels."
+      ],
+      "sections": [
+        {
+          "title": "Find files",
+          "steps": [
+            "Enter a name, part of a path or an extension such as .zip. Patterns such as *.pdf are also supported.",
+            "Use the icon immediately beside the search field. Filter & Sort expands underneath without covering the list.",
+            "Enable Include subfolders to search deeper levels. Clear the query and inspect active filters if expected entries are missing."
+          ]
+        },
+        {
+          "title": "Filter and sort",
+          "items": [
+            "Show: all entries, files only or folders only.",
+            "Type: for example archives, documents, images, audio or video.",
+            "Sort: size, name or type, ascending or descending.",
+            "Folders first: enabled by default; folders precede files.",
+            "The list loads more entries as you scroll, without page controls."
+          ]
+        },
+        {
+          "title": "Why the list may differ from the map",
+          "paragraphs": [
+            "A file in a subfolder is already represented in the recursive map but appears in the direct list only after opening that folder or enabling Include subfolders. Search and list filters change neither source files nor the original scan total. Recycle-bin and system-content visibility switches apply to map, tree and list together."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "filestation",
+      "title": "Open and manage files",
+      "paragraphs": [
+        "The context menu connects analysis with DSM. Available actions depend on the entry and installed DSM applications."
+      ],
+      "sections": [
+        {
+          "title": "Show in File Station",
+          "steps": [
+            "Right-click a file in the map or a folder in the left tree.",
+            "Choose Show in File Station. DSM opens the corresponding location. Partial coverage elsewhere does not automatically block a valid path."
+          ]
+        },
+        {
+          "title": "Open and delete",
+          "paragraphs": [
+            "Open uses a suitable DSM viewer when supported by the file and installed applications. File actions use the current DSM session and its permissions. A recorded scan does not prove the file still exists unchanged.",
+            "Delete file deletes a real source file and requires explicit confirmation. Check the full path before confirming. Delete index for this folder removes only DiskMap results, not NAS files."
+          ],
+          "tone": "warning"
+        }
+      ]
+    },
+    {
+      "id": "measurement",
+      "title": "Understand size values",
+      "paragraphs": [
+        "Displayed sizes describe the recorded snapshot and chosen visibility. They are not a live measurement of free volume capacity."
+      ],
+      "sections": [
+        {
+          "title": "Folder totals and hidden content",
+          "paragraphs": [
+            "Folder sizes are derived from recorded files and descendants. The tree retains the last known size even when another folder is selected. A dash means unknown or not recorded; 0 B is a recorded zero size.",
+            "The number at the top right describes visible content. Include recycle bins or system content to include them in the display. The visible total can therefore be smaller than the entire recorded dataset."
+          ]
+        },
+        {
+          "title": "File size is not physical usage",
+          "paragraphs": [
+            "Logical file size can differ from physical Btrfs usage because of compression, sparse files or shared blocks. Maps do not precisely allocate every physical volume block. Snapshot estimates are displayed separately and are not added to the file map."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "profiles",
+      "title": "Setup and read permissions",
+      "paragraphs": [
+        "A DSM administrator installs and uses the app. The scanner reads as the internal system user we-rock-diskmap, not automatically with the signed-in administrator’s full permissions."
+      ],
+      "sections": [
+        {
+          "title": "Grant access to shared folders",
+          "steps": [
+            "Open DSM → Control Panel → Shared Folder and select the required share.",
+            "Open Edit → Permissions and select System internal user.",
+            "Allow Read only for we-rock-diskmap and save. Repeat for the shares you want to analyse.",
+            "Reopen DiskMap or use Check shared folders again on the setup screen. A newly discovered share appears without a full NAS scan; scan it separately when ready."
+          ]
+        },
+        {
+          "title": "Check subfolder permissions",
+          "paragraphs": [
+            "Read access at the share root does not guarantee access to every descendant. Separate ACLs, encrypted or unmounted scopes and protected recycle bins may prevent access. Check the relevant permissions in File Station. The app never expands permissions automatically."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "recycle",
+      "title": "Recycle bin and administrator restriction",
+      "paragraphs": [
+        "An unreadable #recycle folder is not empty. The package account also needs suitable read permissions here. DSM’s administrator restriction and manually assigned recycle-bin permissions are linked."
+      ],
+      "sections": [
+        {
+          "title": "Important: permissions change the checkbox",
+          "paragraphs": [
+            "Adding we-rock-diskmap with read access to #recycle automatically clears DSM’s “Restrict access to administrators only” checkbox.",
+            "Checking that box again removes the app user’s access again. These two settings cannot therefore be combined independently as a lasting solution."
+          ],
+          "diagram": [
+            "Add app read access",
+            "Admin-only box is cleared",
+            "Check it again → app access is removed"
+          ],
+          "tone": "warning"
+        },
+        {
+          "title": "Option 1: assign explicit recycle-bin permissions",
+          "steps": [
+            "In File Station, select #recycle in the required share.",
+            "Open Properties → Permission and add the internal system user we-rock-diskmap.",
+            "Allow read, list and traverse access for the folders and files to be scanned. Grant no write or delete access.",
+            "After saving, check other accounts’ effective access too. Admin-only is now cleared; do not re-enable it if the app should keep read access.",
+            "Repeat for other recycle bins and refresh the affected scan scope."
+          ]
+        },
+        {
+          "title": "Option 2: clear the DSM administrator restriction",
+          "paragraphs": [
+            "Under Control Panel → Shared Folder → Edit → General, clear the restriction for the enabled recycle bin. Then check effective permissions: other authorised users may gain access to deleted files. Clearing the checkbox is not a substitute for checking the package account’s read access."
+          ]
+        },
+        {
+          "title": "After changing permissions",
+          "paragraphs": [
+            "Recycle-bin status is checked briefly at the share’s #recycle directory when inventory loads, without a recursive scan. After changing permissions, reopen the app or refresh inventory. Use Refresh to update stored contents separately. Read access at the bin itself does not guarantee access to every descendant. Visibility switches do not change permissions."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "categories",
+      "title": "Show recycle bins and system content",
+      "paragraphs": [
+        "Recording and displaying are separate choices. You can keep special content in the index without always showing it in the map."
+      ],
+      "sections": [
+        {
+          "title": "1 · Include in the next scan",
+          "paragraphs": [
+            "Under Settings → Scans → Scan and include in index, choose recycle bins and system files/folders such as @eaDir, .DS_Store or .SMB files. Changes apply to the next scan. Existing results are not retroactively expanded."
+          ]
+        },
+        {
+          "title": "2 · Show in the interface",
+          "paragraphs": [
+            "Beside the size at the top right, the recycle-bin and system-files icons toggle their categories across the map, folder tree and file list. The same options appear under Settings → Scans → Show in maps and lists. Visible special content is rendered in grayscale."
+          ]
+        },
+        {
+          "title": "The three icon states",
+          "items": [
+            "Normal gray recycle bin: present on the share and readable by the app.",
+            "Red recycle-bin outline, no strike: present, but the app lacks read access.",
+            "Dimmed recycle bin with a red strike: not present on the share.",
+            "Unknown status is never displayed as an absent bin. The tooltip explains the state. Subfolders inherit their share’s status; NAS and volume views aggregate it.",
+            "Not indexed: showing/hiding remains disabled even when the bin exists and is readable. Presence and index inclusion are separate.",
+            "System files: dimmed means unavailable in the index; a red strike still indicates missing read access recorded by the last scan."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "snapshot-report",
+      "title": "Snapshot storage report",
+      "paragraphs": [
+        "Synology snapshots share blocks with current files and other snapshots. Their additional storage usage cannot therefore be represented correctly as ordinary file tiles."
+      ],
+      "sections": [
+        {
+          "title": "View a report",
+          "steps": [
+            "Select a share or a folder inside a share.",
+            "Click the layers icon, Snapshot storage report, beside the category icons on the right.",
+            "Read the estimate together with its period and calculation date. Even when viewing a subfolder, the report covers the whole share."
+          ]
+        },
+        {
+          "title": "No report yet?",
+          "paragraphs": [
+            "Create a report for the share in Snapshot Replication using Snapshot → Calculate Size. DiskMap reads a completed DSM report; opening it does not recalculate every snapshot block.",
+            "The #snapshot folder does not need to be visible in File Station. The report is independent of that visibility. Without a suitable completed report, no size is invented and zero is not presented as a measurement."
+          ]
+        },
+        {
+          "title": "Keep the estimate separate",
+          "paragraphs": [
+            "The estimate belongs to its stated period and may be older than your last file scan. It is not added to the file-map total and is not the exact size of one snapshot folder."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "snapshots",
+      "title": "Scan age and partial coverage",
+      "paragraphs": [
+        "Age and completeness answer different questions: when was the scope read, and could all relevant content be recorded?"
+      ],
+      "sections": [
+        {
+          "title": "Green, yellow, red or gray",
+          "paragraphs": [
+            "The age indicator stays in the header when the tree is hidden. Tree dots also indicate age, progressing from green through yellow to red. Gray indicates a missing or unknown scan time. Set the age threshold under Settings → Scans in minutes, hours, days, weeks or months. A month means 30 days here."
+          ],
+          "diagram": [
+            "Green · recent",
+            "Yellow · aging",
+            "Red · stale"
+          ]
+        },
+        {
+          "title": "Understand partial coverage",
+          "paragraphs": [
+            "A recent scan can still contain gaps caused by missing permissions, changed or missing sources, or scan boundaries. Open Partial coverage to inspect specific reasons. Available partial results are usable, but do not prove completeness.",
+            "Intentionally excluded or hidden special content must be distinguished from genuine gaps. Hiding content does not repair permissions; the visible view uses the relevant coverage information."
+          ]
+        },
+        {
+          "title": "Reuse recorded results",
+          "paragraphs": [
+            "The app persists scan results. Opening it or navigating does not automatically start a full scan. Refresh is an explicit decision to read the scope again. A failed or cancelled job must not be treated as a successful new snapshot."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "storage",
+      "title": "Delete and rebuild the index",
+      "paragraphs": [
+        "The index is DiskMap’s recorded file catalogue. Deleting the index and deleting a file are different actions."
+      ],
+      "sections": [
+        {
+          "title": "Reset one scope",
+          "steps": [
+            "Right-click the relevant folder in the left tree.",
+            "Choose Delete index for this folder and inspect the scope in the confirmation dialog.",
+            "Confirm only the intended scope. Its results are then unavailable until you scan it again."
+          ]
+        },
+        {
+          "title": "Reset the entire index",
+          "paragraphs": [
+            "Settings → Scans contains Delete entire index. This also requires confirmation. Active scan jobs may block deletion. Source files are retained; recorded analysis results must be rebuilt afterwards."
+          ],
+          "tone": "warning"
+        },
+        {
+          "title": "Package data is separate from scanned files",
+          "paragraphs": [
+            "DSM manages package data through SYNOPKG_PKGVAR. control.db holds control information, generations/ holds scan indexes, upgrades/ holds recovery bundles; run/control.sock and diskmapd.pid are runtime files. Do not edit or move them while the service is running."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "settings",
+      "title": "Settings and personal view",
+      "paragraphs": [
+        "The gear opens Settings. Tabs separate appearance, scan options, version information and diagnostics."
+      ],
+      "sections": [
+        {
+          "title": "Appearance, Scans and Info",
+          "items": [
+            "Appearance: choose light or dark presentation and German or English.",
+            "Scans: set special categories for the next scan, toggle visibility, change the age threshold or reset the index.",
+            "Info: view the installed app version. It also appears at the bottom left of the main window.",
+            "Debug: optional session log and technical status."
+          ]
+        },
+        {
+          "title": "Saving and scope",
+          "paragraphs": [
+            "The compact display and scan options are applied through their controls. The age threshold applies to your account in this browser. Saved views and personal presentation do not change shared scan data or DSM permissions."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "support",
+      "title": "Notifications and troubleshooting",
+      "paragraphs": [
+        "The bell keeps relevant notifications. Diagnostics help investigate failures without cluttering normal use."
+      ],
+      "sections": [
+        {
+          "title": "Read notifications",
+          "paragraphs": [
+            "Important notices appear at the top right. Dismiss one with X and revisit it in the bell history. Age and progress are already shown in the interface, avoiding repeated cache notices."
+          ]
+        },
+        {
+          "title": "Enable debug when needed",
+          "steps": [
+            "Open Settings → Debug and enable logging before reproducing the issue. It is off by default.",
+            "Choose All, Info, Warning, Error or Critical. The display shows the latest 500 matching entries.",
+            "Adjust the size limit if needed: default 10 MB, range 1–100 MB. Oldest entries are removed at the limit.",
+            "Export the filtered log before closing the app. The export includes all retained matches; disabling logging or closing the app clears the session log."
+          ]
+        },
+        {
+          "title": "Quick troubleshooting",
+          "items": [
+            "Share missing: check package read permissions and reload inventory; no full scan is needed.",
+            "Recycle bin looks empty: inspect permissions and the admin-only checkbox, then refresh the scope.",
+            "File missing on the right: inspect search text, type, files/folders and Include subfolders.",
+            "Map missing: select a recorded scope; inspect the queue and notifications.",
+            "Scan appears stuck: distinguish traversal from index preparation; preserve a timed debug log if the problem persists."
+          ]
+        },
+        {
+          "title": "Share support information",
+          "paragraphs": [
+            "Record app/package version, DSM version, time and reproduction steps. Logs are not sent automatically. Private paths require separate consent; inspect exports and screenshots before sharing. Never include credentials or session values in a support request."
+          ]
+        },
+        {
+          "title": "No scan yet",
+          "paragraphs": [
+            "Select NAS, volume, share or folder and explicitly start a scan. No snapshot does not mean an empty NAS."
+          ],
+          "recoveryCase": "no-scan"
+        },
+        {
+          "title": "No search results",
+          "paragraphs": [
+            "Review the visible search and filter rules and reset them if needed. A bounded window without matches is not a complete search result."
+          ],
+          "recoveryCase": "no-hits"
+        },
+        {
+          "title": "Empty recorded folder",
+          "paragraphs": [
+            "This folder contains no files in the snapshot. This is a historical observation; missing read access does not establish an empty folder."
+          ],
+          "recoveryCase": "empty"
+        },
+        {
+          "title": "Missing read permission",
+          "paragraphs": [
+            "Check the affected scope under Permissions. In DSM, the package service needs read access to that share and its descendants. Do not grant blanket permissions."
+          ],
+          "recoveryCase": "unreadable"
+        },
+        {
+          "title": "Missing volume",
+          "paragraphs": [
+            "Check in DSM whether the selected volume is available and mounted, then refresh the inventory. Missing data remains unknown rather than zero bytes."
+          ],
+          "recoveryCase": "missing"
+        },
+        {
+          "title": "Locked share",
+          "paragraphs": [
+            "Unlock the share in DSM, then check the scope again. DiskMap does not request an encryption key."
+          ],
+          "recoveryCase": "locked"
+        },
+        {
+          "title": "New scan failed",
+          "paragraphs": [
+            "Check scan status and local diagnostics. A previous usable complete snapshot remains separate from the failed job. Start another scan only explicitly."
+          ],
+          "recoveryCase": "failed"
+        },
+        {
+          "title": "Partial scan completed",
+          "paragraphs": [
+            "Available partial results appear automatically. Review the coverage reasons. Unknown areas are not zero bytes; refresh the scope after resolving the cause."
+          ],
+          "recoveryCase": "partial"
+        },
+        {
+          "title": "Index storage full or below reserve",
+          "paragraphs": [
+            "The job stops in a controlled way; a protected previous snapshot is retained. Check free space for the package data area in DSM. Do not manually delete database files. Explicitly start a new scan after resolving the issue."
+          ],
+          "recoveryCase": "index-space"
+        },
+        {
+          "title": "File removed since scanning",
+          "paragraphs": [
+            "The filename describes the recorded snapshot. If current target validation confirms an existing parent folder, File Station can open it after your confirmation. File selection is not guaranteed."
+          ],
+          "recoveryCase": "removed"
+        },
+        {
+          "title": "DSM session expired",
+          "paragraphs": [
+            "Further data access is blocked. Use Sign in to DSM to authenticate again. Enter credentials only in DSM; local help remains readable."
+          ],
+          "recoveryCase": "session"
+        },
+        {
+          "title": "Graphics unavailable",
+          "paragraphs": [
+            "Use the object list and navigation for the same snapshot. A rendering failure is not an empty folder and does not require an automatic scan."
+          ],
+          "recoveryCase": "graphics"
+        },
+        {
+          "title": "DSM function unavailable",
+          "paragraphs": [
+            "Check the integration status of the affected function, such as File Station. An open request does not confirm the displayed destination. Unverified capabilities are not treated as supported."
+          ],
+          "recoveryCase": "integration"
+        },
+        {
+          "title": "Package stopped",
+          "paragraphs": [
+            "The local CLI reports service unavailable and does not secretly start the package. Check DSM Package Center and explicitly start the service there if desired."
+          ],
+          "recoveryCase": "stopped"
+        },
+        {
+          "title": "Corrupt or incompatible index",
+          "paragraphs": [
+            "A corrupt snapshot is not opened as usable. Preserve diagnostics and reset the affected index after confirmation. A new scan rebuilds it without changing source files."
+          ],
+          "recoveryCase": "corrupt"
+        }
+      ]
+    },
+    {
+      "id": "photos",
+      "title": "Photo Station and Synology Photos",
+      "paragraphs": [
+        "The photo share may retain custom subfolder permissions from Photo Station or an earlier setup. Access in the photo application and read access at the share root do not establish that the DiskMap package account can read every subfolder."
+      ],
+      "sections": [
+        {
+          "title": "Why is most of my photo collection missing?",
+          "paragraphs": [
+            "DiskMap scans as the internal system user we-rock-diskmap. A subfolder without read and traversal permission has an unknown size. Even a recent scan can therefore be incomplete. In the directory tree, the tooltip explains an incomplete size; an incomplete zero appears as — rather than an empty folder."
+          ]
+        },
+        {
+          "title": "Check read access narrowly",
+          "paragraphs": [
+            "DiskMap does not change these permissions automatically. A blanket reset of subfolder permissions or renaming the photo share is not required for this diagnosis.",
+            "Official instructions: Synology: ACL permissions for subfolders of photo."
+          ],
+          "steps": [
+            "In DSM → Control Panel → Shared Folder → photo → Permissions, check Read only for the internal system user we-rock-diskmap.",
+            "Also inspect the specific unreadable subfolders and their own ACLs. Add only package read and traversal access, retaining existing user and photo-application permissions.",
+            "Synology Photos also manages Shared Space access inside the photo application. File Station changes do not automatically become photo-application permissions. Older Photo Station folders may restrict permission editing in File Station; consult the Synology instructions for the installed photo application.",
+            "Scan the affected share again. Reloading the interface does not add missing index data."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "session",
+      "title": "Administrators and sessions",
+      "paragraphs": [
+        "The app is restricted to DSM administrators. Personal interface preferences and shared scan data serve different purposes."
+      ],
+      "sections": [
+        {
+          "title": "Which permissions apply?",
+          "paragraphs": [
+            "Authorised administrators use shared scan data. The restricted package user we-rock-diskmap determines what the scanner can read. File Station actions additionally check your current DSM session’s permissions.",
+            "If the session expires, sign in to DSM again and reopen the app. This starts no new scan. Do not assume standard accounts can access private subsets: the app does not provide personal scan isolation for standard users."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "configuration",
+      "title": "Configuration and advanced administration",
+      "paragraphs": [
+        "The compact main interface focuses on scope selection, scans and analysis. Advanced administration is separate from those everyday controls."
+      ],
+      "sections": [
+        {
+          "title": "Configuration backups",
+          "paragraphs": [
+            "The advanced administration area supports configuration export/import; those controls are not exposed in the current compact interface. A configuration export contains profiles and eligible settings, not complete scan indexes, passwords or file contents.",
+            "Import has a 4 MiB limit. Sources must be mapped to the target NAS; equal names do not prove identity. Imported profiles receive new IDs and do not start automatically. Use a consistent package-data backup if indexes also need to be preserved."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scheduler",
+      "title": "Scheduled scans in DSM",
+      "paragraphs": [
+        "Manual scans and the queue are available directly in the app. Recurring schedules are configured separately in DSM Task Scheduler."
+      ],
+      "sections": [
+        {
+          "title": "Review existing tasks",
+          "paragraphs": [
+            "Advanced profile management provides profile-specific invocation templates; it is not part of the current compact interface. Use only a template matching the installed package and exact profile. The app does not create a DSM schedule automatically.",
+            "Tasks reference profile IDs, not just names. Review existing DSM tasks after imports, profile removal, NAS migration or uninstalling. CLI protocol versions are not application versions."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "recovery",
+      "title": "Updates and recovery",
+      "paragraphs": [
+        "Install updates through the supported DSM package workflow. If a problem occurs, preserve the error and the installed package identity."
+      ],
+      "sections": [
+        {
+          "title": "Update and recover a usable state",
+          "paragraphs": [
+            "Package migration backs up control information before changes. A schema downgrade is not automatically reversible. Do not manually swap databases after an unsuccessful upgrade; use the documented administrative recovery procedure with the matching bundle.",
+            "Account for active scans before updating. A successful package start and visible existing result are separate checks from performing another complete scan of your shares."
+          ]
+        },
+        {
+          "title": "Uninstall and reinstall",
+          "paragraphs": [
+            "Review the package dialog’s choice to retain or remove app data. Analysed shares and source files are separate. After reinstalling or moving to another NAS, check package read permissions and sources again. User-created DSM tasks must be removed or adjusted separately."
+          ]
+        },
+        {
+          "title": "Failed update",
+          "paragraphs": [
+            "Preserve the package/build identity and verified bundle under upgrades/. Administrative recovery runs with the package stopped, under its service account, using the installed daemon, its canonical socket and --upgrade=restore. The displaced control state remains in the bundle. Startup remains blocked until a matching package or successful prepare/apply qualifies the version. Do not manually swap databases or assume automatic downgrade compatibility."
+          ],
+          "recoveryCase": "upgrade"
+        },
+        {
+          "title": "Backup and reinstall",
+          "paragraphs": [
+            "Store configuration exports securely; they contain private names and paths but no complete indexes. Optional index backups require a consistent state with writes stopped. After import or moving to another NAS, explicitly map sources and check permissions. Imported profiles initially remain inactive; saving starts no scan."
+          ],
+          "recoveryCase": "reinstall"
+        },
+        {
+          "title": "Uninstall and remaining tasks",
+          "paragraphs": [
+            "Export configuration before uninstalling and review whether to retain or remove app data in the package dialog. Separately review your DSM tasks by profile ID; imported or newly created profiles with the same name do not replace that ID. Explicitly remove obsolete tasks. Analysed shares are not deleted."
+          ],
+          "recoveryCase": "tasks"
+        }
+      ]
+    }
+  ]
+}

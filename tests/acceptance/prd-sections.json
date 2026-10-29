@@ -1,0 +1,550 @@
+{
+  "sourceRevisionId": "ed3c34d1-244a-44b7-9ea8-d2709f1292da",
+  "sections": [
+    {
+      "section": "3.1",
+      "title": "Primäre Zielgruppe",
+      "body": "Privatnutzer und Administratoren kleiner Unternehmen, die DSM bedienen können, aber weder programmieren noch per SSH arbeiten möchten. Auch NAS mit mehreren Volumes und sehr vielen Dateien sollen handhabbar bleiben.\n\nV1 richtet sich an **berechtigte DSM-Administratoren**. Ein datenschutzsicherer Betrieb für gewöhnliche Benutzer mit unterschiedlichen Dateirechten ist eine spätere Ausbaustufe. Diese Einschränkung ist in Installation, Hilfe und Berechtigungsanzeige sichtbar."
+    },
+    {
+      "section": "3.2",
+      "title": "Zentrale Nutzerabläufe",
+      "body": "| Anwendungsfall | Erwartetes Ergebnis |\n|---|---|\n| Gesamtes NAS untersuchen | Alle erfassten Volumes erscheinen als getrennte Hierarchiecluster. |\n| Nur ein Volume untersuchen | Der Nutzer wählt dieses Volume, ohne die übrigen Volumes neu zu scannen. |\n| Nur eine Freigabe aktualisieren | Ein Freigabeprofil wird direkt gescannt; kein vorausgehender Volume-Vollscan. |\n| Große Datei finden | Auswahl in Karte oder Liste zeigt Dateidetails und die Aktion für File Station. |\n| Darstellung wechseln | Treemap und Radial Map wechseln bei identischem Datenstand, Ausschnitt und Filter. |\n| Nächtliche Aktualisierung | DSM-Aufgabe aktualisiert das gewählte Profil bei geschlossener App. |\n| Scanfehler verstehen | Betroffene Bereiche, Datenalter und mögliche nächste Schritte sind erkennbar. |\n| Sprache wechseln | Oberfläche und Hilfetexte wechseln zwischen Deutsch und Englisch. |"
+    },
+    {
+      "section": "3.3",
+      "title": "Erfolgskriterien für die Produktabnahme",
+      "body": "Mindestens vier von fünf Testpersonen aus der Zielgruppe sollen ohne zusätzliche mündliche Erklärung einen vorhandenen Datenstand öffnen, in eine Freigabe navigieren, eine große Datei finden und deren Ordner in File Station öffnen können. Zielzeit: höchstens drei Minuten nach Öffnen eines fertigen Datenstands.\n\nDie Ersteinrichtung soll einschließlich der Anleitung für Leserechte innerhalb von zehn Minuten bedienbar sein. Die tatsächliche Scandauer ist dabei ausdrücklich nicht enthalten.\n\nKeine Testperson darf einen Teilscan mit einer vollständigen NAS-Analyse oder einen alten Datenstand mit einer Live-Ansicht verwechseln. Bei Verständnisschwierigkeiten werden Beschriftung und Standarddarstellung überarbeitet, nicht nur die Dokumentation erweitert.\n\nDiese Werte sind **Abnahmeziele**, keine bereits gemessenen Ergebnisse. Nutzungsstatistiken oder Telemetrie werden dafür nicht automatisch gesammelt."
+    },
+    {
+      "section": "4.1",
+      "title": "Verbindlicher V1-Umfang",
+      "body": "| Bereich | Inhalt |\n|---|---|\n| Paket und Oberfläche | `.spk`, Paket-Zentrum, DSM-Hauptmenü, integriertes Anwendungsfenster, Start/Stopp, lokaler Betrieb. |\n| Scan-Auswahl | Gesamtes NAS, einzelne oder mehrere Volumes, einzelne oder mehrere Freigaben, volumenübergreifende Auswahl. |\n| Datenhaltung | Scan-Profile, persistente Indizes, versionierte Datenstände, atomare Veröffentlichung, begrenzte Aufbewahrung. |\n| Zeitplanung | Nutzbare DSM-Aufgabenplaner-Anbindung mit generierter, sicherer Aufrufvorlage und Testablauf. |\n| Visualisierung | Hierarchische Treemap und Sunburst, identische Datenbasis, Drill-down, Aggregation kleiner Objekte. |\n| Analyse | Dateigröße, korrekt bezeichnete Blockbelegung, große Dateien und Ordner, Dateitypen, Suche, Größen- und Änderungsdatumsfilter. |\n| DSM-Übergabe | Gewählten Ordner beziehungsweise Elternordner einer Datei in File Station öffnen; Pfade kopieren. |\n| Bedienung | Einrichtungsassistent, klarer Datenstand, Legende, Details, Navigationshistorie, Listenalternative, leere und fehlerhafte Zustände. |\n| Einstellungen | Allgemein, Visualisierung, Scanner, Zeitplanungshilfe, Index, DSM-Integration, Berechtigungen, Diagnose und Konfigurationssicherung. |\n| Sprachen | Vollständige deutsche und englische Oberfläche einschließlich Fehler- und Hilfetexten. |\n| Sicherheit | Administratorbeschränkung, serverseitige Autorisierung, minimale Rechte, keine schreibenden Quelldatenaktionen. |"
+    },
+    {
+      "section": "4.2",
+      "title": "Gewünscht, aber nur mit nachgewiesener Unterstützung",
+      "body": "Automatische Markierung der Datei in File Station; automatische Übernahme einer von DSM bereitgestellten Theme-Information; automatische Erstellung oder zuverlässiges Auslesen von DSM-Aufgaben; DSM-Systembenachrichtigungen; ereignisbasierter inkrementeller Scan; dauerhafte Fortsetzung eines unterbrochenen Scans über einen NAS-Neustart hinweg.\n\nFür diese Punkte darf die App keine Schalter anbieten, die nur scheinbar funktionieren. Verfügbarkeit, Alternativen und Einschränkungen müssen sichtbar sein."
+    },
+    {
+      "section": "4.3",
+      "title": "Nicht Bestandteil von V1",
+      "body": "Keine Dublettenprüfung anhand von Dateiinhalten, keine automatischen Aufräumempfehlungen mit Löschversprechen, keine Zeitreihen oder Snapshot-Vergleiche, keine Btrfs-Snapshot-Verwaltung, keine Löschfunktion, kein Dateieditor, keine Downloads oder Freigabelinkerstellung aus DiskMap, keine SMB-Finder-Integration und kein Multi-NAS-Verbund.\n\nEbenso ausgeschlossen: KI- oder Cloud-Abhängigkeiten, Hashing großer Dateien, Inhaltsanalyse, Laufwerksreparaturen, RAID-Management und Zugriff auf Datenbestände über öffentliche Freigabelinks.\n\nEin späterer Funktionsausbau darf die Sicherheitsgrenzen der lesenden V1 nicht unbemerkt verändern."
+    },
+    {
+      "section": "5.1",
+      "title": "Paketinstallation",
+      "body": "**PKG-01 – MUSS:** Installation als eigenständige `.spk` über die manuelle Installation im DSM-Paket-Zentrum. Ein Docker-Container, Container-Manager-Projekt oder separates Portainer-Deployment ist keine Laufzeitvoraussetzung.\n\n**PKG-02 – MUSS:** Paket enthält Backend, Scanner, Oberfläche, Übersetzungen und alle für den normalen Betrieb notwendigen statischen Ressourcen. Für Nutzer sind weder Node.js-, Python- noch Go-Installation notwendig.\n\n**PKG-03 – MUSS:** Paket-Zentrum zeigt Namen, Version, Herausgeber, Beschreibung, Status und kompatible Plattformen. Installation prüft unterstützten DSM-Build, Architektur und ausreichenden freien Platz.\n\n**PKG-04 – MUSS:** Installation, Aktualisierung und Deinstallation schreiben nur in dokumentierte Paketressourcen und eigene Datenbereiche. Änderungen an globalen DSM-Konfigurationsdateien durch unkontrollierte Textersetzungen sind nicht zulässig.\n\nDas Synology-Paketformat und die DSM-Integration sind offiziell dokumentiert; konkrete Paketressourcen und Abhängigkeiten werden im technischen Entwurf festgelegt. [R01, R11]"
+    },
+    {
+      "section": "5.2",
+      "title": "Anwendungsfenster",
+      "body": "**DSM-01 – MUSS / PRÜFGATE:** Start über „DSM → Hauptmenü → We.Rock.DiskMap“ öffnet ein verschiebbares und größenveränderbares Fenster innerhalb des DSM-Arbeitsbereichs. Schließen der Oberfläche beendet keine Hintergrundscans.\n\nDie Oberfläche darf intern Webtechnologien verwenden. „DSM-App“ bezeichnet hier Paketinstallation, DSM-Fenster und integriertes Verhalten; es verlangt keine Betriebssystem-Oberfläche außerhalb des Browsers.\n\nEin Startlink, der lediglich einen zusätzlichen Browser-Tab mit einer eigenständigen Webseite öffnet, ist **kein gleichwertiger Ersatz**. Sollte das eingebettete Fenster auf einer Zielversion nicht belastbar realisierbar sein, muss die Kompatibilitätsliste oder die Produktanforderung ausdrücklich neu entschieden werden."
+    },
+    {
+      "section": "5.3",
+      "title": "Anmeldung und Zugriffspfad",
+      "body": "**DSM-02 – MUSS / PRÜFGATE:** Bestehende DSM-Anmeldung nutzen; keine zweite Benutzerverwaltung, kein gespeichertes Administratorpasswort und keine zusätzliche Accountregistrierung.\n\nZugriff auf Daten und Steueraktionen wird serverseitig geprüft. Ein verstecktes Hauptmenü-Icon allein ist keine Zugriffskontrolle.\n\nDie Verbindung soll über den bestehenden DSM-Zugriff erfolgen. Keine standardmäßig öffentlich erreichbare zusätzliche Dienstschnittstelle und keine notwendige Router-Portfreigabe. Ein interner Backend-Port oder lokaler Socket bleibt ein Implementierungsdetail."
+    },
+    {
+      "section": "5.4",
+      "title": "Kompatibilität",
+      "body": "V1 wird zunächst für die tatsächlich getestete x86-64-Paketplattform des Referenz-NAS bereitgestellt. Weitere x86-64-Modelle sind nur bei passendem Paket- und Laufzeittest freigegeben. ARM-Plattformen folgen bei Bedarf.\n\nDSM 7.x ist der Zielrahmen. Ein konkreter Mindestbuild und die unterstützten weiteren Builds werden nach den Vorprüfungen dokumentiert. Die verfügbare Entwicklerdokumentation bezeichnet sich derzeit als DSM-7.2.2-Leitfaden; daraus folgt keine automatische Kompatibilität mit allen späteren Versionen. [R12]"
+    },
+    {
+      "section": "6.1",
+      "title": "Hauptnavigation",
+      "body": "Die Anwendung besitzt vier primäre Bereiche: **Übersicht/Karte**, **Scan-Profile**, **Scan-Status** und **Einstellungen**. Hilfe und Diagnose sind von den relevanten Stellen erreichbar, aber keine konkurrierenden Hauptarbeitsbereiche.\n\nBeim ersten Start erscheint der Einrichtungsassistent. Später wird das zuletzt verwendete oder ausdrücklich festgelegte Profil geöffnet. Solange kein Datenstand existiert, erscheint eine verständliche Startansicht statt eines leeren Diagramms."
+    },
+    {
+      "section": "6.2",
+      "title": "Bildschirmdefinitionen",
+      "body": "| Ansicht | Zweck und zentrale Inhalte |\n|---|---|\n| Ersteinrichtung | Sprache, Umfang, Leserechte, Profil, Zeitplanungshilfe, erster Scan. |\n| Übersicht | Profile, erfasste Größen, letzter vollständiger Scan, Warnungen, „Öffnen“ und „Jetzt aktualisieren“. |\n| Analyse/Karte | Bereichsauswahl, Datenstand, Treemap/Radial Map, Breadcrumb, Filter, Legende, Details. |\n| Scan-Profile | Profile erstellen, duplizieren, ändern, deaktivieren und löschen; keine doppelte Pflege in Einstellungen. |\n| Profileditor | Hierarchische Bereichsauswahl, Ausschlüsse, Scanoptionen, Aktualitätsziel und Aufgabenplaner-Anleitung. |\n| Scan-Status | Aktiver Lauf, Warteschlange, Zähler, Pause, Fortsetzen, Abbrechen, Laufhistorie. |\n| Einstellungen | Persönliche Darstellung sowie globale Scanner-, Index- und Diagnoseeinstellungen. |\n| Hilfe/Diagnose | Kontextbezogene Erklärungen, Integrationstests, technische Informationen und datensparsame Protokolle. |"
+    },
+    {
+      "section": "6.3",
+      "title": "Aufbau der Analyseansicht",
+      "body": "Oben stehen Profil, gewählter Ausschnitt, Scan-Datenstand und Aktualitäts-/Vollständigkeitshinweise. Die Werkzeugleiste enthält Darstellungswechsel, Suche, Filter, Größenmetrik und „Jetzt aktualisieren“.\n\nDie Mitte gehört überwiegend der Visualisierung. Ein optionaler, einklappbarer Verzeichnisbaum links unterstützt die Orientierung. Rechts zeigt ein verschiebbares oder einklappbares Detailpanel die aktuelle Auswahl. Breadcrumb und kontextbezogene Statusinformationen bleiben sichtbar.\n\nEine Listenansicht ergänzt die Karten. Sie dient präzisem Vergleichen, sehr kleinen Objekten, der Tastaturbedienung und als Ausweichdarstellung bei Grafikproblemen."
+    },
+    {
+      "section": "6.4",
+      "title": "Zustandsbeibehaltung",
+      "body": "Profil, Datenstand, Ausschnitt, Auswahl, Filter, Suchtext, Sortierung und Darstellungsmodus bilden einen zusammengehörigen Ansichtsstatus. Ein Wechsel zwischen Treemap und Radial Map setzt diese Werte nicht zurück.\n\nDie App besitzt eine eigene Zurück-/Vorwärts-Navigation. Sie darf dabei nicht unbeabsichtigt die gesamte DSM-Seite verlassen. Bei erneutem Öffnen wird ein noch gültiger zuletzt verwendeter Zustand wiederhergestellt."
+    },
+    {
+      "section": "7.1",
+      "title": "Einrichtungsassistent",
+      "body": "Der Assistent erläutert zunächst knapp: „DiskMap liest Dateiinformationen. Deine Dateien werden nicht bearbeitet. Für die Anzeige werden gespeicherte Scan-Daten verwendet.“\n\n| Schritt | Nutzerentscheidung | Verhalten der App |\n|---|---|---|\n| 1. Sprache | DSM-Sprache verwenden, Deutsch oder Englisch. | Vorschau und unmittelbarer Sprachwechsel. |\n| 2. Umfang | Gesamtes NAS, Volumes oder Freigaben. | Hierarchische Auswahl mit sichtbarer Zuordnung. |\n| 3. Zugriff | Leserechte prüfen und gegebenenfalls in DSM vergeben. | Lesbarkeit prüfen; konkrete Anleitung, keine pauschalen Vollzugriffsrechte. |\n| 4. Profil | Namen bestätigen, Ausschlüsse bei Bedarf ändern. | Verständliche Zusammenfassung des tatsächlich gewählten Bereichs. |\n| 5. Aktualisierung | Nur manuell oder DSM-Aufgabe einrichten. | Vollständige Aufrufvorlage und Anleitung; Schritt kann übersprungen werden. |\n| 6. Start | Ersten Scan starten. | Fortschrittsansicht; die Oberfläche darf geschlossen werden. |\n\nEin späterer Wiedereinstieg ist möglich. Unvollständige Einrichtung wird nicht durch einen automatisch gestarteten Vollscan „repariert“."
+    },
+    {
+      "section": "7.2",
+      "title": "Berechtigungsprüfung",
+      "body": "Die Vorprüfung kann fehlenden Zugriff auf gewählte Wurzeln erkennen, ersetzt aber nicht die Fehlererfassung im eigentlichen Scan. Einzelne Unterordner können abweichende Berechtigungen besitzen.\n\nDie App nennt Freigabe, Problem und sinnvollen nächsten Schritt, beispielsweise: „Die Freigabe backup ist ausgewählt, aber für den DiskMap-Paketbenutzer nicht lesbar. Prüfe die Leseberechtigung unter den Berechtigungen für systeminterne Benutzer.“ Die genaue DSM-Menüführung wird je unterstützter Version getestet. [R04]"
+    },
+    {
+      "section": "7.3",
+      "title": "Hilfen ohne Handbuchpflicht",
+      "body": "Die Hauptansicht erklärt Fläche beziehungsweise Winkel, aktive Größenmetrik und Farblegende direkt am Diagramm. Wesentliche Informationen dürfen nicht ausschließlich bei Mausberührung erscheinen.\n\nEs gibt jederzeit „Zur Gesamtansicht“, „Filter zurücksetzen“ und einen sichtbaren Weg eine Ebene nach oben. Leere Zustände nennen ihre Ursache: kein Scan, keine Treffer, leerer Ordner, fehlende Berechtigung oder nicht erfasster Bereich."
+    },
+    {
+      "section": "8.1",
+      "title": "Unterstützte Auswahl",
+      "body": "**SCOPE-01 – MUSS:** Ein Profil kann alle lokalen DSM-Datenvolumes, ein einzelnes Volume, mehrere Volumes, eine einzelne Freigabe oder mehrere Freigaben unterschiedlicher Volumes umfassen. Kombinationen aus ganzen Volumes und ausgewählten Freigaben anderer Volumes sind erlaubt.\n\n„Alle Volumes“ bezieht sich auf erkannte lokale Datenvolumes einschließlich unterstützter Erweiterungseinheiten, nicht auf alle beliebigen Einhängepunkte des Linux-Systems. RAID-Mitglieder, Cache-Geräte und Systempartitionen werden nicht zusätzlich als Dateibestände gezählt. Externe USB-Datenträger und entfernte SMB-/NFS-Mounts sind in V1 kein automatisch eingeschlossener Umfang."
+    },
+    {
+      "section": "8.2",
+      "title": "Auswahlbaum und Überlappungen",
+      "body": "Die Auswahl zeigt **NAS → Volume → Freigabe**. Elternknoten unterstützen ausgewählt, nicht ausgewählt und teilweise ausgewählt.\n\nEin vollständig ausgewähltes Volume schließt seine erfassten Freigaben ein. Wird zusätzlich eine bereits darin liegende Freigabe ausgewählt, entsteht kein zweiter Scan und keine doppelte Gewichtung. Die Oberfläche erklärt die normalisierte Auswahl vor dem Start.\n\nFreigaben werden ihrem echten Volume über eine geprüfte Zuordnung zugeordnet. Der Anzeigename allein ist kein stabiler Identifikator."
+    },
+    {
+      "section": "8.3",
+      "title": "Direktzugriff und Teilansichten",
+      "body": "**SCOPE-02 – MUSS:** Ein reines Freigabeprofil beginnt unmittelbar an den gewählten Freigaben. Es durchsucht nicht zuerst andere Freigaben oder das gesamte Volume.\n\n**SCOPE-03 – MUSS:** Liegt ein vollständiger NAS-Datenstand vor, können alle darin enthaltenen Teilbäume ohne neuen Dateisystemdurchlauf geöffnet werden. Ein fehlender Teilbaum wird nicht automatisch nachgescannt.\n\nEin manueller Aktualisierungswunsch für einen Unterordner darf nicht stillschweigend nur einen Teil eines bestehenden vollständigen Datenstands ersetzen. V1 bietet dafür einen ausdrücklich benannten Bereichsscan beziehungsweise ein entsprechendes Profil an."
+    },
+    {
+      "section": "8.4",
+      "title": "Dynamische Veränderungen",
+      "body": "Beim Modus „Gesamtes NAS“ ist sichtbar, ob neu hinzukommende lokale Volumes bei folgenden Läufen berücksichtigt werden. Vorgeschlagener Standard: ja, aber nur im Rahmen vorhandener Leserechte; neue oder nicht lesbare Bereiche werden gemeldet.\n\nExplizit ausgewählte Volumes und Freigaben bleiben eine feste Auswahl. Verschwundene, gesperrte oder nicht eingehängte Ziele werden als fehlend geführt, nicht als leere Verzeichnisse.\n\nDer konkrete Umfang eines Laufs wird zu dessen Beginn als Manifest gespeichert. Ändern sich während des Scans Mounts oder Zuordnungen, werden betroffene Bereiche als unsicher beziehungsweise unvollständig gekennzeichnet."
+    },
+    {
+      "section": "8.5",
+      "title": "Volume-Bereiche außerhalb von Freigaben",
+      "body": "Bei einem Volume-Scan dürfen zugängliche Daten außerhalb regulärer Freigaben erfasst werden. Sie erscheinen getrennt unter „Weitere erfasste Bereiche“ und behalten ihre tatsächliche Herkunft.\n\nGeschützte System- oder Paketbereiche werden weder durch pauschale Rechteänderungen freigeschaltet noch kommentarlos ausgelassen. Ihr Zugriff und ihre Bedeutung bleiben explizit. Ein echter Zugriff auf jeden geschützten Bereich ist ein eigener Sicherheits- und Machbarkeitspunkt, kein implizites Versprechen des Modus „Alle Volumes“."
+    },
+    {
+      "section": "9.1",
+      "title": "Profilinhalt",
+      "body": "**PROF-01 – MUSS:** Jedes Profil besitzt eine unveränderliche technische ID, einen frei änderbaren Anzeigenamen, eine Konfigurationsversion, den Umfang, Ausschlussregeln, Scanoptionen, ein Aktualitätsziel sowie Verweise auf den letzten Lauf und den letzten vollständigen Datenstand.\n\nDie ID, nicht der Name, wird für geplante Aufgaben verwendet. Umbenennen darf eine eingerichtete DSM-Aufgabe nicht beschädigen.\n\nBeispielprofile sind „Gesamtes NAS“, „Docker“, „Medien“ und „Backups“. Diese Beispiele werden nicht mit fest vorgegebenen Pfaden auf dem Nutzer-NAS angelegt. Vorschläge verwenden ausschließlich tatsächlich erkannte Bereiche."
+    },
+    {
+      "section": "9.2",
+      "title": "Profilaktionen",
+      "body": "Anlegen, duplizieren, bearbeiten, deaktivieren, löschen, jetzt aktualisieren und vollständig neu aufbauen sind in V1 vorgesehen. Löschen eines Profils betrifft ausschließlich DiskMap-Konfiguration und nach Bestätigung zugehörige Indexdaten, niemals die Quelldateien.\n\nVor dem Löschen weist die App auf möglicherweise noch vorhandene DSM-Aufgaben hin. Eine solche Aufgabe darf danach nicht versehentlich ein anderes Profil oder das gesamte NAS scannen. Sie liefert einen klaren Fehler „Profil nicht vorhanden“."
+    },
+    {
+      "section": "9.3",
+      "title": "Profiländerungen",
+      "body": "Änderungen von Umfang, Ausschlüssen oder Messregeln erzeugen eine neue Konfigurationsversion. Ein laufender Scan verwendet unverändert die Version, mit der er gestartet wurde.\n\nEin vorhandener Datenstand bleibt ein Ergebnis der alten Konfiguration. Die App darf ihn nicht so darstellen, als sei er bereits nach den neuen Regeln erfasst worden. Bis zum nächsten passenden Lauf steht ein Hinweis wie „Profil geändert – angezeigter Datenstand verwendet die vorherige Konfiguration“.\n\nReine Umbenennungen oder persönliche Darstellungsänderungen erfordern keinen neuen Scan."
+    },
+    {
+      "section": "9.4",
+      "title": "Profilübergreifende Datenstände",
+      "body": "V1 führt Datenstände verschiedener Profile **nicht stillschweigend zusammen**. Ein aktueller Docker-Scan ersetzt nicht unbemerkt den Docker-Teil eines älteren NAS-Scans.\n\nInnerhalb einer Ansicht ist genau erkennbar, aus welchem Profil und Datenstand die Werte stammen. Beim Wechsel zu einer jüngeren, passenden Datenquelle wird das Profil ausdrücklich gewechselt. Überlappende Profile dürfen nicht addiert werden, um eine vermeintliche Gesamtbelegung zu erzeugen."
+    },
+    {
+      "section": "10.1",
+      "title": "Arbeitsweise",
+      "body": "**SCAN-01 – MUSS:** Der Scanner liest für den gewählten Bereich Dateisystem-Metadaten und baut daraus einen hierarchischen Index. Dateiinhalte werden weder zur Typbestimmung noch für Vorschaubilder, Hashes oder Dublettenprüfung geöffnet.\n\nErfasst werden insbesondere Name, Elternbeziehung, Objekttyp, logische Größe, verfügbare Blockbelegung, Änderungszeit und für Sonderfälle notwendige Identitätsinformationen. Besitzerinformationen werden angezeigt, soweit verfügbar und ohne unverhältnismäßigen Zusatzaufwand ermittelbar.\n\n**SCAN-02 – MUSS:** Ordnersummen, Dateizahlen und benötigte Aggregationen werden vor der Veröffentlichung berechnet. Sie werden nicht bei jedem Öffnen durch erneutes Durchlaufen des NAS ermittelt."
+    },
+    {
+      "section": "10.2",
+      "title": "Phasen eines Scanlaufs",
+      "body": "Ein Lauf durchläuft Vorprüfung, Erfassung, Aggregation, Validierung und Veröffentlichung. Die Vorprüfung kontrolliert Profilversion, Umfang, Berechtigungen, laufende Aufträge und verfügbaren Indexspeicher.\n\nFehler werden pro Bereich erfasst. Ein einzelner unlesbarer Unterordner darf nicht zum Absturz des gesamten Dienstes führen. Der Lauf kann jedoch nur als vollständig gelten, wenn der vereinbarte Umfang tatsächlich ohne bekannte Erfassungslücken abgeschlossen wurde."
+    },
+    {
+      "section": "10.3",
+      "title": "Vollscan und Indexaktualisierung",
+      "body": "**SCAN-03 – MUSS:** Ein initialer vollständiger Scan und ein bewusst auslösbarer vollständiger Neuaufbau sind verfügbar.\n\n**SCAN-04 – MUSS:** „Jetzt aktualisieren“ gleicht den ausgewählten Profilumfang zuverlässig mit dem Dateisystem ab. Vorhandene Indexdaten dürfen technisch wiederverwendet und nur geänderte Datensätze neu geschrieben werden. Trotzdem kann ein vollständiger Metadaten-Durchlauf erforderlich sein.\n\nDie App darf nicht behaupten, „nur Änderungen“ zu scannen, wenn sie tatsächlich alle Verzeichnisse erneut prüft. Änderungen in einem tiefen Unterordner dürfen insbesondere nicht allein aufgrund eines unveränderten Zeitstempels eines übergeordneten Ordners übersehen werden.\n\n**SCAN-05 – SOLL:** Eine spätere ereignisgestützte Beschleunigung muss Ereignisverluste, Neustarts, Umbenennungen und neue Unterverzeichnisse berücksichtigen. Regelmäßige vollständige Abgleiche bleiben als Korrektheitsmechanismus bestehen. Inotify ist nicht automatisch rekursiv und kann Ereignisse bei überlaufenden Warteschlangen verlieren. [R08]"
+    },
+    {
+      "section": "10.4",
+      "title": "Fortschritt",
+      "body": "Die App zeigt Phase, Laufzeit, geprüfte Dateien und Verzeichnisse, bisher erfasste Dateigrößen, Warnungszahl und aktuelle Aktivität. Der aktuelle Pfad wird nur berechtigten Nutzern angezeigt und nicht unnötig in exportierten Protokollen verbreitet.\n\nBeim ersten Scan ist die Gesamtzahl normalerweise unbekannt. Die Anzeige verwendet dann keinen erfundenen Nenner. Eine Hochrechnung aus dem letzten Lauf ist als Schätzung gekennzeichnet und darf nicht als exakter Prozentwert erscheinen.\n\n„Erfasste Dateigrößen: 4 TB“ bezeichnet die Summe von Metadatenwerten, nicht vier Terabyte tatsächlich gelesenen Dateiinhalts. 100 Prozent beziehungsweise „Abgeschlossen“ wird erst nach erfolgreicher Validierung und Veröffentlichung angezeigt."
+    },
+    {
+      "section": "10.5",
+      "title": "Pause, Fortsetzen und Abbruch",
+      "body": "**SCAN-06 – MUSS:** Ein laufender Scan kann kontrolliert pausiert, im gleichen Dienstlauf fortgesetzt oder abgebrochen werden. Während der Pause wird keine neue Erfassung begonnen; ein bereits laufender Dateisystemzugriff muss gegebenenfalls erst zurückkehren.\n\nAbbruch beschädigt den letzten veröffentlichten Datenstand nicht. Unvollständige Arbeitsdaten werden entweder als klar gekennzeichnetes Zwischenresultat aufbewahrt oder sicher innerhalb des eigenen Paketdatenbereichs entfernt.\n\nNach Prozess- oder NAS-Neustart ist ein früherer laufender Auftrag als „Unterbrochen“ sichtbar. Eine dauerhafte, lückenlose Fortsetzung ab einem Checkpoint ist SOLL. Ohne nachgewiesene sichere Fortsetzung wird ein neuer Lauf angeboten; es wird kein teilweise erfasster Stand als vollständig ausgegeben."
+    },
+    {
+      "section": "10.6",
+      "title": "Parallelität und Warteschlange",
+      "body": "Standardmäßig läuft NAS-weit **ein Scanauftrag gleichzeitig**. Weitere Profile werden in eine begrenzte Warteschlange aufgenommen. Mehrfache Auslöser desselben Profils werden zusammengefasst, damit häufige Zeitpläne keine unbegrenzt wachsende Warteschlange erzeugen.\n\nManuelle und geplante Aufträge nutzen denselben Auftragsmanager. Der Status zeigt, ob ein Auftrag wartet, bereits läuft oder wegen eines vorhandenen Auftrags nicht erneut gestartet wurde.\n\nEine weitergehende Parallelisierung ist eine Expertenoption nach Leistungstest, nicht die V1-Standardeinstellung."
+    },
+    {
+      "section": "10.7",
+      "title": "Ressourcenprofile",
+      "body": "| Modus | Zielverhalten |\n|---|---|\n| Schonend | Geringe Parallelität, begrenzte Aktivität, Vorrang für die NAS-Nutzung. |\n| Ausgeglichen | Standard; begrenzte Speicher- und I/O-Nutzung bei brauchbarer Scanzeit. |\n| Schnell | Höhere zulässige Parallelität innerhalb fester Schutzgrenzen; Warnung vor zusätzlicher Last. |\n\nRessourcenlimits sind messbare Implementierungsvorgaben. Bezeichnungen allein reichen nicht. Die konkrete Zuordnung von Parallelität, Warteintervallen und Speichergrenzen wird anhand der Referenztests dokumentiert.\n\nEine automatische Drosselung bei hoher NAS-Auslastung ist SOLL, sofern verlässliche Messwerte verfügbar sind. Es wird keine universelle Garantie gegeben, dass Hintergrundscans völlig ohne Einfluss auf andere Dienste bleiben."
+    },
+    {
+      "section": "11.1",
+      "title": "Terminologie",
+      "body": "In der deutschen Oberfläche heißt das Ergebnis **Scan-Datenstand**. Die englische Oberfläche verwendet **Scan snapshot**. Technische Dokumentation darf von Indexgenerationen sprechen.\n\nEin Scan-Datenstand ist kein Btrfs-Snapshot und keine Sicherung von Dateiinhalten. Er enthält Metadaten, die während eines Zeitintervalls erfasst wurden. Er garantiert keine dateisystemweite Momentaufnahme eines gleichzeitig veränderten NAS."
+    },
+    {
+      "section": "11.2",
+      "title": "Aufbau und Veröffentlichung",
+      "body": "**INDEX-01 – MUSS:** Ein neuer Datenstand entsteht getrennt vom bisher veröffentlichten Stand. Er wird erst nach Abschluss der Berechnung und Validierung atomar zum neuen vollständigen Stand des Profils.\n\n**INDEX-02 – MUSS:** Absturz, Abbruch, voller Datenträger oder Validierungsfehler dürfen den bisherigen vollständigen Stand nicht zerstören oder durch halbfertige Daten ersetzen.\n\nEine transaktionale Veröffentlichung und isolierte Leser sind Teil der Architektur. SQLite stellt Isolation für abgeschlossene Transaktionen bereit; die konkrete Generationenverwaltung muss darauf zusätzlich korrekt aufbauen. [R09]"
+    },
+    {
+      "section": "11.3",
+      "title": "Nutzung während einer Aktualisierung",
+      "body": "Die geöffnete Analyse bleibt auf ihrem Datenstand. Nach Abschluss steht der Hinweis „Neuer Datenstand verfügbar“ mit einer Aktion zum Übernehmen. Die Grafik springt nicht unerwartet während der Nutzung auf neue Werte.\n\nBeim Übernehmen werden Ausschnitt und Auswahl soweit möglich wiederhergestellt. Ist der gewählte Pfad im neuen Stand nicht mehr enthalten, wird der nächste vorhandene Elternknoten mit Erklärung geöffnet."
+    },
+    {
+      "section": "11.4",
+      "title": "Vollständige und teilweise Ergebnisse",
+      "body": "**INDEX-03 – MUSS:** Vollständigkeit, Datenalter und Laufstatus sind getrennte Eigenschaften. Ein gerade erzeugter Datenstand kann unvollständig sein; ein älterer kann vollständig, aber veraltet sein.\n\nEin abgeschlossener Teilscan überschreibt den letzten vollständigen Stand nicht automatisch. Er kann bewusst mit dauerhaft sichtbarer Warnung geöffnet werden. Gibt es noch keinen vollständigen Stand, bietet die App „Teilweise erfasste Daten ansehen“ an.\n\nFehlende Bereiche werden nicht mit alten Werten aufgefüllt, sofern dadurch unbemerkt ein gemischter Datenstand entstehen würde. Eine zukünftige gemischte Ansicht müsste Zeitstempel je Teilbaum zeigen und ist nicht Bestandteil von V1."
+    },
+    {
+      "section": "11.5",
+      "title": "Gültigkeit und Zeitbezug",
+      "body": "Jeder Datenstand speichert Start- und Endzeit, Profilversion, Umfangsmanifest, Ausschlussregeln, Messmethoden, Scanner-Version und bekannte Erfassungslücken.\n\n„Aktuell“ bedeutet nur: innerhalb des konfigurierten Aktualitätsziels. Es bedeutet nicht: identisch mit dem gegenwärtigen Dateisystem. Auch ein wenige Minuten alter Datenstand wird als gespeicherter Stand bezeichnet."
+    },
+    {
+      "section": "11.6",
+      "title": "Aufbewahrung und Speichergrenzen",
+      "body": "Vorgeschlagener Standard: letzter vollständiger Stand plus ein vorheriger vollständiger Stand je Profil. Zusätzlich sind temporär Arbeitsdaten eines laufenden Scans erforderlich. Konfigurierbare Aufbewahrungszahlen können 1, 2, 3, 7 oder 30 sein.\n\nV1 erlaubt die Auswahl eines erhaltenen Datenstands, aber noch keinen fachlichen Vergleich zweier Stände. Alte Stände tragen ihr Datum deutlich.\n\nDie App zeigt Indexgröße, temporären Bedarf und freien Platz im eigenen Datenvolume. Vor einem neuen Scan wird ausreichend Reserve verlangt. Der einzige nutzbare vollständige Stand darf nicht automatisch gelöscht werden, nur um einen neuen Lauf beginnen zu können.\n\nAktive Leser werden bei der Bereinigung berücksichtigt. Falls ein lange geöffneter alter Stand nicht mehr vorgehalten werden kann, erhält der Nutzer eine kontrollierte Aufforderung zum Wechsel, keinen stillen Rückfall auf einen neuen Scan."
+    },
+    {
+      "section": "12.1",
+      "title": "Grundsatz",
+      "body": "**SCHED-01 – MUSS:** Scan-Profile lassen sich aus dem DSM-Aufgabenplaner aktualisieren. DSM bietet geplante benutzerdefinierte Skripte beziehungsweise Befehle; DiskMap stellt dafür eine stabile lokale Aufrufschnittstelle bereit. [R10]\n\nDie App benötigt keinen offenen Browser. Das Paket muss jedoch gestartet sein. Ist es im Paket-Zentrum gestoppt, meldet der Aufruf dies ausdrücklich und umgeht den administrativen Stopp nicht.\n\nEs gibt in V1 keinen zweiten internen Kalenderscheduler. Eine Warteschlange für bereits ausgelöste Scans ist davon zu unterscheiden."
+    },
+    {
+      "section": "12.2",
+      "title": "Einrichtung für Nicht-Techniker",
+      "body": "Pro Profil zeigt die App einen fertig erzeugten Aufruf, einen Kopierbutton und eine zur unterstützten DSM-Version passende Schritt-für-Schritt-Anleitung. Der Nutzer soll keine Shell-Syntax, Pfade oder Profilnamen manuell zusammensetzen müssen.\n\nDie Anleitung erklärt Aufgabenname, Ausführungskonto, gewünschte Tage/Uhrzeit, Aufgabeninhalt und Testlauf. Ein auf dem NAS tatsächlich auswählbares Ausführungskonto muss im Prüfgate bestätigt werden; die Verfügbarkeit eines systeminternen Paketbenutzers in dieser Auswahl wird nicht angenommen.\n\nDer erzeugte Aufruf verwendet eine stabile Profil-ID und enthält keine Passwörter, Session-Cookies oder langlebigen Webtokens."
+    },
+    {
+      "section": "12.3",
+      "title": "Lokaler Ausführungsvertrag",
+      "body": "**SCHED-02 – MUSS:** Der lokale Aufruf reicht den Auftrag an denselben Auftragsmanager weiter wie die Oberfläche. Berechtigung, Profilvalidierung, Sperren, Ressourcenlimits und Protokollierung gelten identisch.\n\nEin durch den Aufgabenplaner privilegiert gestarteter Aufruf darf nicht dazu führen, dass der eigentliche Scanner unbemerkt mit umfassenderen Dateirechten arbeitet. Vorgesehen ist ein eng begrenzter Aufruf beziehungsweise eine Rechteabgabe an den Paketdienst. Der konkrete sichere Mechanismus wird vorab getestet.\n\nEin Standardaufruf wartet bis zum endgültigen Ergebnis, damit der DSM-Aufgabenplaner zwischen erfolgreichem Abschluss und Fehler unterscheiden kann. Rückgabestatus unterscheiden mindestens vollständig erfolgreich, mit Erfassungslücken beendet, bereits laufend/zusammengefasst, Profil ungültig, Zugriff verweigert, Dienst nicht verfügbar, abgebrochen und fehlgeschlagen. Die numerische Zuordnung wird als versionierter CLI-Vertrag dokumentiert."
+    },
+    {
+      "section": "12.4",
+      "title": "Informationen in der App",
+      "body": "Sicher anzeigen lassen sich protokollierte Aufträge, deren Auslöser und letzter erfolgreicher Scan. Die tatsächliche Existenz eines DSM-Zeitplans, seine Aktivierung und der nächste Lauf dürfen nur als bestätigt erscheinen, wenn diese Informationen zuverlässig aus DSM gelesen wurden.\n\nOhne eine geprüfte Leseschnittstelle lautet die Darstellung beispielsweise „Zeitplan in DSM verwalten; letzter beobachteter Aufgabenplaner-Aufruf: …“. Ein eingegebenes Aktualitätsziel ist kein Beweis für einen existierenden DSM-Task.\n\n**SCHED-03 – SOLL / PRÜFGATE:** Automatisches Anlegen, Ändern oder Auslesen von Aufgaben nur über einen geprüften Adapter. Die manuelle Einrichtung per erzeugter Vorlage bleibt ausreichend für V1."
+    },
+    {
+      "section": "12.5",
+      "title": "Praktischer Test",
+      "body": "Die Anleitung endet mit „Aufgabe in DSM jetzt ausführen“. DiskMap bestätigt den empfangenen Profilauftrag und nach Abschluss den neuen Datenstand. Der Test wird zusätzlich bei geschlossener DiskMap-Oberfläche durchgeführt."
+    },
+    {
+      "section": "13.1",
+      "title": "Unveränderliche fachliche Hierarchie",
+      "body": "**VIS-01 – MUSS:** Beide Karten verwenden dieselbe Hierarchie: **NAS → Volume → Freigabe oder weiterer Volume-Bereich → Ordner → Unterordner → Datei**. Bei einem gewählten Teilbaum beginnt die sichtbare Darstellung an diesem Knoten; der Breadcrumb erhält den übergeordneten Kontext.\n\nDateien dürfen nicht aus unterschiedlichen Elternordnern herausgelöst und als scheinbar zusammengehöriger Cluster dargestellt werden. Jeder echte Knoten besitzt genau eine Elternbeziehung innerhalb eines Datenstands."
+    },
+    {
+      "section": "13.2",
+      "title": "Geometrie und Gewichtung",
+      "body": "Die aktive Größenmetrik bestimmt die Gewichte. In der Treemap entspricht die innere Datenfläche dem Gewicht. In der Radial Map entsprechen Winkelanteile innerhalb derselben Ebene den Gewichten. Die absoluten Flächen äußerer und innerer Ringe sind nicht als direkte Größenvergleiche gedacht.\n\nOrdnersummen werden aus enthaltenen Objekten berechnet; bereits aggregierte Ordnersummen und ihre Dateien dürfen nicht gleichzeitig nochmals in die Gesamtsumme eingehen.\n\nFreier Volume-Speicher ist kein Dateiobjekt. Er wird im Kapazitätsbereich separat dargestellt, nicht als gewöhnlicher Ordner in den Karten."
+    },
+    {
+      "section": "13.3",
+      "title": "Kleine, leere und unbekannte Objekte",
+      "body": "**VIS-02 – MUSS:** Zu kleine Elemente werden innerhalb ihres jeweiligen Elternkontextes zusammengefasst. Der Sammelbereich nennt tatsächliche Anzahl und Summe. Er ist als virtuelle Darstellungsgruppe gekennzeichnet, nicht als realer Ordner.\n\nEin Klick bietet eine Liste oder tieferen Ausschnitt; „In File Station öffnen“ darf für eine künstliche Gruppe keinen erfundenen Pfad verwenden.\n\nNull-Byte-Dateien und leere Ordner bleiben in Listen und Suche vorhanden, erhalten aber keine erfundene positive Fläche. Unbekannte Größen werden nicht als null interpretiert. Ihre Existenz und fehlende Messbarkeit werden gesondert angezeigt."
+    },
+    {
+      "section": "13.4",
+      "title": "Farben",
+      "body": "Standard: Farbe nach übergeordnetem Ordnerzweig. Weitere V1-Modi sind Dateityp und Änderungsalter. Eine Größenfärbung ist optional, weil Größe bereits geometrisch kodiert ist.\n\nDie Farbe eines unveränderten Zweigs bleibt bei gleichem Modus möglichst stabil. Ein Wechsel des Farbmodus verändert die Hierarchie und die Gewichte nicht. Gemischte Ordner dürfen nicht irreführend als ein einzelner Dateityp erscheinen.\n\nAuswahl, Tastaturfokus und Warnung verwenden zusätzlich Umriss, Symbol oder Muster. Rot und Grün allein dürfen keinen Zustand erklären."
+    },
+    {
+      "section": "13.5",
+      "title": "Detailgrad und Grenzwerte",
+      "body": "Es gibt „Automatisch“ sowie begrenzte explizite Hierarchietiefen. Auch eine Expertenauswahl „Maximal“ bedeutet nicht, dass Millionen Elemente ohne Begrenzung an den Browser geliefert werden.\n\nDas Renderbudget ist von der Indexierung getrennt. Eine reduzierte Zahl sichtbarer Elemente darf weder kleine Dateien aus dem Index entfernen noch Suchergebnisse verändern."
+    },
+    {
+      "section": "16.1",
+      "title": "Einheitliches Interaktionsmodell",
+      "body": "| Aktion | Verhalten |\n|---|---|\n| Mausberührung | Kurze Vorschau mit Name, Typ, Größe und übergeordnetem Kontext. |\n| Einfacher Klick | Auswahl fixieren; Detailpanel und passende Listenzeile synchronisieren. |\n| Doppelklick auf Ordner | In den Ordner hineinzoomen. |\n| Sichtbare Aktion „Hier öffnen“ | Gleichwertiger Weg zum Drill-down, auch für Touch und Tastatur. |\n| Breadcrumb auswählen | Zum gewählten Vorfahren navigieren. |\n| Eine Ebene hoch | Elternknoten öffnen; aktiven Filter sichtbar beibehalten. |\n| Zur Gesamtansicht | Zur Wurzel des gewählten Profildatenstands zurückkehren. |\n| Kontextmenü/Aktionsbutton | Details, in Karte öffnen, in File Station anzeigen und Pfad kopieren. |\n\nDas Verhalten unterscheidet bewusst Auswahl und Navigation. Ein einzelner Klick auf eine Datei startet weder einen Download noch ein anderes Programm."
+    },
+    {
+      "section": "16.2",
+      "title": "Dateidetails",
+      "body": "Eine ausgewählte Datei zeigt vollständigen Namen, logische Größe, verfügbare Blockbelegung mit Messhinweis, Volume, Freigabe, Pfad, Änderungszeit, ermittelten Typ und Datenstand. Zusätzlich werden verfügbare Besitzer-/Gruppeninformationen, Linkhinweise und bekannte Zugriffsprobleme angezeigt.\n\nDer angezeigte Pfad stammt aus dem ausgewählten Datenstand. Die App behauptet nicht ungeprüft, dass die Datei noch an dieser Stelle existiert."
+    },
+    {
+      "section": "16.3",
+      "title": "Ordnerdetails",
+      "body": "Ein Ordner zeigt aggregierte Größen, Datei- und Unterordnerzahlen, Anteil am Ausschnitt, größte direkte Unterordner, größte enthaltene Dateien und Dateitypverteilung. Eine Liste „Größte Unterordner“ nennt eindeutig, ob nur direkte Kinder oder alle Nachfahren enthalten sind.\n\nFür rekursive Ranglisten werden Vorfahren und Nachfahren nicht als addierbare unabhängige Posten präsentiert. Die Summen der Liste müssen keine disjunkte Zerlegung des Ordners sein; dieser Unterschied ist klar erkennbar."
+    },
+    {
+      "section": "16.4",
+      "title": "Pfade kopieren",
+      "body": "Es gibt getrennte Optionen für den **NAS-Dateisystempfad** und, falls vorhanden, den **File-Station-Pfad**. Der Nutzer erhält keine mehrdeutige Mischung. Ein zukünftiger SMB-Pfad ist nicht Teil des V1-Vertrags."
+    },
+    {
+      "section": "17.1",
+      "title": "Verpflichtendes Nutzerergebnis",
+      "body": "**FS-01 – MUSS / PRÜFGATE:** Für einen von File Station erreichbaren Ordner öffnet „In File Station öffnen“ genau diesen Ordner im DSM-Dateibrowser.\n\n**FS-02 – MUSS / PRÜFGATE:** Für eine Datei öffnet „In File Station anzeigen“ ihren übergeordneten Ordner. Die Datei muss durch ihren Namen eindeutig lokalisierbar sein; der Name bleibt im DiskMap-Detailpanel sichtbar und kopierbar.\n\n**FS-03 – SOLL / PRÜFGATE:** Die konkrete Datei wird in File Station automatisch markiert, wenn die freigegebene Integration dies zuverlässig ermöglicht. Falls nur das Öffnen des Ordners unterstützt ist, kommuniziert die App genau dieses Ergebnis.\n\nEin Button, der nur File Station ohne passenden Ordner startet, erfüllt FS-01 und FS-02 nicht. „Pfad kopieren“ allein ist für regulär unterstützte Freigaben ebenfalls kein ausreichender Ersatz."
+    },
+    {
+      "section": "17.2",
+      "title": "Pfadzuordnung",
+      "body": "Die App unterscheidet physische NAS-Pfade und Freigabepfade. Beispielsweise können `/volume2/photo/2026/bild.jpg` und `/photo/2026/bild.jpg` auf dasselbe Ziel verweisen. Die offizielle API unterscheidet entsprechend einen Freigabepfad und `real_path`. Die Zuordnung wird aus geprüften Informationen gebildet, nicht allein durch Abschneiden eines Zeichenkettenpräfixes. [R05]\n\nVolume-Wurzeln, interne Paketordner und andere nicht über File Station adressierbare Bereiche erhalten eine klare Meldung „Dieser Bereich ist in File Station nicht direkt verfügbar“. DiskMap erstellt dafür keine neue Freigabe und verändert keine Berechtigungen."
+    },
+    {
+      "section": "17.3",
+      "title": "Validierung und Fehler",
+      "body": "Vor der Übergabe darf die App die Existenz des konkreten Ziels und seine aktuelle Zuordnung eng begrenzt prüfen. Dies ist kein neuer Verzeichnisscan.\n\nIst die Datei seit dem Scan verschwunden, kann nach Hinweis ihr noch vorhandener Elternordner geöffnet werden. Bei verschobenen Freigaben wird eine verifizierte aktuelle Zuordnung verwendet; eine zufällige gleichnamige Datei darf nicht als sicher identisch behandelt werden.\n\nSonderzeichen, Leerzeichen, Umlaute, Unicode, Prozentzeichen, Rauten und Anführungszeichen müssen korrekt und sicher übertragen werden. Dateinamen dürfen nie als JavaScript, HTML oder Shell-Befehl interpretiert werden."
+    },
+    {
+      "section": "17.4",
+      "title": "Sitzungs- und Versionsverhalten",
+      "body": "Die Übergabe verwendet die aktuelle berechtigte DSM-Sitzung. Zugangsdaten werden nicht in URLs, Protokollen oder Zwischenablage abgelegt. Sessionablauf führt zur erneuten DSM-Anmeldung, nicht zu einer zusätzlichen unsicheren Passwortabfrage in DiskMap.\n\nDie UI-Steuerung von File Station wird als isolierter, versionsgeprüfter Adapter implementiert. In der geprüften offiziellen Dateiverwaltungs-API ist kein eigener Vertrag für „DSM-Fenster an Pfad öffnen und Datei markieren“ nachgewiesen; eine konkrete Launcher-Methode wird daher erst nach praktischem Test festgelegt. [R05]"
+    },
+    {
+      "section": "18.1",
+      "title": "Suche",
+      "body": "**FIND-01 – MUSS:** Suche nach Datei- und Ordnernamen sowie indizierten Pfaden. Standard ist eine verständliche, nicht zwischen Groß- und Kleinschreibung unterscheidende Teilstringsuche. Einfache Dateimuster wie `*.iso` können zusätzlich unterstützt werden, müssen aber im Hilfetext erklärt sein.\n\nDie Suche arbeitet auf dem ausgewählten Datenstand. Ergebnisse zeigen Name, Pfad, Typ, Größe und Änderungsdatum. Beim Auswählen wird das Objekt in Karte, Baum und Detailpanel synchronisiert. Große Ergebnismengen werden paginiert beziehungsweise virtualisiert.\n\nAutovervollständigung für indizierte Ordner und bekannte Dateitypen ist SOLL. Freie reguläre Ausdrücke und eine komplexe Suchsprache sind nicht Voraussetzung für die Bedienung von V1."
+    },
+    {
+      "section": "18.2",
+      "title": "Filter",
+      "body": "V1 bietet Bedienelemente für Mindest-/Höchstgröße, Dateitypkategorie, Änderungszeitraum und Objektart Datei/Ordner. Vorgefertigte Filter wie „Größer als 1 GB“, „Videos“ oder „Seit mehr als zwei Jahren nicht geändert“ sind mit einem Klick aktivierbar.\n\nKombinierte Filter gelten gemeinsam. Jede aktive Regel erscheint als entfernbarer Filter-Chip. Eine Aktion entfernt alle Filter.\n\n„Alt“ bezieht sich auf das Änderungsdatum, nicht auf eine behauptete letzte Nutzung. Änderungszeit und Zugriffszeit werden nicht verwechselt; insbesondere wird eine selten geänderte Datei nicht automatisch als unnötig eingestuft. Die Zeitstempelfelder haben unterschiedliche technische Bedeutungen. [R13]"
+    },
+    {
+      "section": "18.3",
+      "title": "Hervorheben und Eingrenzen",
+      "body": "**FIND-02 – MUSS:** Die App unterscheidet zwei Verhalten:\n\n**Hervorheben:** Die ursprüngliche Karte bleibt in Größe und Struktur erhalten. Treffer werden hervorgehoben, Nichttreffer abgeschwächt. Das ist der Suchstandard.\n\n**Nur Treffer anzeigen:** Die Darstellung wird auf Treffer und die zu ihrer Einordnung nötigen Vorfahren reduziert. Gewichte und Prozente beziehen sich dann ausdrücklich auf die Treffer. Die Anzeige nennt weiterhin ursprünglichen Gesamtwert und Trefferwert.\n\nEin Filter darf nicht unbemerkt den Nenner von Prozentwerten ändern. „Keine Treffer“ ist kein leerer Ordner und kein Scanfehler."
+    },
+    {
+      "section": "18.4",
+      "title": "Dateitypen und Nutzungskontext",
+      "body": "V1 verwendet eine konfigurierbare Zuordnung anhand der Dateiendung beziehungsweise vorhandener verlässlicher Metadaten. Kategorien: Bilder, Videos, Audio, Dokumente, Archive, Datenträgerabbilder, erkennbare Datenbankdateien und Sonstiges/Unbekannt.\n\nEin Ordner mit dem Namen `docker` macht seine Dateien nicht automatisch zu einem eigenständigen Dateityp „Container“. Ein solcher Verwendungszusammenhang wird höchstens separat als Kontext gekennzeichnet.\n\nFehlende Endungen und nicht sicher klassifizierbare Dateien bleiben „Unbekannt“. Für eine schönere Statistik wird keine Inhaltsart erfunden."
+    },
+    {
+      "section": "18.5",
+      "title": "Listen",
+      "body": "Listen sind nach Größe, Name, Änderungsdatum und Typ sortierbar. Größenmetrik und Einheiten stimmen mit der Karte überein. Die Listenalternative bleibt auch ohne funktionierende Canvas-Darstellung bedienbar.\n\nEin Datei-/Analyseexport nach CSV oder JSON ist P2. Davon unabhängig gehören Konfigurationsexport und Diagnoseexport zu V1."
+    },
+    {
+      "section": "19.1",
+      "title": "Drei getrennte Informationsarten",
+      "body": "| Metrik | Bedeutung und V1-Verhalten |\n|---|---|\n| **Dateigröße** | Logische Größe der erfassten Dateien. Standardgewicht der Karten. |\n| **Gemeldete Blockbelegung** | Vom Dateisystem für erfasste Objekte gemeldete Belegung; nur bei unterstützter und geprüfter Ermittlung auswählbar. Keine Zusage exklusiven Speicherverbrauchs. |\n| **Volume-Belegung** | Separater Kapazitätswert aus einer geprüften Volume-/DSM-Quelle mit eigenem Erfassungszeitpunkt. Kein Ergebnis der Dateisummen. |\n\nBei Linux-Metadaten müssen Dateigröße und Blockanzahl korrekt unterschieden und mit der richtigen Einheit interpretiert werden. Die gemeldete Blockbelegung kann von der logischen Größe abweichen. [R06, R13]\n\n**SIZE-01 – MUSS:** Ein Wechsel der verfügbaren Größenmetrik verwendet bereits gespeicherte Werte und startet keinen Scan. Eine nicht erfasste Metrik wird nicht durch eine andere Größe ersetzt, sondern als nicht verfügbar gekennzeichnet."
+    },
+    {
+      "section": "19.2",
+      "title": "Zählregeln für V1",
+      "body": "Karten zeigen Dateieinträge in ihrer tatsächlichen Verzeichnisstruktur. Ein normaler Dateieintrag besitzt seine logische Größe und seine verfügbare Blockbelegung. Ein Ordner besitzt für die Dateiansicht das Aggregat seiner enthaltenen Einträge; die Größe des Verzeichniseintrags selbst wird nicht mit dem Inhalt verwechselt.\n\nHardlinks an unterschiedlichen Pfaden bleiben unterschiedliche sichtbare Einträge. Die V1-Pfadsummen zählen diese Referenzen entsprechend mehrfach und werden ausdrücklich als solche erklärt. Bekannte Hardlinks erhalten einen Hinweis. Die App ordnet gemeinsam referenzierte Daten nicht zufällig nur dem zuerst gescannten Pfad zu.\n\nEine zusätzliche physisch eindeutige Hardlink-Zusammenfassung ist eine spätere oder gesondert abgenommene Messfunktion. Identitäten müssen dafür dateisystemspezifisch verifiziert werden; eine Inode-Nummer allein ist kein NAS-weiter Schlüssel.\n\nSymbolische Links werden nicht auf ihre Ziele aufgelöst. Ihre eigenen Metadaten können getrennt angezeigt werden, die Zielgröße wird nicht zusätzlich in die Karte übernommen. Verzeichnismetadaten, die keine Dateiinhalte darstellen, werden bei Bedarf separat ausgewiesen, nicht still in Dateisummen versteckt."
+    },
+    {
+      "section": "19.3",
+      "title": "Btrfs, Reflinks und freigebbarer Platz",
+      "body": "Btrfs unterscheidet bei der Speicheranalyse unter anderem referenzierte, exklusive und gemeinsam genutzte Bereiche. Eine einfache Summe pro Datei bildet diese Unterschiede nicht vollständig ab. [R07]\n\nV1 verspricht deshalb weder „physisch exakt“ noch „durch Löschen freigebbar“. Die Bezeichnung „tatsächlich belegter Speicher“ ohne Erläuterung wird vermieden. Eine zukünftige exklusive Btrfs-Auswertung bekommt eine eigene Messmethode, Leistungsbewertung und Abnahme."
+    },
+    {
+      "section": "19.4",
+      "title": "Abweichung zur DSM-Anzeige",
+      "body": "**SIZE-02 – MUSS:** Ein Hilfebereich erklärt, warum Dateisummen und Volume-Belegung nicht übereinstimmen müssen. Er nennt mögliche Ursachen, ohne deren Größen zu erfinden: unterschiedliche Datenstände, ausgeschlossene oder nicht lesbare Bereiche, Dateisystem-Metadaten, Snapshots, gemeinsam genutzte Blöcke und Mehrfachreferenzen.\n\nEs wird nicht pauschal „700 GB Snapshots“ ausgegeben, nur weil die Differenz 700 GB beträgt. Fehlt eine vergleichbare Messbasis, lautet die Aussage „Nicht direkt vergleichbare Messgrößen“.\n\nEine numerische Differenz darf nur mit Umfang, Zeitbezug und Rechenbasis gezeigt werden. Auch eine negative Differenz wird nicht auf null abgeschnitten oder als Fehler verschwiegen. Unbekannte Anteile sind keine exakt gemessenen Kategorien."
+    },
+    {
+      "section": "19.5",
+      "title": "Genauigkeit und Einheiten",
+      "body": "Die Datenhaltung verwendet ganzzahlige Bytewerte ohne Rundungsverluste. Rundung erfolgt erst für die Anzeige. Sehr große Werte müssen auch bei Übertragung an den Browser exakt bleiben.\n\nDezimale Einheiten GB/TB und binäre Einheiten GiB/TiB sind ausdrücklich wählbar. Innerhalb einer Ansicht bleibt die Darstellung einheitlich. Details können zusätzlich den exakten Bytewert nennen."
+    },
+    {
+      "section": "20.1",
+      "title": "Ausschlussregeln",
+      "body": "**EXCL-01 – MUSS:** Profile unterstützen ausgeschlossene Pfade und einfache Namens-/Pfadmuster. Regeln gelten für den Scan und werden mit dem Datenstand gespeichert. Sie sind nicht mit Anzeige- oder Größenfiltern zu verwechseln.\n\nGlobale Vorgaben können als Vorlage dienen. Im Profil wird die wirksame Kombination angezeigt. Für V1 gilt: Ausschluss gewinnt; unklare Kombinationen werden vor dem Speichern erläutert. Eine Vorschau prüft Syntax und, sofern ein Index existiert, mögliche Treffer ohne zusätzlichen Vollscan."
+    },
+    {
+      "section": "20.2",
+      "title": "Vorgeschlagene Standardbehandlung",
+      "body": "| Bereich oder Objekttyp | Standard |\n|---|---|\n| Gewöhnliche versteckte Dateien | Einschließen, soweit lesbar. |\n| Papierkörbe wie `#recycle` | Einschließen und kennzeichnen; kein stiller Ausschluss relevanten Speicherverbrauchs. |\n| Erkennbare Synology-Zusatzordner wie `@eaDir` | Einschließen, soweit lesbar, und verständlich benennen. |\n| Interne Paket-/Systemdaten | Gesondert darstellen, sofern lesbar; fehlender Zugriff bleibt sichtbar. |\n| Btrfs-Snapshot-Verzeichnisbäume | Nicht rekursiv als gewöhnliche aktuelle Dateien einbeziehen. |\n| Symbolische Links | Link erfassen, Ziel nicht verfolgen. |\n| Entfernte Mounts und Mounts außerhalb des Umfangs | Nicht betreten; Grenzen kennzeichnen. |\n| Eigene aktive Index- und temporäre Arbeitsdateien | Rekursion in eigene Arbeitsdaten vermeiden; DiskMap-Eigenbedarf gesondert nennen. |\n| Geräte, Pipes und Sockets | Typ erkennen; nicht öffnen und keine erfundene Nutzdatengröße ansetzen. |\n\nDie Erkennung spezieller DSM-Bereiche wird je unterstützter Plattform validiert. Namen mit `@` allein sind kein hinreichender Beweis, dass ein Ordner automatisch ausgeschlossen werden darf."
+    },
+    {
+      "section": "20.3",
+      "title": "Verschlüsselte oder fehlende Freigaben",
+      "body": "Eine gesperrte verschlüsselte Freigabe wird als nicht verfügbar ausgewiesen. DiskMap fragt keine Entschlüsselungsschlüssel ab und entsperrt sie nicht. Nach Entsperrung kann der Nutzer oder der nächste geplante Lauf aktualisieren.\n\nEin verschwundenes Volume oder ein anderer Mount an einem bekannten Pfad darf nicht als dasselbe unveränderte Volume behandelt werden. Umfangsidentität und Erreichbarkeit werden vor jedem Lauf überprüft."
+    },
+    {
+      "section": "20.4",
+      "title": "Änderungen während eines Scans",
+      "body": "Dateien können während der Erfassung geändert, verschoben oder entfernt werden. DiskMap unterscheidet bekannte kurzzeitige Änderungen von fehlender Lesbarkeit. Beobachtete Unsicherheiten werden im Laufbericht erfasst.\n\nEin Datenstand ist eine Erfassung über Start- und Endzeit, keine konsistente Sicherung laufender Datenbanken. Die App stoppt keine Datenbanken oder Container und setzt keine Anwendungen für den Scan auf Pause."
+    },
+    {
+      "section": "20.5",
+      "title": "Pfadsicherheit",
+      "body": "Sehr lange Pfade, ungewöhnliche Zeichen und nicht sauber als Unicode darstellbare Dateinamen dürfen den Scan nicht abbrechen. Die interne Identität und adressierbare Originalinformation bleiben erhalten; problematische Darstellung wird sicher maskiert.\n\nSymlink-Schleifen, mehrfach eingebundene Pfade und unerwartete Mountwechsel werden begrenzt beziehungsweise ausgeschlossen. Eine Texteingabe im Frontend darf niemals beliebige Dateisystempfade außerhalb des freigegebenen Umfangs zum Scanner durchreichen."
+    },
+    {
+      "section": "21.1",
+      "title": "Umfang der Übersetzung",
+      "body": "**I18N-01 – MUSS:** Deutsch und Englisch decken Navigation, Einrichtungsassistent, Einstellungen, Tooltips, Dialoge, Scanstatus, Fehlermeldungen, Hilfen, Kontextmenüs, Diagnosetexte und benutzerbezogene Benachrichtigungen ab.\n\nPaketbeschreibung und unterstützte Installations-/Deinstallationsdialoge werden ebenfalls zweisprachig ausgeliefert. Eigennamen, reale Dateinamen und technische IDs werden nicht übersetzt.\n\nTechnische Protokollcodes und Schnittstellenkennungen können englisch bleiben. Die erklärenden Texte für Nutzer werden lokalisiert."
+    },
+    {
+      "section": "21.2",
+      "title": "Sprachauswahl",
+      "body": "Standard ist die Sprache der aktuellen DSM-Nutzersitzung, soweit zuverlässig ermittelbar. Unterstützt diese weder Deutsch noch Englisch, wird Englisch verwendet. Ist die DSM-Sprache technisch nicht verfügbar, dient die Browsersprache als Ersatz; ansonsten Englisch. Eine manuelle Benutzerauswahl hat Vorrang.\n\nDas Wechseln der Sprache verändert weder Scan-Profile noch Indexdaten und benötigt keinen Neustart des Scanners. Persönliche Einstellungen verschiedener Administratoren sind voneinander getrennt."
+    },
+    {
+      "section": "21.3",
+      "title": "Formatierung",
+      "body": "Zahlen, Dezimaltrennzeichen, Datumsformate und Pluralformen werden passend zur gewählten Sprache formatiert. Datenstandszeiten besitzen eine erkennbare Zeitzone; Standard ist die NAS-Zeitzone. Intern werden Zeitpunkte einheitlich gespeichert.\n\nDie Zeitplanungslogik verbleibt in DSM. Sommerzeit- und Zeitzonenwechsel werden nicht durch eine zweite eigene Kalenderberechnung überschrieben."
+    },
+    {
+      "section": "21.4",
+      "title": "Qualitätssicherung",
+      "body": "Automatische Prüfung auf fehlende Übersetzungsschlüssel, unübersetzte Platzhalter und kaputte Variablenersetzung. Oberflächentests berücksichtigen längere deutsche Beschriftungen. Sprachwechsel, Fehlermeldungen und Einrichtungsablauf werden in beiden Sprachen vollständig durchlaufen."
+    },
+    {
+      "section": "22.1",
+      "title": "Struktur",
+      "body": "Einstellungen sind in verständliche Gruppen gegliedert. Selten benötigte technische Optionen erscheinen hinter „Erweitert“. Scan-Profile bleiben in ihrem eigenen Bereich; Einstellungen verweisen dorthin, statt dieselbe Konfiguration nochmals unabhängig abzulegen.\n\n| Gruppe | Optionen | Vorgeschlagener Standard |\n|---|---|---|\n| Allgemein | Sprache, Theme, Startprofil, Einheiten. | DSM-Sprache soweit verfügbar, Automatik-Theme, zuletzt genutztes Profil, dezimale Größen. |\n| Visualisierung | Standardkarte, Farbe, Tiefe, Beschriftung, Prozentwerte, Clustergrenzen, reduzierte Bewegung. | Disk Map, Ordnerfarben, automatische Tiefe, sichtbare Hierarchiegrenzen. |\n| Scan und Leistung | Ressourcenmodus, Parallelität, Pause-/Abbruchverhalten, Expertenlimits. | Ausgeglichen, ein aktiver Scan. |\n| Zeitplanung | Profilspezifische Aufrufvorlage, Anleitung, Integrationstest. | Kein automatisch aktivierter DSM-Task. |\n| Index und Datenstände | Speicherverbrauch, Aufbewahrung, Reserve, Integritätsprüfung, Neuaufbau und Indexlöschung. | Zwei vollständige Stände je Profil; geschützter letzter nutzbarer Stand. |\n| DSM und File Station | Integrationsstatus, getestete Fähigkeiten, Testfunktion. | Ordnerübergabe aktiv, sofern unterstützt. |\n| Berechtigungen | Lesbare und nicht lesbare Wurzeln, letzte Prüfung, Hilfe zur Freigabe. | Keine automatische pauschale Rechteausweitung. |\n| Benachrichtigungen | Fehler, Teilscan, fehlende Ziele, Erfolg. | Fehler und Teilscan melden; Erfolg nicht aktiv melden. |\n| Diagnose und Datenschutz | Lokale Logs, datensparsamer Diagnoseexport, optionale Pfaddetails. | Keine Telemetrie; Export ohne private Namen/Pfade. |\n| Import/Export | Konfiguration sichern, prüfen und wiederherstellen. | Keine Index- oder Quelldateien im Konfigurationsexport. |\n| Über die App | Version, Kompatibilität, Komponentenstatus, lokale Hilfe und Lizenzinformationen. | Keine notwendige Internetabfrage. |"
+    },
+    {
+      "section": "22.2",
+      "title": "Theme und Anzeige",
+      "body": "Hell und Dunkel sind MUSS. „Automatisch“ übernimmt ein zuverlässig verfügbares DSM-Theme-Signal; andernfalls die Browser-/Systempräferenz. Welche Quelle verwendet wird, ist dokumentiert. Eine nicht belegte DSM-Theme-API wird nicht vorausgesetzt.\n\nClustergrenzen dürfen abgeschwächt, aber nicht so deaktiviert werden, dass die Pflicht zur erkennbaren Hierarchie verloren geht. Expertenlimits können nicht über sicherheitsrelevante Höchstgrenzen hinausgesetzt werden."
+    },
+    {
+      "section": "22.3",
+      "title": "Speichern und Zurücksetzen",
+      "body": "Globale und persönliche Einstellungen sind klar unterschieden. Änderungen werden vor Verlassen bei Bedarf gespeichert oder verworfen. „Standardwerte wiederherstellen“ nennt den betroffenen Bereich und löscht keine Profile oder Datenstände.\n\nGefährlichere eigene Datenaktionen wie Indexlöschung benötigen eine Bestätigung mit Profilname und Hinweis „Deine NAS-Dateien werden nicht gelöscht“."
+    },
+    {
+      "section": "22.4",
+      "title": "Indexspeicherort",
+      "body": "Standard ist der vom Paket verwaltete Datenbereich auf dem Installationsvolume. Der tatsächliche Ort wird angezeigt. Ein freies beliebiges Verzeichnisfeld ist nicht vorgesehen.\n\nEin Wechsel des Datenvolumes ist SOLL und muss eine kontrollierte Migration mit angehaltenen Schreibvorgängen, Platzprüfung, Rechteprüfung und Rückfallmöglichkeit verwenden. Bis diese Funktion abgenommen ist, bleibt der Speicherort nicht frei änderbar."
+    },
+    {
+      "section": "22.5",
+      "title": "Konfiguration importieren und exportieren",
+      "body": "**CFG-01 – MUSS:** Exportiert werden versionierte Profile, Ausschlüsse und geeignete App-Einstellungen. Keine Passwörter, Sitzungen, Dateiinhalte oder vollständigen Scan-Indizes.\n\n**CFG-02 – MUSS:** Import besitzt Größenlimit, Schema-/Versionsprüfung und eine Vorschau der Änderungen. Wurzeln werden mit dem tatsächlichen NAS abgeglichen. Fehlende Freigaben werden als nicht zugeordnet angezeigt; keine automatische Zuordnung allein aufgrund gleicher Namen.\n\nImportierte Profile werden zunächst ohne automatische Scanauslösung übernommen. Technische IDs werden kontrolliert neu vergeben oder konfliktfrei übernommen; bereits bestehende DSM-Aufgaben dürfen nicht auf ein anderes Profil umgelenkt werden. Die App weist auf notwendige Aktualisierung von Aufgaben hin.\n\nKonfigurationen können private Profilnamen und Pfade enthalten. Der Export weist darauf hin und wird nicht als anonym beworben."
+    },
+    {
+      "section": "23.1",
+      "title": "Benutzer- und Prozessrechte",
+      "body": "**SEC-01 – MUSS:** Zugriff auf Index, Pfadnamen, Profile, Logs und Steuerfunktionen ausschließlich für serverseitig authentifizierte und berechtigte DSM-Administratoren. Normale Benutzer erhalten auch über direkte API-Aufrufe keine Daten.\n\n**SEC-02 – MUSS:** Backend und Scanner laufen regulär unter einem eingeschränkten Paketkonto. Für Quelldaten werden nur benötigte Lese-/Verzeichniszugriffsrechte vorgesehen. Schreibrechte sind auf eigene Paketdaten, Logs und Arbeitsdateien begrenzt.\n\nDSM 7 verlangt in seiner dokumentierten Paketänderung den Paketkontext und sieht für privilegierte Vorgänge Ressourcenmechanismen vor. Einzelne historische Beispiele in der Dokumentation sind kein Freibrief für einen dauerhaft als root laufenden Webdienst. [R03]\n\n**SEC-03 – MUSS / PRÜFGATE:** Reichen normale Paketleserechte für bestimmte Systembereiche nicht aus, ist deren Zugriff gesondert zu entscheiden. Ein eventueller eng begrenzter Metadatenhelfer benötigt eigene Sicherheitsprüfung, ausdrückliche Aktivierung und eine DSM-konforme Umsetzung. Keine pauschale root-Weboberfläche und kein universell nutzbares privilegiertes Shell-Interface."
+    },
+    {
+      "section": "23.2",
+      "title": "Bedeutung von „read-only“",
+      "body": "Read-only bezieht sich auf die analysierten Quelldaten: DiskMap bietet keine Mutation ihrer Inhalte, Namen, ACLs, Eigentümer oder Verzeichnisstruktur an. Das Anlegen von Indizes, Löschen eigener alter Datenstände und Speichern eigener Einstellungen sind dagegen notwendige erlaubte Schreibvorgänge.\n\nBetriebssystembedingte Zugriffszeitbehandlung bei Leseoperationen ist nicht mit einer fachlichen Dateibearbeitung gleichzusetzen. V1 verspricht keine bitidentische forensische Unveränderlichkeit sämtlicher Dateisystem-Metadaten. [R13]"
+    },
+    {
+      "section": "23.3",
+      "title": "Schutz der Schnittstellen",
+      "body": "Jede Anfrage prüft Sitzung und Berechtigung. Zustandsändernde Aktionen besitzen Schutz gegen fremd ausgelöste Browseranfragen. IDs und Pfade werden serverseitig auf den erlaubten Profilumfang begrenzt. Keine SQL- oder Shell-Konstruktion aus ungeprüften Nutzerwerten.\n\nDateinamen werden als untrusted data behandelt: sichere HTML-Ausgabe, keine Ausführung und korrekte Kodierung. Dateien mit Namen, die wie Skripte oder HTML aussehen, müssen gefahrlos sichtbar sein.\n\nLokale Steuerkanäle sind durch Dateirechte und überprüfbare Aufruferidentität geschützt. Kein Zugriff auf den Index nur aufgrund der Kenntnis eines internen Ports."
+    },
+    {
+      "section": "23.4",
+      "title": "Vertraulichkeit der Indizes",
+      "body": "Metadaten können private Informationen offenlegen. Der Index ist daher kein öffentliches Cache-Verzeichnis und keine automatisch freigegebene Datei. Statische Webauslieferung darf niemals den Datenbank- oder Logbereich veröffentlichen.\n\nAPI-Antworten mit Pfaden und Dateilisten werden nicht für öffentliche Zwischenablagen, gemeinsam genutzte Proxy-Caches oder ungeschützte Offline-Speicher freigegeben. Ein Sitzungsende beendet weitere Datenzugriffe; sensible Ansichten dürfen nicht unbegrenzt ohne erneute Prüfung weiterlaufen."
+    },
+    {
+      "section": "23.5",
+      "title": "Keine externe Datenübertragung",
+      "body": "Keine Telemetrie, kein obligatorischer Update-Check, keine Analyse-Cloud, keine extern geladenen Schriftarten oder Diagrammbibliotheken. Ein optionaler Zugriff auf öffentliche Versionsinformationen muss bewusst auslösbar sein und darf keine NAS-Dateiinformationen übertragen."
+    },
+    {
+      "section": "24.1",
+      "title": "Empfohlene technische Basis",
+      "body": "| Baustein | Zielentscheidung | Begründung als Projektentscheidung |\n|---|---|---|\n| Scanner und Backend | Go | Gemeinsame Laufzeitbasis und gebündelte ausführbare Komponenten. |\n| Index und Konfiguration | SQLite | Lokale Datenhaltung ohne separat administrierten Datenbankserver. |\n| Oberfläche | React mit TypeScript | Strukturierte, testbare Oberfläche und typisierte Zustandsverträge. |\n| Hierarchielayout | Eine bewährte Layoutbibliothek, vorzugsweise D3-Hierarchy nach Prüfung. | Gemeinsame fachliche Hierarchie statt zwei unabhängiger Berechnungen. |\n| Grafik | Canvas2D für dichte Karten, HTML für Details und zugängliche Listen. | Begrenzte Elementzahlen und eine bedienbare nichtgrafische Alternative. |\n| Paketierung | Synology-Paketframework | Tatsächliches `.spk` mit Lebenszyklus und DSM-Integration. |\n\nDies sind Architekturvorgaben für den Entwurf, keine Zusage bestimmter Bibliotheksversionen oder bereits erreichter Leistung. Alternativen benötigen eine begründete Entscheidung; zwei UI-Frameworks oder zwei vollständige unabhängige Chartstacks sind zu vermeiden.\n\nEin begrenztes SVG-Rendering für die Radial Map ist zulässig, sofern dieselben Datenverträge und Leistungsgrenzen gelten. WebGL ist für V1 keine notwendige Voraussetzung."
+    },
+    {
+      "section": "24.2",
+      "title": "Module",
+      "body": "**DSM-Adapter:** Anmeldung, Fensterintegration, Volumes/Freigaben, File Station und optional Aufgaben-/Benachrichtigungsinformationen. Versionsabhängige Aufrufe bleiben hier gekapselt.\n\n**Auftragsmanager:** Validierung, Sperren, Warteschlange, Pause/Abbruch, Laufprotokolle und Veröffentlichung.\n\n**Scanner:** Ausschließlich freigegebene Wurzeln und Metadaten erfassen; kein UI-Wissen und keine Benutzerdateioperationen.\n\n**Indexdienst:** Hierarchie, Aggregationen, Suchindex, Datenstandskonsistenz und begrenzte Abfragen.\n\n**Frontend:** Navigation, beide Karten, Liste, Filter, Einstellungen und Übersetzungen. Es entscheidet keine Zugriffsberechtigungen.\n\n**Lokaler Aufgabenplaner-Client:** Authentifizierter Aufruf bestehender Profile und verständlicher Ergebnisstatus; kein zweiter Scanner mit abweichenden Regeln."
+    },
+    {
+      "section": "24.3",
+      "title": "Generationenverwaltung",
+      "body": "Vorgeschlagen sind eine kleine Steuerdatenbank für Profile und Aufträge sowie getrennte, nach Veröffentlichung unveränderte Indexgenerationen. Das genaue Dateilayout bleibt dem technischen Entwurf vorbehalten.\n\nKopieren aktiver Datenbankdateien ohne konsistentes Verfahren ist keine Backup- oder Veröffentlichungslösung. Speicherbedarf von Journals, temporären Dateien und Generationen muss in der Kapazitätsplanung enthalten sein."
+    },
+    {
+      "section": "24.4",
+      "title": "Unabhängigkeit",
+      "body": "Keine Abhängigkeit von vorhandenen PostgreSQL-Instanzen, n8n, Redis, Docker-Netzen, Cloudspeichern oder anderen We.Rock-Projekten. Die Anwendung muss auf einem frisch unterstützten NAS ohne diese Infrastruktur betreibbar sein."
+    },
+    {
+      "section": "25.1",
+      "title": "Kernobjekte",
+      "body": "| Objekt | Wesentliche Informationen |\n|---|---|\n| Volume | Stabile geprüfte Identität, Anzeigename, Mountzuordnung, Dateisystem, Erreichbarkeit, Kapazitätswerte mit Quelle/Zeitpunkt. |\n| Freigabe | Identität, Name, Volume-Zuordnung, physischer Pfad, File-Station-Zuordnung, Zugriff und Sperrstatus. |\n| Scan-Profil | ID, Version, Name, Umfang, Ausschlüsse, Ressourcenmodus, Aktualitätsziel, Aktivstatus. |\n| Scan-Auftrag | ID, Profilversion, Auslöser, Zustände, Zeiten, Zähler, Warnungen, Ergebnis und technische Versionen. |\n| Scan-Datenstand | ID, Umfangsmanifest, Erfassungsintervall, Status, Messmethoden, Summen, Abdeckung und Speicherbedarf. |\n| Indexknoten | Datenstands-ID, Knoten-ID, Eltern-ID, Originalname, Objekttyp, Volume/Freigabe, Größen, Zeiten, optionale Eigentümerdaten und Linkmerkmale. |\n| Abdeckungsbefund | Bereich, Zustand lesbar/ausgeschlossen/fehlend/Fehler, bekannte Anzahl und Messgrenzen. |\n| Benutzereinstellung | DSM-Benutzerbezug, Sprache, Theme, bevorzugtes Profil und Ansichtspräferenzen. |\n\nDie genaue Datenbankschemaform ist keine fachliche Verpflichtung. Die genannten Informationen und ihre Konsistenz sind es."
+    },
+    {
+      "section": "25.2",
+      "title": "Invarianten",
+      "body": "Jeder echte Indexknoten gehört zu genau einem Datenstand. Innerhalb dieses Standes ist seine Elternbeziehung eindeutig und zyklenfrei. Virtuelle Darstellungsgruppen sind unterscheidbar und besitzen keinen vorgetäuschten realen Dateipfad.\n\nProfilnamen sind keine Primärschlüssel. Dateisystemidentität ist nicht allein aus Anzeigenamen oder Inode-Nummern abzuleiten. Pfad und Objektidentität werden bei Umbenennungen und neuen Datenständen nicht unkritisch gleichgesetzt.\n\nUnbekannte Werte bleiben unbekannt. Bytewerte werden mit ausreichender Ganzzahlpräzision gespeichert und übertragen; der JavaScript-Zahlenbereich darf keine unbemerkten Rundungsfehler erzeugen."
+    },
+    {
+      "section": "25.3",
+      "title": "Abfrageverträge",
+      "body": "Eine Hierarchieabfrage benennt Datenstand, Wurzelknoten, Metrik, Filter, gewünschte Tiefe und Elementbudget. Die Antwort enthält die tatsächliche Abdeckung, Summen, Kindbeziehungen und eventuelle Aggregationen.\n\nEine Suchanfrage benennt ebenfalls den Datenstand und verwendet begrenzte Seitengrößen. Statusabfragen liefern den tatsächlichen Auftrag und nicht aus einem Timer abgeleitete Scheinfortschritte.\n\nSteueraktionen wie Start, Pause, Fortsetzen, Abbruch und Profiländerung sind getrennt von lesenden Abfragen. Alle sind autorisiert; schreibende Aktionen sind gegen unbeabsichtigte Wiederholung abgesichert."
+    },
+    {
+      "section": "25.4",
+      "title": "Cache und Bildschirmkonsistenz",
+      "body": "Cache-Schlüssel umfassen mindestens Datenstand, Wurzel, Metrik und wirksame Filter. Ein Wechsel der Quelle darf keine Werte aus dem vorherigen Profil weiterverwenden.\n\nKarte, Liste und Detailpanel zeigen keine Mischung verschiedener Datenstände. Antworten auf überholte Such- oder Navigationsanfragen werden verworfen. Backend- und Frontendlimits verhindern das Laden des vollständigen NAS-Baums in einen einzigen Browserzustand."
+    },
+    {
+      "section": "26.1",
+      "title": "Getrennte Zustandsdimensionen",
+      "body": "**Auftrag:** wartend, Vorprüfung, scannend, pausiert, aggregierend, validierend, veröffentlichend, abgeschlossen, abgebrochen, unterbrochen oder fehlgeschlagen.\n\n**Datenstand:** vollständig, mit Erfassungslücken, beschädigt oder nicht vorhanden.\n\n**Aktualität:** innerhalb des Aktualitätsziels, veraltet oder mangels Datenstand nicht bestimmbar.\n\n**Quelle:** erreichbar, nicht eingehängt, gesperrt oder nicht lesbar.\n\nMehrere Zustände dürfen gleichzeitig zutreffen. Beispielsweise: „Datenstand vollständig, zwei Tage alt; neuer Scan läuft“."
+    },
+    {
+      "section": "26.2",
+      "title": "Pflichtfälle",
+      "body": "| Fall | Nutzeranzeige und Verhalten |\n|---|---|\n| Noch kein Scan | Einrichtung/Scan anbieten; kein scheinbar leeres NAS. |\n| Keine Suchtreffer | Such-/Filterregeln zeigen und Zurücksetzen anbieten. |\n| Leerer Ordner | „Dieser Ordner enthält im Datenstand keine Dateien.“ |\n| Fehlendes Leserecht | Betroffenen Bereich und konkrete Rechtehilfe nennen. |\n| Volume nicht vorhanden | Ziel als fehlend kennzeichnen; nicht als 0 Byte publizieren. |\n| Freigabe gesperrt | Entsperrung in DSM erforderlich; keine Schlüsselabfrage. |\n| Neuer Scan fehlgeschlagen | Alten vollständigen Stand weiter nutzbar lassen. |\n| Teilscan abgeschlossen | Teilweise Daten ausdrücklich öffnen lassen; Warnung dauerhaft sichtbar. |\n| Indexdatenträger voll | Lauf kontrolliert stoppen; geschützten bisherigen Stand behalten. |\n| Datei seit Scan entfernt | Hinweis und gegebenenfalls vorhandenen Elternordner öffnen. |\n| DSM-Sitzung abgelaufen | Weitere Datenzugriffe sperren und DSM-Neuanmeldung verlangen. |\n| Grafik nicht verfügbar | Liste und Navigation weiter anbieten. |\n| Inkompatible DSM-Funktion | Betroffene Funktion konkret nennen; keine Erfolgsmeldung ohne Wirkung. |\n| Paket wurde gestoppt | Lokaler Aufruf endet mit „Dienst nicht verfügbar“; kein versteckter Start. |"
+    },
+    {
+      "section": "26.3",
+      "title": "Fehlermeldungen",
+      "body": "Eine Meldung enthält verständliche Beschreibung, betroffenen Bereich, mögliche Handlung und bei Bedarf eine ausklappbare technische Kennung. Nutzer müssen keine Rohdatenbankfehler oder Stacktraces interpretieren.\n\nDiagnosehinweise enthalten niemals Passwörter, Session-IDs oder ungefilterte private Pfade in Benachrichtigungen. Detaillierte lokale Fehlerpfade bleiben nur berechtigten Administratoren zugänglich."
+    },
+    {
+      "section": "27.1",
+      "title": "Datenmengen und Messumgebung",
+      "body": "Die Architektur muss für mehrere Millionen Einträge ausgelegt sein. Abnahmedatensätze umfassen 100.000, eine Million und zehn Millionen Einträge mit unterschiedlichen Baumtiefen und Dateigrößenverteilungen.\n\nReferenz ist das zuvor genannte NAS, ergänzt um mindestens einen ressourcenbegrenzten Testlauf. Browser, DSM-Build, Datenträgerart, konkurrierende Last und Cachezustand werden im Messbericht genannt. Ziele sind keine bereits nachgewiesenen Leistungsversprechen."
+    },
+    {
+      "section": "27.2",
+      "title": "Vorgeschlagene Leistungsbudgets",
+      "body": "| Messgröße | Abnahmeziel unter dokumentierten Referenzbedingungen |\n|---|---|\n| Fertiges Profil öffnen | Erste nutzbare Karte im lokalen Netz innerhalb von 3 Sekunden. |\n| Drill-down in vorhandenen Index | 95. Perzentil unter 1 Sekunde. |\n| Ansichtswechsel bei vorhandenen Daten | Sichtbare Reaktion innerhalb von 200 ms, fertiges Layout möglichst unter 1 Sekunde. |\n| Indexsuche | Erste 50 Treffer im 95. Perzentil unter 2 Sekunden. |\n| Treemap-Elementbudget | Zunächst höchstens 10.000 sichtbare Grafikelemente pro Ansicht. |\n| Radial-Elementbudget | Zunächst höchstens 2.000 sichtbare Segmente pro Ansicht. |\n| Frontend-Speicher | Zielbudget höchstens 512 MiB im definierten Lasttest. |\n| Paket-Speicherbedarf im RAM | Zielbudget höchstens 1 GiB für Dienst und aktiven Scanner im ausgeglichenen Modus; Leerlauf deutlich darunter. |\n| Bedienung während Scan | Navigation bleibt nutzbar; keine vollständige Blockade durch Indexschreibvorgänge. |\n\nDie Zahlen werden in der technischen Vorprüfung bestätigt oder vor Implementierungsabschluss begründet angepasst. Ein sichtbares Diagramm mit falschen Summen gilt auch bei Einhaltung aller Zeitbudgets als fehlgeschlagen.\n\nEine feste Vollscanzeit wird nicht versprochen. Entscheidend sind Eintragszahl, Verzeichnisstruktur und Datenträgerverhalten, nicht allein die Summe der Dateigrößen."
+    },
+    {
+      "section": "27.3",
+      "title": "Darstellungsgrößen",
+      "body": "Desktop ist die primäre Oberfläche. Vollständige Bedienbarkeit wird für ein DSM-App-Fenster ab ungefähr 1024 × 700 CSS-Pixeln angestrebt, optimale Nutzung ab 1280 × 800. Bei Full-HD- und 4K-Ausgabe bleibt die Karte scharf und die Schrift angemessen groß; physische Pixelzahl ist nicht mit CSS-Fenstergröße gleichzusetzen.\n\nSchmalere Ansichten verwenden ausklappbare Baum- und Detailbereiche, ohne die Hauptgrafik hinter langen Einstellungslisten zu verstecken. Ein eigenständiger Smartphone-Client ist nicht V1. Eine zugängliche Listenalternative bleibt auch in schmalen Fenstern erhalten."
+    },
+    {
+      "section": "27.4",
+      "title": "Barrierearme Bedienung",
+      "body": "Ziel ist die Anwendung der relevanten WCAG-2.2-AA-Anforderungen für die eigene Oberfläche, ohne vor erfolgter Prüfung eine vollständige Konformität einschließlich des umgebenden DSM zu behaupten. [R14]\n\nKernfunktionen sind per Tastatur erreichbar; Fokus ist sichtbar. Karteninformationen besitzen eine synchronisierte Listen-/Textalternative. Farbe ist nie der einzige Informationsträger. Touch-Nutzer erhalten dieselben Informationen ohne Hover. Reduzierte Bewegung wird respektiert; Animationen sind nicht zum Verständnis erforderlich."
+    },
+    {
+      "section": "27.5",
+      "title": "Ausfallsicherheit und ruhender Betrieb",
+      "body": "Ein geschlossener Browser stoppt den Scan nicht. Ein Scanfehler stoppt nicht die lesende Anzeige eines gültigen Indexes. Paketstopp und NAS-Neustart behandeln laufende Aufträge kontrolliert.\n\nEs gibt keine permanenten Vollscans im Hintergrund. Reines Navigieren durchsucht keine Quellverzeichnisse. Daraus wird jedoch keine Garantie abgeleitet, dass Festplatten im Ruhezustand bleiben: Auch Indexzugriffe und geplante Scans können Datenträger benötigen."
+    },
+    {
+      "section": "28.1",
+      "title": "Lokale Protokolle",
+      "body": "Logs enthalten technische Zustände, Laufzeiten, begrenzte Fehlerzusammenfassungen und Versionen. Rotation und Größenbegrenzung sind Pflicht. Ein vorgeschlagener Standard ist eine zeitlich und größenmäßig begrenzte Laufhistorie statt unbegrenzter Aufbewahrung.\n\nDer App-Status zeigt Backend, Scanner, Warteschlange, Datenbankintegrität, Datenbedarf und erkannte DSM-Fähigkeiten."
+    },
+    {
+      "section": "28.2",
+      "title": "Diagnoseexport",
+      "body": "**OPS-01 – MUSS:** Ein Diagnosepaket kann lokal erzeugt werden. Standardinhalt: App-/DSM-Version, Architektur, anonymisierte Konfigurationseckdaten, Komponentenstatus, aggregierte Fehler und Integrationsfähigkeiten.\n\nPrivate Dateinamen, Nutzernamen und Pfade werden nicht lediglich aus einem Hauptfeld entfernt, während sie in Fehlermeldungen erhalten bleiben. Die Schwärzung muss alle Exportbestandteile erfassen. Eine Vorschau und eine gesonderte Zustimmung sind erforderlich, um private Pfadinformationen hinzuzufügen.\n\nDer Export wird nicht automatisch an einen Supportdienst übertragen."
+    },
+    {
+      "section": "28.3",
+      "title": "Updates und Migrationen",
+      "body": "**OPS-02 – MUSS:** Updates erhalten Profile, persönliche Einstellungen und verwendbare Datenstände, soweit das neue Schema diese unterstützt. Migrationsschritte werden versioniert und vor Änderungen abgesichert.\n\nEine fehlgeschlagene Migration hinterlässt keinen scheinbar funktionsfähigen, beschädigten Index. Die App bietet eine kontrollierte Rückkehr oder einen Neuaufbau des Indexes an, ohne Quelldaten zu verändern. Ein Schema-Downgrade wird nicht als automatisch reversibel behauptet.\n\nUpdatepakete werden über den definierten Paketweg installiert. Releaseartefakte erhalten Prüfsummen und nachvollziehbare Versionsinformationen. Ein eigener im DSM-7-Paketformat vorausgesetzter Signiermechanismus wird nicht erfunden; die dokumentierten Paketänderungen sind zu berücksichtigen. [R03]"
+    },
+    {
+      "section": "28.4",
+      "title": "Sicherung und Neuinstallation",
+      "body": "Konfiguration kann separat exportiert werden. Scan-Indizes sind grundsätzlich rekonstruierbar, können aber groß sein. Ihre optionale Sicherung benötigt ein konsistentes Verfahren und ist nicht Bestandteil des kleinen Konfigurationsexports.\n\nDie App dokumentiert ihre eigenen Datenverzeichnisse und das Wiederherstellungsverhalten. Nach Import auf einem anderen NAS erfolgt eine neue Zuordnung der Wurzeln und eine Berechtigungsprüfung."
+    },
+    {
+      "section": "28.5",
+      "title": "Deinstallation",
+      "body": "**OPS-03 – MUSS:** Vor Deinstallation ist verständlich, ob eigene Konfiguration/Indexdaten erhalten oder entfernt werden. Unterstützt der Paketdialog diese Auswahl nicht, muss eine dokumentierte vorherige Export-/Bereinigungsfunktion vorhanden sein.\n\nNiemals werden analysierte Freigaben oder Quelldateien gelöscht. Benutzerseitig eingerichtete DSM-Aufgaben werden nicht ohne geprüfte Zuordnung entfernt. Die App warnt vor verbleibenden Aufgaben und nennt ihre Profilbezüge; ein späterer Aufruf darf keine unerwartete Aktion ausführen."
+    },
+    {
+      "section": "32.1",
+      "title": "Erwarteter Lieferumfang",
+      "body": "Ein installierbares Releasepaket je freigegebener Architektur; vollständiger Quellcode mit reproduzierbarem Buildweg; englische Codebezeichner und Kommentare; deutsche und englische Sprachdateien; versionierte Datenbankmigrationen; automatisierte Tests und reproduzierbare Testdaten; dokumentierte DSM-Kompatibilität; Einrichtungs- und Aufgabenplaner-Anleitungen; Sicherheits- und Rechtekonzept; lokale Hilfe; Changelog, Lizenzinformationen und Prüfsummen der Artefakte.\n\nDieses PRD ist das Anforderungsdokument. Eine spätere technische Spezifikation beschreibt konkrete DSM-Aufrufe, Paketdateien, API-Pfade, Schemaentscheidungen und Bibliotheksversionen. Sie darf die hier festgelegten Produktgarantien nicht still verändern."
+    },
+    {
+      "section": "32.2",
+      "title": "Releasefreigabe",
+      "body": "V1 ist freigabefähig, wenn alle P0-Anforderungen umgesetzt und die zugehörigen Abnahmeszenarien bestanden sind, insbesondere tatsächliches DSM-Fenster, zielgenaue File-Station-Ordnerübergabe, Multi-Volume-/Freigabeauswahl, persistente indexbasierte Ansichten, beide hierarchischen Karten, deutscher/englischer Betrieb und Aufgabenplaner-Aktualisierung.\n\nZusätzlich müssen Sicherheits- und Konsistenzprüfungen bestanden, Speicherkennzahlen ehrlich bezeichnet, technische Vorbehalte in eine tatsächliche Fähigkeitsmatrix überführt und bekannte Einschränkungen sichtbar dokumentiert sein.\n\nKeine Freigabe bei ungeschütztem Indexzugriff, einem als vollständig bezeichneten unvollständigen Scan, einer Quelldatenmutation durch DiskMap, einem nicht funktionierenden Pflichtaufruf an File Station oder einer bloßen externen Webseite anstelle der vereinbarten DSM-Anwendung."
+    }
+  ]
+}

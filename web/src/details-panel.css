@@ -1,0 +1,13 @@
+/* Detail content wraps within the DSM panel while exact values remain selectable. */
+.detail-panel { min-width:0; overflow-wrap:anywhere; }
+.detail-panel textarea { width:100%; box-sizing:border-box; min-height:3.5em; resize:vertical; white-space:pre-wrap; }
+.detail-panel dl > div { margin-block:.5rem; }
+.detail-panel dt { font-weight:600; }
+.detail-panel dd { margin-inline-start:0; user-select:text; }
+.detail-panel section { margin-block:1rem; }
+.detail-panel li p { margin-block:.25rem; }
+.detail-table { max-width:100%; overflow-x:auto; }
+.detail-panel table { border-collapse:collapse; font-size:.9em; }
+.detail-panel td,.detail-panel th { padding:.4rem; text-align:start; vertical-align:top; }
+.detail-panel button,.detail-panel select { max-width:100%; min-height:2rem; white-space:normal; }
+.detail-panel :focus-visible { outline:2px solid currentColor; outline-offset:2px; }

@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+# The newly installed binary backs up and migrates offline before DSM starts the package.
+target=${SYNOPKG_PKGDEST:?Missing package target}
+state=${SYNOPKG_PKGVAR:?Missing package state}
+umask 077
+# A deliberately cleared store is initialized by normal service startup.
+[ -e "$state/control.db" ] || exit 0
+"$target/bin/diskmapd" --socket "$state/run/control.sock" --upgrade=prepare
+"$target/bin/diskmapd" --socket "$state/run/control.sock" --upgrade=apply

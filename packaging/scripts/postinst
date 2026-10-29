@@ -1,0 +1,7 @@
+#!/bin/sh
+set -eu
+# DSM's icon renderer needs traversable public UI directories, independent of install umask.
+# Restrict this correction to shipped static UI resources; private package state is untouched.
+ui=${SYNOPKG_PKGDEST:?Missing package target}/ui
+[ -d "$ui" ] && [ ! -L "$ui" ] || exit 1
+find "$ui" -type d -exec chmod 0755 '{}' +

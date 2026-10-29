@@ -1,0 +1,7 @@
+import assert from 'node:assert/strict';
+import {createServer} from '../node_modules/vite/dist/node/index.js';
+const {chromium}=await import(process.env.DISKMAP_PLAYWRIGHT_MODULE??'playwright');
+// Verify the actual notification component, without native data or destructive operations.
+const server=await createServer({configFile:false,root:process.cwd(),server:{host:'127.0.0.1',port:0},logLevel:'error'});await server.listen();
+const browser=await chromium.launch({headless:true,executablePath:process.env.DISKMAP_BROWSER_EXECUTABLE||undefined});
+try{const page=await browser.newPage();await page.goto(`http://127.0.0.1:${server.httpServer.address().port}/design.html`);await page.evaluate(async()=>{(await import('/tests/fixtures/notification-center.jsx')).mount();});const scope=page.locator('#notification-test');await scope.getByRole('button',{name:'Meldungen',exact:true}).waitFor();assert.equal(await scope.locator('.disk-notice-card').count(),0);await page.locator('#raise-error').click();await scope.locator('.disk-notice-card[data-kind="error"]').waitFor();await scope.getByRole('button',{name:'Meldung schließen',exact:true}).click();assert.equal(await scope.locator('.disk-notice-card').count(),0);await scope.getByRole('button',{name:'Meldungen',exact:true}).click();assert.equal(await scope.locator('.disk-notice-card').count(),1);console.log('PASS quiet idle, error card, dismissal and bell history');}finally{await browser.close();await server.close();}

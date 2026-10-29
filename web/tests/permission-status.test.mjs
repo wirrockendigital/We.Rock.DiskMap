@@ -1,0 +1,24 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {mkdtempSync,mkdirSync,cpSync,writeFileSync,rmSync} from 'node:fs';
+import {join} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {execFileSync} from 'node:child_process';
+import {createRequire} from 'node:module';
+import React from 'react';
+// Compile the actual provider and component; fixture observations are not native acceptance.
+const web=fileURLToPath(new URL('../',import.meta.url));mkdirSync(join(web,'.test-build'),{recursive:true});const tmp=mkdtempSync(join(web,'.test-build/permission-'));let component;
+try{cpSync(join(web,'src'),join(tmp,'src'),{recursive:true});writeFileSync(join(tmp,'package.json'),'{"type":"commonjs"}');execFileSync(join(web,'node_modules/.bin/tsc'),['--ignoreConfig','--target','ES2022','--module','Node16','--moduleResolution','Node16','--jsx','react-jsx','--esModuleInterop','--skipLibCheck','--outDir',join(tmp,'out'),join(tmp,'src/features/settings/PermissionStatus.tsx')]);component=createRequire(import.meta.url)(join(tmp,'out/features/settings/PermissionStatus.js'));}finally{rmSync(tmp,{recursive:true,force:true});}
+const scope={kind:'shares',targetIds:['s']},when='2026-10-11T00:00:00Z';
+const inventory={observedAt:when,volumes:[{id:'v',name:'Volume',state:'reachable'}],shares:[{id:'s',name:'Synthetic share',volumeId:'v',state:'reachable',readable:true}]};
+const check=state=>({scope,checkedAt:when,roots:[{targetId:'s',kind:'share',volumeId:'v',state}],coveredTargetIds:['s'],issues:[]});
+const elements=t=>Array.isArray(t)?t.flatMap(elements):React.isValidElement(t)?[t,...elements(t.props.children)]:[];
+const tick=()=>new Promise(resolve=>setImmediate(resolve));
+function setup(){const old={useState:React.useState,useRef:React.useRef,useEffect:React.useEffect},oldFetch=globalThis.fetch,oldWindow=globalThis.window;const states=[],refs=[];let cleanup;const props={language:'en',scope,identity:'p:1',disabled:false,onSessionDenied:()=>{props.denials++;},denials:0};return{props,states,render(mount=false){let i=0,j=0,fn;React.useState=initial=>{const n=i++;if(!(n in states))states[n]=initial;return[states[n],v=>states[n]=typeof v==='function'?v(states[n]):v];};React.useRef=initial=>refs[j++]??={current:initial};React.useEffect=effect=>{if(mount)fn=effect;};const out=component.PermissionStatus(props);if(fn)cleanup=fn();return elements(out);},cleanup(){cleanup?.();Object.assign(React,old);globalThis.fetch=oldFetch;if(oldWindow===undefined)delete globalThis.window;else globalThis.window=oldWindow;},abort(){cleanup?.();}};}
+const respond=data=>new Response(JSON.stringify({contractVersion:1,data}),{status:200});
+// Explicit checks report root-only evidence and preserve unreadability instead of starting scans.
+test('permission check is explicit, shows denied roots and checked time without ACL or scan requests',async()=>{const h=setup(),requests=[];try{globalThis.window={parent:{SYNO:{SDS:{Session:{SynoToken:'synthetic'}}}}};globalThis.fetch=async(url,options)=>{requests.push([url,options.method]);return respond(url.includes('scope-inventory')?inventory:check('unreadable'));};let tree=h.render(true);assert.equal(requests.length,0);tree.find(x=>x.type==='button').props.onClick();await tick();tree=h.render();assert.deepEqual(requests.map(x=>x[1]),['GET','POST']);assert.ok(requests.every(x=>/scope-inventory|scope-preview/.test(x[0])));assert.ok(tree.some(x=>x.type==='li'&&JSON.stringify(x.props.children).includes('Unreadable')));assert.ok(tree.some(x=>x.props.value===when));assert.ok(tree.some(x=>x.type==='p'&&String(x.props.children).includes('no blanket ACL')));}finally{h.cleanup();}});
+// Profile changes and teardown suppress both obsolete success and authorization failures.
+test('obsolete permission success and late denied response cannot replace a new profile',async()=>{for(const status of [200,403]){const h=setup();let resolve;try{globalThis.window={parent:{SYNO:{SDS:{Session:{SynoToken:'synthetic'}}}}};globalThis.fetch=()=>new Promise(r=>resolve=r);h.render(true).find(x=>x.type==='button').props.onClick();h.abort();h.props.identity='q:2';h.render(true);resolve(status===200?respond(inventory):new Response('',{status}));await tick();assert.equal(h.props.denials,0);assert.equal(h.states[0],null);}finally{h.cleanup();}}});
+// Current permission loss invokes session teardown; an unavailable capability does not imply access.
+test('current authorization loss is reported and disabled probes never call transport',async()=>{const h=setup();let requests=0;try{globalThis.window={parent:{SYNO:{SDS:{Session:{SynoToken:'synthetic'}}}}};globalThis.fetch=async()=>{requests++;return new Response('',{status:403});};h.props.disabled=true;h.render(true).find(x=>x.type==='button').props.onClick();assert.equal(requests,0);h.props.disabled=false;h.render().find(x=>x.type==='button').props.onClick();await tick();assert.equal(h.props.denials,1);}finally{h.cleanup();}});

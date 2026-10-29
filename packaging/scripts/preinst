@@ -1,0 +1,19 @@
+#!/bin/sh
+set -eu
+# Fail before package writes on targets outside the empirically qualified build.
+fail() { echo "DiskMap preflight: $1" >&2; exit 1; }
+[ "$(uname -m)" = x86_64 ] || fail 'unsupported architecture'
+grep -Fxq 'unique="REPLACED_TARGET_MODEL"' /etc.defaults/synoinfo.conf || fail 'unsupported model'
+[ "${SYNOPKG_DSM_VERSION_MAJOR:-}" = 7 ] || fail 'unsupported DSM major version'
+[ "${SYNOPKG_DSM_VERSION_BUILD:-}" = 90080 ] || fail 'unsupported DSM build'
+# Package Center supplies the installation volume; never guess a default volume.
+volume=${SYNOPKG_PKGDEST_VOL:-}
+printf '%s\n' "$volume" | grep -Eq '^/volume[1-9][0-9]*$' || fail 'invalid installation volume'
+[ -d "$volume" ] || fail 'installation volume unavailable'
+# The packager replaces this with twice the unpacked payload plus a 64 MiB reserve.
+required_kib=REPLACED_BY_PACKAGER
+case "$required_kib" in ''|*[!0-9]*) fail 'missing package size budget' ;; esac
+available=$(LC_ALL=C df -Pk "$volume" | awk 'NR==2 && NF>=6 {print $4}')
+case "$available" in ''|*[!0-9]*) fail 'cannot determine free space' ;; esac
+[ "$available" -ge "$required_kib" ] || fail 'insufficient free space'
+exit 0

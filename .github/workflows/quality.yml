@@ -1,0 +1,32 @@
+name: Source quality
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      # This job validates source only; a live Control target is required before an SPK build.
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.27.2'
+          cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.2.0'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: npm --prefix web ci --ignore-scripts
+      - run: go mod verify
+      - run: sh scripts/quality/run.sh

@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false, "allowImportingTsExtensions": false,
+    "rootDir": "src", "outDir": ".test-build", "module": "NodeNext", "moduleResolution": "NodeNext"
+  },
+  "include": ["src/contracts.ts", "src/contracts.test.ts"]
+}

@@ -1,0 +1,75 @@
+#!/bin/sh
+set -eu
+# DSM supplies these package-owned locations to every lifecycle invocation.
+target=${SYNOPKG_PKGDEST:?Missing package target}
+state=${SYNOPKG_PKGVAR:?Missing package state}
+pidfile="$state/diskmapd.pid"
+socket="$state/run/control.sock"
+
+# Check process identity before signalling, including after a stale PID file.
+running() {
+  [ -f "$pidfile" ] || return 1
+  pid=$(cat "$pidfile")
+  case "$pid" in ''|*[!0-9]*) return 1;; esac
+  [ "$(readlink "/proc/$pid/exe" 2>/dev/null || true)" = "$(readlink -f "$target/bin/diskmapd")" ] || return 1
+  # The lifecycle hook runs as the package account; another identity is never a signal target.
+  expected_uid=$(id -u) || return 1
+  [ "$expected_uid" != 0 ] || return 1
+  actual_uid=$(cat "/proc/$pid/status" 2>/dev/null | awk '/^Uid:/ {print $3; count++} END {if (count != 1) exit 1}') || return 1
+  [ "$actual_uid" = "$expected_uid" ] || return 1
+  # Accept only the exact invocation emitted below, with a canonical package socket boundary.
+  actual_socket=$(cat "/proc/$pid/cmdline" 2>/dev/null | tr '\000' '\n' | awk 'NR == 2 && $0 != "--socket" {bad=1} NR == 3 {value=$0} END {if (NR != 3 || bad || value == "") exit 1; print value}') || return 1
+  case "$actual_socket" in /*) ;; *) return 1;; esac
+  canonical_socket=$(readlink -f "$socket") || return 1
+  [ -n "$canonical_socket" ] || return 1
+  [ "$(readlink -f "$actual_socket" 2>/dev/null || true)" = "$canonical_socket" ] || return 1
+  kill -0 "$pid" 2>/dev/null
+}
+
+case "${1:-}" in
+  start)
+    # An existing process may be alive but unavailable (for example, storage reserve exhausted).
+    if running; then
+      "$target/bin/diskmapctl" --socket "$socket" health >/dev/null 2>&1
+      exit $?
+    fi
+    umask 077
+    # Validate existing data, log and PID inodes before shell redirections.
+    "$target/bin/diskmapd" --socket "$socket" --check-runtime
+    mkdir -p "$state/run"
+    # A dead daemon can leave only its own socket; never remove other paths.
+    [ ! -S "$socket" ] || rm "$socket"
+    # Structured, bounded diagnostic slots are owned by the daemon.
+    "$target/bin/diskmapd" --socket "$socket" >/dev/null 2>&1 &
+    echo "$!" > "$pidfile"
+    attempts=0
+    while [ "$attempts" -lt 10 ]; do
+      "$target/bin/diskmapctl" --socket "$socket" health >/dev/null 2>&1 && exit 0
+      running || exit 1
+      attempts=$((attempts + 1))
+      sleep 1
+    done
+    exit 1
+    ;;
+  stop)
+    running || exit 0
+    # Keep the original identity even if a later status probe observes a replaced PID file.
+    stopping_pid=$pid
+    kill -TERM "$stopping_pid"
+    attempts=0
+    while running; do
+      [ "$attempts" -lt 15 ] || exit 1
+      attempts=$((attempts + 1))
+      sleep 1
+    done
+    # Identity loss is not evidence of process exit; never remove a replacement PID file.
+    kill -0 "$stopping_pid" 2>/dev/null && exit 1
+    [ "$(cat "$pidfile" 2>/dev/null || true)" = "$stopping_pid" ] || exit 1
+    rm -f "$pidfile"
+    ;;
+  status)
+    running && exit 0
+    exit 3
+    ;;
+  *) echo 'Expected start, stop, or status' >&2; exit 2;;
+esac
