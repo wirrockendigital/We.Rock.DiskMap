@@ -10,14 +10,20 @@ We.Rock.DiskMap is a disk usage analyzer for Synology DSM. It helps NAS administ
 - **Understand the result.** DiskMap shows when a scan was captured and identifies partial coverage, so missing access is not mistaken for empty storage.
 - **Continue in DSM.** Open a selected folder in File Station or copy its path. File actions use your current DSM permissions.
 
-The app is available in English and German. Scan results are shared among DSM administrators; personal display preferences remain individual.
+The app is available in English and German. We.Rock.DiskMap is for **Synology DSM administrators only**. Scan results are shared among DSM administrators; personal display preferences remain individual.
+
+## Beta software
+
+We.Rock.DiskMap is in beta. Test the app on **VirtualDSM or a non-production Synology DSM system first** before using it on a production NAS.
+
+The software is provided **as is**, without warranty. To the extent permitted by applicable law, its copyright holders and contributors are not liable for damages arising from its use or inability to use it. See [GPL-3.0-only](LICENSE), sections 15 and 16, for the full terms.
 
 ## Install on Synology DSM
 
 1. Obtain a We.Rock.DiskMap `.spk` package built for your DSM version and NAS architecture.
 2. Sign in to DSM as an administrator and open **Package Center → Manual Install**.
 3. Select the package, review the package information, and complete installation.
-4. In **Control Panel → Shared Folder → Edit → Permissions**, grant the internal system user `we-rock-diskmap` read access to each shared folder you want to scan.
+4. In **Control Panel → Shared Folder → Edit → Permissions**, grant the internal system user `we-rock-diskmap` **at least read access to every shared folder you want to scan**. Set this permission for each share separately.
 5. Open **We.Rock.DiskMap** from the DSM main menu.
 
 This repository currently provides source code rather than a general SPK download. Use a package supplied for your specific DSM build and NAS model.
